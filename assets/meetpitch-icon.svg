@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- MeetPitch icon: 12の円環＝11人の選手＋1人のサポーター（オレンジ＝あなた） -->
+  <g fill="none" stroke-width="42" stroke-dasharray="33 420">
+    <circle cx="100" cy="100" r="72" stroke="#3f3a8c" transform="rotate(-88 100 100)"/>
+    <circle cx="100" cy="100" r="72" stroke="#ff7d1f" transform="rotate(-58 100 100)"/>
+    <circle cx="100" cy="100" r="72" stroke="#74bfec" transform="rotate(-28 100 100)"/>
+    <circle cx="100" cy="100" r="72" stroke="#4faae2" transform="rotate(2 100 100)"/>
+    <circle cx="100" cy="100" r="72" stroke="#2f93d8" transform="rotate(32 100 100)"/>
+    <circle cx="100" cy="100" r="72" stroke="#3a80c8" transform="rotate(62 100 100)"/>
+    <circle cx="100" cy="100" r="72" stroke="#3e70bf" transform="rotate(92 100 100)"/>
+    <circle cx="100" cy="100" r="72" stroke="#4362b3" transform="rotate(122 100 100)"/>
+    <circle cx="100" cy="100" r="72" stroke="#4756a8" transform="rotate(152 100 100)"/>
+    <circle cx="100" cy="100" r="72" stroke="#4a4b9e" transform="rotate(182 100 100)"/>
+    <circle cx="100" cy="100" r="72" stroke="#474295" transform="rotate(212 100 100)"/>
+    <circle cx="100" cy="100" r="72" stroke="#423a8d" transform="rotate(242 100 100)"/>
+  </g>
+  <circle cx="100" cy="100" r="45" fill="#fff" stroke="#141b33" stroke-width="4"/>
+  <clipPath id="ball"><circle cx="100" cy="100" r="43"/></clipPath>
+  <g clip-path="url(#ball)">
+    <ellipse cx="100" cy="130" rx="42" ry="20" fill="#1a2340" opacity=".07"/>
+    <g stroke="#141b33" stroke-width="3.5" fill="none">
+      <path d="M100 84 100 54"/>
+      <path d="M115.2 95.1 143.7 85.8"/>
+      <path d="M109.4 112.9 127 137.2"/>
+      <path d="M90.6 112.9 73 137.2"/>
+      <path d="M84.8 95.1 56.3 85.8"/>
+    </g>
+    <g fill="#141b33">
+      <polygon points="100,84 115.2,95.1 109.4,112.9 90.6,112.9 84.8,95.1"/>
+      <polygon points="100,39 114.3,49.4 108.8,66.1 91.2,66.1 85.7,49.4"/>
+      <polygon points="143.7,70.8 158,81.2 152.5,97.9 134.9,97.9 129.4,81.2"/>
+      <polygon points="127,122.2 141.3,132.6 135.8,149.3 118.2,149.3 112.7,132.6"/>
+      <polygon points="73,122.2 87.3,132.6 81.8,149.3 64.2,149.3 58.7,132.6"/>
+      <polygon points="56.3,70.8 70.6,81.2 65.1,97.9 47.5,97.9 42,81.2"/>
+    </g>
+  </g>
+</svg>
