@@ -165,8 +165,10 @@ h1.hero-title .hl{
 /* ヒーロー：試合を選ぶ */
 .pick-title{color:#fff;font-weight:700;font-size:13.5px;margin-bottom:14px;display:flex;align-items:center;gap:7px}
 .pick-list{display:flex;flex-direction:column;gap:10px}
-.pick{display:flex;align-items:center;gap:13px;background:#fff;border-radius:14px;padding:13px 15px;box-shadow:0 8px 20px -12px rgba(0,0,0,.35);border:2px solid transparent;transition:border-color .2s}
+.pick{display:flex;align-items:center;gap:13px;background:#fff;border-radius:14px;padding:13px 15px;box-shadow:0 8px 20px -12px rgba(0,0,0,.35);border:2px solid transparent;transition:transform .18s ease,border-color .2s ease;cursor:pointer;text-decoration:none;color:inherit}
+.pick:hover{transform:translateX(3px);border-color:var(--amber)}
 .pick.is-on{border-color:var(--amber)}
+.pick-go{flex:none;font-weight:900;color:var(--amber-strong);font-size:16px}
 .pick-radio{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--line);position:relative}
 .pick.is-on .pick-radio{border-color:var(--amber-strong)}
 .pick.is-on .pick-radio::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--amber-strong)}
@@ -187,6 +189,40 @@ h1.hero-title .hl{
 .fx-btn{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:#fff;background:var(--cta);padding:11px 22px;border-radius:999px;box-shadow:0 8px 18px -8px rgba(240,125,0,.7);transition:transform .18s ease}
 .fx-btn:hover{transform:translateY(-2px)}
 @media(max-width:820px){.fixtures{grid-template-columns:1fr;max-width:420px;margin-inline:auto}}
+
+/* 地域から探す */
+.region{max-width:720px;margin:64px auto 0}
+.region-divider{display:flex;align-items:center;gap:16px;color:var(--ink-soft);font-size:13px;font-weight:700;margin-bottom:26px}
+.region-divider::before,.region-divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.region-title{text-align:center;font-size:clamp(20px,2.8vw,26px);font-weight:900;margin-bottom:8px}
+.region-sub{text-align:center;font-size:14.5px;color:var(--ink-soft);margin-bottom:24px}
+.region-select-wrap{position:relative;max-width:440px;margin:0 auto}
+select.region-select{width:100%;appearance:none;-webkit-appearance:none;font-family:inherit;font-size:16px;font-weight:700;color:var(--ink);background:#fff;border:2px solid var(--line);border-radius:14px;padding:16px 46px 16px 18px;cursor:pointer;box-shadow:var(--shadow-sm)}
+select.region-select:focus{outline:none;border-color:var(--blue-400);box-shadow:0 0 0 4px rgba(74,125,255,.15)}
+.region-select-wrap::after{content:"▾";position:absolute;right:18px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--blue-500);font-size:14px}
+.region-result{margin-top:24px;display:flex;flex-direction:column;gap:16px}
+.club-card{display:flex;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-sm);text-align:left;animation:fadeUp .45s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.club-bar{flex:none;width:8px}
+.club-body{padding:22px 24px;flex:1;min-width:0}
+.club-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.club-name{font-size:19px;font-weight:900}
+.club-league{font-size:11px;font-weight:800;color:#fff;padding:3px 10px;border-radius:999px;letter-spacing:.5px}
+.club-meta{font-size:13px;color:var(--ink-soft);margin-bottom:12px;display:flex;align-items:flex-start;gap:6px}
+.club-desc{font-size:14px;color:var(--ink-soft);margin-bottom:16px}
+.club-fx-title{font-size:12px;font-weight:800;color:var(--blue-600);margin-bottom:8px}
+.club-fx{display:flex;align-items:center;gap:12px;font-size:13.5px;padding:10px 13px;background:var(--blue-050);border-radius:11px;margin-bottom:8px}
+.club-fx .d{flex:none;font-weight:800;color:var(--blue-700);font-size:12.5px}
+.club-fx .o{font-weight:700}
+.club-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.club-btn{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:#fff;background:var(--cta);padding:11px 20px;border-radius:999px;box-shadow:0 8px 18px -8px rgba(240,125,0,.7);transition:transform .18s ease}
+.club-btn:hover{transform:translateY(-2px)}
+.club-link{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:700;color:var(--blue-600);background:var(--blue-100);padding:11px 20px;border-radius:999px;transition:background .18s ease}
+.club-link:hover{background:#d9e3fb}
+.region-empty{background:#fff;border:1px dashed var(--line);border-radius:18px;padding:30px 26px;text-align:center;animation:fadeUp .45s ease}
+.region-empty p{font-size:14.5px;color:var(--ink-soft);margin-bottom:18px}
+.region-empty .club-btn{margin-inline:auto}
+@media(max-width:520px){.club-actions{flex-direction:column}.club-btn,.club-link{justify-content:center}}
 
 @media(max-width:860px){
   .hero{padding:120px 0 70px}
@@ -410,30 +446,33 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
       <div class="hero-card">
         <div class="pick-title">⚽ 気になる試合を選ぶだけ</div>
         <div class="pick-list">
-          <div class="pick is-on">
+          <a class="pick is-on" href="https://forms.gle/HKm9dRiBUZdy7H8K9" target="_blank" rel="noopener">
             <div class="pick-radio"></div>
             <div class="pick-main">
               <div class="pick-date">7/25(土) 19:00</div>
               <div class="pick-fix">アルビレックス新潟 <span>VS</span> モンテディオ山形</div>
               <div class="pick-venue">📍 デンカビッグスワンスタジアム</div>
             </div>
-          </div>
-          <div class="pick">
+            <span class="pick-go">→</span>
+          </a>
+          <a class="pick" href="https://forms.gle/HKm9dRiBUZdy7H8K9" target="_blank" rel="noopener">
             <div class="pick-radio"></div>
             <div class="pick-main">
               <div class="pick-date">8/15(土) 19:00</div>
               <div class="pick-fix">アルビレックス新潟 <span>VS</span> 北海道コンサドーレ札幌</div>
               <div class="pick-venue">📍 デンカビッグスワンスタジアム</div>
             </div>
-          </div>
-          <div class="pick">
+            <span class="pick-go">→</span>
+          </a>
+          <a class="pick" href="https://forms.gle/HKm9dRiBUZdy7H8K9" target="_blank" rel="noopener">
             <div class="pick-radio"></div>
             <div class="pick-main">
               <div class="pick-date">8/22(土) 19:00</div>
               <div class="pick-fix">アルビレックス新潟 <span>VS</span> 藤枝MYFC</div>
               <div class="pick-venue">📍 デンカビッグスワンスタジアム</div>
             </div>
-          </div>
+            <span class="pick-go">→</span>
+          </a>
         </div>
         <p class="card-cap">選んだ試合の“初めて仲間”とマッチング。</p>
       </div>
@@ -642,6 +681,19 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
         <a href="https://forms.gle/HKm9dRiBUZdy7H8K9" target="_blank" rel="noopener" class="fx-btn">この試合の仲間を探す →</a>
       </div>
     </div>
+
+    <!-- 地域から探す -->
+    <div class="region reveal">
+      <div class="region-divider">ほかの試合も見る</div>
+      <div class="region-title">あなたの街にも、Jリーグがある。</div>
+      <p class="region-sub">お住まいの都道府県を選ぶと、地元のJクラブと本拠地スタジアムが表示されます。</p>
+      <div class="region-select-wrap">
+        <select class="region-select" id="prefSelect" aria-label="都道府県を選択">
+          <option value="">お住まいの都道府県を選択…</option>
+        </select>
+      </div>
+      <div class="region-result" id="regionResult"></div>
+    </div>
   </div>
 </section>
 
@@ -746,6 +798,88 @@ window.addEventListener('scroll',()=>{
   header.style.transform = (y>lastY && y>400) ? 'translateY(-100%)' : 'translateY(0)';
   lastY = y;
 });
+
+// ===== 地域から探す =====
+const FORM='https://forms.gle/HKm9dRiBUZdy7H8K9';
+const PREFS=['北海道','青森県','岩手県','宮城県','秋田県','山形県','福島県','茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県','新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県','三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県','鳥取県','島根県','岡山県','広島県','山口県','徳島県','香川県','愛媛県','高知県','福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県'];
+const CLUBS={
+ '北海道':[{n:'北海道コンサドーレ札幌',l:'J1',s:'大和ハウス プレミストドーム',c:'#c8102e',d:'北の大地を代表するクラブ。熱いサポーターと躍動的なサッカーが魅力。'}],
+ '青森県':[{n:'ヴァンラーレ八戸',l:'J3',s:'プライフーズスタジアム',c:'#00a0e9',d:'青森・八戸を拠点に、東北からJの舞台を目指すクラブ。'}],
+ '岩手県':[{n:'いわてグルージャ盛岡',l:'J3',s:'いわぎんスタジアム',c:'#e60012',d:'盛岡から東北を盛り上げる、地域密着のクラブ。'}],
+ '宮城県':[{n:'ベガルタ仙台',l:'J2',s:'ユアテックスタジアム仙台',c:'#f4b223',d:'黄金色のユニと熱狂的な応援が名物。杜の都のクラブ。'}],
+ '秋田県':[{n:'ブラウブリッツ秋田',l:'J2',s:'ソユースタジアム',c:'#0068b7',d:'秋田の青。堅い守りと粘り強い戦いが持ち味。'}],
+ '山形県':[{n:'モンテディオ山形',l:'J2',s:'NDソフトスタジアム山形',c:'#1d4a9e',d:'山形の誇り。県民に愛される老舗クラブ。'}],
+ '福島県':[{n:'いわきFC',l:'J2',s:'ハワイアンズスタジアムいわき',c:'#d7000f',d:'「日本の東北から、世界へ」。フィジカル自慢の新鋭。'},{n:'福島ユナイテッドFC',l:'J3',s:'とうほう・みんなのスタジアム',c:'#e60012',d:'農業応援など地域とともに歩むクラブ。'}],
+ '茨城県':[{n:'鹿島アントラーズ',l:'J1',s:'県立カシマサッカースタジアム',c:'#a4262c',d:'国内最多タイトルを誇る常勝軍団。勝利へのこだわりは随一。'},{n:'水戸ホーリーホック',l:'J2',s:'ケーズデンキスタジアム水戸',c:'#002b7f',d:'若手の登竜門。育成に定評のある茨城のクラブ。'}],
+ '栃木県':[{n:'栃木SC',l:'J3',s:'カンセキスタジアムとちぎ',c:'#f6c700',d:'黄色い声援が特徴。粘り強い戦いで昇格を狙う。'}],
+ '群馬県':[{n:'ザスパ群馬',l:'J3',s:'正田醤油スタジアム群馬',c:'#14206b',d:'温泉と競馬の街から。群馬の熱を背に戦う。'}],
+ '埼玉県':[{n:'浦和レッズ',l:'J1',s:'埼玉スタジアム2002',c:'#e60012',d:'国内屈指の観客動員。真っ赤に染まるスタジアムは圧巻。'},{n:'RB大宮アルディージャ',l:'J2',s:'NACK5スタジアム大宮',c:'#f39800',d:'オレンジの旋風。新たな体制で上位を目指す。'}],
+ '千葉県':[{n:'柏レイソル',l:'J1',s:'三協フロンテア柏スタジアム',c:'#f8b500',d:'ピッチとの距離が近い“日立台”の熱狂で知られる黄色いクラブ。'},{n:'ジェフユナイテッド千葉',l:'J2',s:'フクダ電子アリーナ',c:'#e8b200',d:'黄と緑のクラブ。J復帰へ挑み続ける。'}],
+ '東京都':[{n:'FC東京',l:'J1',s:'味の素スタジアム',c:'#002f87',d:'青と赤の都会派クラブ。味スタを本拠に戦う。'},{n:'東京ヴェルディ',l:'J1',s:'味の素スタジアム',c:'#007a3d',d:'緑の名門。技巧派スタイルが伝統。'},{n:'FC町田ゼルビア',l:'J1',s:'町田GIONスタジアム',c:'#002d72',d:'町田から旋風を起こす、勢いのあるクラブ。'}],
+ '神奈川県':[{n:'川崎フロンターレ',l:'J1',s:'Uvanceとどろきスタジアム',c:'#009fe8',d:'攻撃的で華やかなサッカー。地域密着イベントも人気。'},{n:'横浜F・マリノス',l:'J1',s:'日産スタジアム',c:'#004098',d:'トリコロールの伝統クラブ。スピーディな攻撃が魅力。'},{n:'横浜FC',l:'J2',s:'ニッパツ三ツ沢球技場',c:'#00a5e3',d:'水色の港町クラブ。三ツ沢の一体感が魅力。'},{n:'湘南ベルマーレ',l:'J1',s:'レモンガススタジアム平塚',c:'#00a63c',d:'走り続ける「湘南スタイル」。緑の情熱。'}],
+ '新潟県':[{n:'アルビレックス新潟',l:'J2',s:'デンカビッグスワンスタジアム',c:'#ff7e00',d:'オレンジと青のクラブ。ビッグスワンを満員に染める応援が名物。',fx:[{d:'7/25(土) 19:00',o:'モンテディオ山形'},{d:'8/15(土) 19:00',o:'北海道コンサドーレ札幌'},{d:'8/22(土) 19:00',o:'藤枝MYFC'}]}],
+ '富山県':[{n:'カターレ富山',l:'J2',s:'富山県総合運動公園陸上競技場',c:'#003893',d:'立山連峰を望む富山のクラブ。着実に力をつける。'}],
+ '石川県':[{n:'ツエーゲン金沢',l:'J3',s:'金沢ゴーゴーカレースタジアム',c:'#ba0e2f',d:'加賀百万石の街から。赤いユニで戦う。'}],
+ '福井県':[],
+ '山梨県':[{n:'ヴァンフォーレ甲府',l:'J2',s:'JITリサイクルインクスタジアム',c:'#002f87',d:'天皇杯制覇の実績も。武田信玄ゆかりの地のクラブ。'}],
+ '長野県':[{n:'松本山雅FC',l:'J3',s:'サンプロ アルウィン',c:'#0f6f3a',d:'緑に染まるアルウィンの熱狂で知られる山雅。'},{n:'AC長野パルセイロ',l:'J3',s:'長野Uスタジアム',c:'#f39800',d:'オレンジのクラブ。信州のもう一つの雄。'}],
+ '岐阜県':[{n:'FC岐阜',l:'J3',s:'岐阜メモリアルセンター長良川競技場',c:'#00a650',d:'緑のクラブ。J復帰を目指し地域と歩む。'}],
+ '静岡県':[{n:'清水エスパルス',l:'J1',s:'IAIスタジアム日本平',c:'#ff6600',d:'サッカー王国・清水の象徴。オレンジの情熱。'},{n:'ジュビロ磐田',l:'J2',s:'ヤマハスタジアム',c:'#009fe8',d:'黄金期を築いた名門。水色のクラブ。'},{n:'藤枝MYFC',l:'J2',s:'藤枝総合運動公園サッカー場',c:'#1d2f6b',d:'サッカーのまち藤枝から。攻撃的スタイルが持ち味。'},{n:'アスルクラロ沼津',l:'J3',s:'愛鷹広域公園多目的競技場',c:'#00a5df',d:'富士山を望む沼津のクラブ。'}],
+ '愛知県':[{n:'名古屋グランパス',l:'J1',s:'豊田スタジアム',c:'#d7000f',d:'赤鯱のクラブ。屋根付きの豊田スタジアムは大迫力。'}],
+ '三重県':[],
+ '滋賀県':[],
+ '京都府':[{n:'京都サンガF.C.',l:'J1',s:'サンガスタジアム by KYOCERA',c:'#4b1f6f',d:'紫のクラブ。駅近の専用スタジアムが自慢。'}],
+ '大阪府':[{n:'ガンバ大阪',l:'J1',s:'パナソニック スタジアム 吹田',c:'#00398f',d:'青と黒の強豪。国内屈指の専用スタジアムが本拠。'},{n:'セレッソ大阪',l:'J1',s:'ヨドコウ桜スタジアム',c:'#eb6ea5',d:'桜色のクラブ。攻撃的で華やかなサッカー。'}],
+ '兵庫県':[{n:'ヴィッセル神戸',l:'J1',s:'ノエビアスタジアム神戸',c:'#9d2235',d:'クリムゾンレッドの雄。屋根付きスタジアムの一体感が魅力。'}],
+ '奈良県':[{n:'奈良クラブ',l:'J3',s:'ロートフィールド奈良',c:'#005bac',d:'古都・奈良のクラブ。地域とともに成長中。'}],
+ '和歌山県':[],
+ '鳥取県':[{n:'ガイナーレ鳥取',l:'J3',s:'Axisバードスタジアム',c:'#009844',d:'「大きくなれ」の想いを込めた緑のクラブ。'}],
+ '島根県':[],
+ '岡山県':[{n:'ファジアーノ岡山',l:'J1',s:'JFE晴れの国スタジアム',c:'#1d2f6b',d:'晴れの国のクラブ。着実な歩みでJ1へ。'}],
+ '広島県':[{n:'サンフレッチェ広島',l:'J1',s:'エディオンピースウイング広島',c:'#582a83',d:'紫の強豪。街なかの新スタジアムが誕生し熱気も倍増。'}],
+ '山口県':[{n:'レノファ山口FC',l:'J2',s:'維新みらいふスタジアム',c:'#f39800',d:'オレンジのクラブ。ボールを大事にするスタイル。'}],
+ '徳島県':[{n:'徳島ヴォルティス',l:'J2',s:'ポカリスエットスタジアム',c:'#005bab',d:'渦潮の街のクラブ。ポゼッションサッカーが伝統。'}],
+ '香川県':[{n:'カマタマーレ讃岐',l:'J3',s:'Pikaraスタジアム',c:'#005bac',d:'うどん県のクラブ。地域に根ざし戦う。'}],
+ '愛媛県':[{n:'愛媛FC',l:'J2',s:'ニンジニアスタジアム',c:'#f6a200',d:'オレンジのクラブ。四国の雄として奮闘。'},{n:'FC今治',l:'J2',s:'アシックス里山スタジアム',c:'#00a0e9',d:'岡田武史氏が関わるクラブ。里山スタジアムが話題。'}],
+ '高知県':[],
+ '福岡県':[{n:'アビスパ福岡',l:'J1',s:'ベスト電器スタジアム',c:'#1d2f6b',d:'紺のクラブ。堅守で九州を代表する存在に。'},{n:'ギラヴァンツ北九州',l:'J3',s:'ミクニワールドスタジアム北九州',c:'#ffdb00',d:'海沿いの絶景スタジアムが自慢。黄色のクラブ。'}],
+ '佐賀県':[{n:'サガン鳥栖',l:'J2',s:'駅前不動産スタジアム',c:'#0d63b6',d:'駅前の好立地スタジアム。運動量豊富な戦いが持ち味。'}],
+ '長崎県':[{n:'V・ファーレン長崎',l:'J2',s:'PEACE STADIUM（長崎スタジアムシティ）',c:'#005baa',d:'話題の新スタジアム「長崎スタジアムシティ」を本拠に躍進。'}],
+ '熊本県':[{n:'ロアッソ熊本',l:'J2',s:'えがお健康スタジアム',c:'#ec1c24',d:'赤のクラブ。攻撃的なサッカーで上位を狙う。'}],
+ '大分県':[{n:'大分トリニータ',l:'J2',s:'レゾナックドーム大分',c:'#003399',d:'青のクラブ。ドーム型スタジアムが本拠。'}],
+ '宮崎県':[{n:'テゲバジャーロ宮崎',l:'J3',s:'いちご宮崎新富サッカー場',c:'#14a04c',d:'南国宮崎のクラブ。着実にステップアップ中。'}],
+ '鹿児島県':[{n:'鹿児島ユナイテッドFC',l:'J3',s:'白波スタジアム',c:'#d7000f',d:'薩摩のクラブ。熱い応援で九州南部を盛り上げる。'}],
+ '沖縄県':[{n:'FC琉球',l:'J3',s:'タピック県総ひやごんスタジアム',c:'#d7000f',d:'南国・沖縄のクラブ。島全体で応援する存在。'}]
+};
+function badgeColor(l){return l==='J1'?'#c99a1e':l==='J2'?'#2251d6':'#12894f';}
+function schedURL(n){return 'https://www.google.com/search?q='+encodeURIComponent(n+' 日程 結果');}
+function renderRegion(pref){
+  const box=document.getElementById('regionResult');
+  box.innerHTML='';
+  if(!pref)return;
+  const clubs=CLUBS[pref];
+  if(!clubs||!clubs.length){
+    box.innerHTML='<div class="region-empty"><p>'+pref+'には、現在Jリーグのクラブがありません。<br>近くのクラブや日本代表戦から、現地デビューしてみませんか？</p><a class="club-btn" href="'+FORM+'" target="_blank" rel="noopener">まずは登録して相談する →</a></div>';
+    return;
+  }
+  box.innerHTML=clubs.map(function(c){
+    var fx='';
+    if(c.fx){fx='<div class="club-fx-title">📅 直近の試合</div>'+c.fx.map(function(f){return '<div class="club-fx"><span class="d">'+f.d+'</span><span class="o">vs '+f.o+'</span></div>';}).join('');}
+    return '<div class="club-card"><div class="club-bar" style="background:'+c.c+'"></div><div class="club-body">'
+      +'<div class="club-top"><span class="club-name">'+c.n+'</span><span class="club-league" style="background:'+badgeColor(c.l)+'">'+c.l+'</span></div>'
+      +'<div class="club-meta">📍 '+c.s+'</div>'
+      +'<div class="club-desc">'+c.d+'</div>'
+      +fx
+      +'<div class="club-actions"><a class="club-btn" href="'+FORM+'" target="_blank" rel="noopener">この地域で仲間を探す →</a><a class="club-link" href="'+schedURL(c.n)+'" target="_blank" rel="noopener">📅 日程・結果を見る</a></div>'
+      +'</div></div>';
+  }).join('');
+}
+(function(){
+  const sel=document.getElementById('prefSelect');
+  if(!sel)return;
+  PREFS.forEach(function(p){var o=document.createElement('option');o.value=p;o.textContent=p;sel.appendChild(o);});
+  sel.addEventListener('change',function(e){renderRegion(e.target.value);});
+})();
 </script>
 </body>
 </html>
