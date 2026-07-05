@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>MeetPitch アプリデモ</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue-900:#0a1747; --blue-800:#0f2260; --blue-700:#122a86; --blue-600:#173bb0;
+  --blue-500:#2251d6; --blue-400:#4a7dff; --blue-100:#e8eefc; --blue-050:#f4f7fe;
+  --amber:#ffb347; --amber-strong:#ff9d1c; --cta:#ff9d1c;
+  --ink:#1a2340; --ink-soft:#4a5678; --line:#e3e8f5;
+  --green:#12894f; --green-bg:#e4f7ec;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{
+  font-family:'Noto Sans JP',system-ui,sans-serif;color:var(--ink);line-height:1.7;
+  background:linear-gradient(160deg,#0f2260,#173bb0);min-height:100vh;
+}
+button{font-family:inherit;border:none;background:none;cursor:pointer}
+
+/* ==== スマホフレーム ==== */
+.phone{
+  position:relative;max-width:414px;margin:0 auto;background:#fff;min-height:100vh;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+@media(min-width:500px){
+  body{padding:28px 0}
+  .phone{min-height:820px;max-height:860px;border-radius:38px;border:10px solid #10152b;box-shadow:0 40px 90px -30px rgba(0,0,0,.6)}
+}
+
+/* ==== アプリヘッダー ==== */
+.app-head{
+  flex:none;display:flex;align-items:center;gap:8px;padding:14px 18px 12px;
+  background:#fff;border-bottom:1px solid var(--line);z-index:5;
+}
+.app-head .logo{display:flex;align-items:center;gap:7px;font-family:'Montserrat';font-weight:800;font-size:17px;color:var(--blue-700)}
+.app-head svg{width:24px;height:24px}
+.demo-chip{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:1px;color:#fff;background:var(--coral,#ff7a59);background:#ff5a6e;padding:3px 10px;border-radius:999px}
+
+/* ==== 画面共通 ==== */
+.screen{display:none;flex:1;flex-direction:column;overflow-y:auto;background:var(--blue-050)}
+.screen.active{display:flex}
+.pad{padding:20px 18px}
+.sc-title{font-size:20px;font-weight:900;line-height:1.5;margin-bottom:4px}
+.sc-sub{font-size:13px;color:var(--ink-soft);margin-bottom:18px}
+.btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
+  background:var(--cta);color:#fff;font-weight:800;font-size:15.5px;
+  padding:16px;border-radius:16px;box-shadow:0 10px 24px -10px rgba(240,125,0,.75);
+  transition:transform .15s;
+}
+.btn:active{transform:scale(.97)}
+.btn.sub{background:#fff;color:var(--blue-600);border:2px solid var(--blue-100);box-shadow:none}
+.btn.ghost{background:none;color:var(--ink-soft);box-shadow:none;font-weight:600;font-size:13px;padding:10px}
+.back{font-size:13px;font-weight:700;color:var(--ink-soft);padding:14px 18px 0;display:inline-flex;align-items:center;gap:5px}
+
+/* ==== ホーム ==== */
+#home{background:linear-gradient(170deg,var(--blue-800),var(--blue-600));color:#fff;justify-content:center;text-align:center}
+#home .hero-icon{width:110px;height:110px;margin:0 auto 18px;filter:drop-shadow(0 12px 28px rgba(0,0,0,.35))}
+#home h1{font-family:'Montserrat';font-weight:900;font-size:30px;letter-spacing:.5px}
+#home .tag{font-size:13.5px;color:rgba(255,255,255,.85);margin:8px 0 34px}
+.role-btns{display:flex;flex-direction:column;gap:13px;padding:0 26px}
+.role-btn{
+  display:flex;align-items:center;gap:14px;text-align:left;background:#fff;color:var(--ink);
+  border-radius:18px;padding:17px 18px;box-shadow:0 14px 30px -14px rgba(0,0,0,.4);
+  transition:transform .15s;
+}
+.role-btn:active{transform:scale(.97)}
+.role-btn .r-ico{flex:none;width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:23px}
+.role-btn.beginner .r-ico{background:var(--blue-100)}
+.role-btn.guide .r-ico{background:#ffe9c7}
+.role-btn b{display:block;font-size:15.5px;font-weight:900}
+.role-btn small{font-size:11.5px;color:var(--ink-soft)}
+.role-btn .arr{margin-left:auto;color:var(--amber-strong);font-weight:900}
+#home .foot-note{font-size:11px;color:rgba(255,255,255,.6);margin-top:26px}
+
+/* ==== 試合選択 ==== */
+.match-card{
+  background:#fff;border-radius:18px;padding:16px;border:2px solid transparent;
+  box-shadow:0 8px 20px -12px rgba(15,34,96,.25);margin-bottom:12px;width:100%;text-align:left;
+  transition:transform .15s,border-color .15s;
+}
+.match-card:active{transform:scale(.98)}
+.match-card .m-date{font-size:11.5px;font-weight:800;color:var(--blue-600);background:var(--blue-100);display:inline-block;padding:3px 10px;border-radius:999px;margin-bottom:8px}
+.match-card .m-fix{font-size:15px;font-weight:900;line-height:1.45}
+.match-card .m-fix span{font-size:10.5px;color:var(--ink-soft);margin:0 4px}
+.match-card .m-venue{font-size:11px;color:var(--ink-soft);margin:3px 0 10px}
+.match-card .m-foot{display:flex;align-items:center;gap:8px}
+.avs{display:flex}
+.avs span{width:26px;height:26px;border-radius:50%;background:var(--blue-100);border:2px solid #fff;margin-left:-7px;display:flex;align-items:center;justify-content:center;font-size:12px}
+.avs span:first-child{margin-left:0}
+.m-wait{font-size:11.5px;font-weight:700;color:var(--green);background:var(--green-bg);padding:3px 10px;border-radius:999px}
+.m-go{margin-left:auto;font-weight:900;color:var(--amber-strong)}
+
+/* ==== 確認 ==== */
+.confirm-box{background:#fff;border-radius:20px;padding:20px;box-shadow:0 10px 26px -14px rgba(15,34,96,.3);margin-bottom:14px}
+.confirm-box .c-label{font-size:11px;font-weight:800;color:var(--ink-soft);letter-spacing:1px;margin-bottom:6px}
+.fee-row{display:flex;align-items:baseline;gap:8px;margin:4px 0}
+.fee-row .fee{font-family:'Montserrat';font-weight:900;font-size:34px}
+.fee-row .fee-unit{font-size:12px;color:var(--ink-soft)}
+.fee-note{font-size:11.5px;color:var(--ink-soft)}
+.fee-list{margin-top:12px;display:flex;flex-direction:column;gap:7px}
+.fee-list li{list-style:none;font-size:12.5px;display:flex;gap:7px;color:var(--ink-soft)}
+.fee-list .ck{color:var(--amber-strong);font-weight:900;flex:none}
+.demo-note{font-size:11px;color:var(--ink-soft);text-align:center;margin-top:10px}
+
+/* ==== マッチング演出 ==== */
+#matching{background:linear-gradient(170deg,var(--blue-800),var(--blue-600));color:#fff;justify-content:center;text-align:center}
+.pulse-wrap{position:relative;width:130px;height:130px;margin:0 auto 26px}
+.pulse-wrap::before,.pulse-wrap::after{
+  content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(255,179,71,.55);
+  animation:pulse 1.8s ease-out infinite;
+}
+.pulse-wrap::after{animation-delay:.9s}
+@keyframes pulse{0%{transform:scale(.75);opacity:1}100%{transform:scale(1.55);opacity:0}}
+.pulse-wrap svg{position:relative;width:100%;height:100%;z-index:2}
+#matchingText{font-size:15px;font-weight:700;min-height:48px}
+.dots::after{content:"";animation:dots 1.5s steps(4,end) infinite}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+
+/* ==== グループ ==== */
+.group-head{
+  background:linear-gradient(150deg,var(--blue-700),var(--blue-500));color:#fff;
+  padding:18px;border-radius:20px;margin-bottom:14px;box-shadow:0 14px 30px -14px rgba(15,34,96,.5);
+}
+.group-head .g-date{font-size:11.5px;font-weight:700;color:var(--amber);margin-bottom:3px}
+.group-head .g-fix{font-size:16px;font-weight:900;line-height:1.4}
+.group-head .g-venue{font-size:11px;color:rgba(255,255,255,.8);margin-top:4px}
+.group-head .g-meet{margin-top:12px;background:rgba(0,0,0,.18);border-radius:12px;padding:10px 13px;font-size:12px;display:flex;gap:8px;align-items:flex-start}
+.member-card{background:#fff;border-radius:18px;padding:6px 16px;box-shadow:0 8px 20px -12px rgba(15,34,96,.22);margin-bottom:14px}
+.mem{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--blue-050)}
+.mem:last-child{border-bottom:none}
+.mem .m-ava{flex:none;width:40px;height:40px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:19px}
+.mem.you .m-ava{background:#ffe9c7;box-shadow:0 0 0 2px var(--amber)}
+.mem b{font-size:13.5px;display:block;line-height:1.35}
+.mem small{font-size:11px;color:var(--ink-soft)}
+.mem .m-tag{margin-left:auto;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px;flex:none}
+.mem .m-tag.first{color:var(--blue-600);background:var(--blue-100)}
+.mem .m-tag.guide{color:#8a5b00;background:#ffe9c7}
+.sec-h{font-size:12px;font-weight:800;color:var(--ink-soft);letter-spacing:1px;margin:2px 0 8px}
+
+/* ポイントカード（案内役） */
+.point-card{background:linear-gradient(140deg,#2b2452,#173bb0);color:#fff;border-radius:18px;padding:16px 18px;margin-bottom:14px;box-shadow:0 12px 26px -12px rgba(15,34,96,.5)}
+.point-card .p-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.point-card .p-title{font-size:11.5px;font-weight:800;color:var(--amber);letter-spacing:1px}
+.point-card .p-pt{font-family:'Montserrat';font-weight:900;font-size:26px}
+.point-card .p-pt small{font-size:11px;font-family:'Noto Sans JP';font-weight:500;opacity:.8}
+.p-bar{height:8px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden;margin:6px 0}
+.p-bar i{display:block;height:100%;width:60%;background:linear-gradient(90deg,var(--amber),#ffd07a);border-radius:99px}
+.point-card .p-note{font-size:10.5px;color:rgba(255,255,255,.78)}
+
+/* ==== チャット ==== */
+.chat-box{background:#fff;border-radius:18px;box-shadow:0 8px 20px -12px rgba(15,34,96,.22);display:flex;flex-direction:column;overflow:hidden}
+.chat-log{padding:14px 14px 6px;display:flex;flex-direction:column;gap:10px;max-height:260px;overflow-y:auto}
+.msg{display:flex;gap:8px;align-items:flex-end}
+.msg .c-ava{flex:none;width:28px;height:28px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:13px}
+.msg .bubble{max-width:75%;background:var(--blue-050);border-radius:14px 14px 14px 4px;padding:8px 12px;font-size:12.5px}
+.msg .b-name{font-size:10px;color:var(--ink-soft);margin-bottom:1px}
+.msg.me{flex-direction:row-reverse}
+.msg.me .bubble{background:var(--blue-600);color:#fff;border-radius:14px 14px 4px 14px}
+.chat-input{display:flex;gap:8px;padding:10px;border-top:1px solid var(--blue-050)}
+.chat-input input{flex:1;border:1.5px solid var(--line);border-radius:99px;padding:9px 15px;font-size:13px;font-family:inherit;outline:none}
+.chat-input input:focus{border-color:var(--blue-400)}
+.chat-input button{flex:none;width:40px;height:40px;border-radius:50%;background:var(--cta);color:#fff;font-size:16px;font-weight:900}
+
+/* ==== 当日ガイド ==== */
+.check-card{background:#fff;border-radius:18px;padding:6px 16px;box-shadow:0 8px 20px -12px rgba(15,34,96,.22);margin-bottom:14px}
+.chk{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--blue-050);cursor:pointer}
+.chk:last-child{border-bottom:none}
+.chk .box{flex:none;width:22px;height:22px;border-radius:7px;border:2px solid var(--line);margin-top:2px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:900;transition:all .15s}
+.chk.on .box{background:var(--green);border-color:var(--green)}
+.chk b{font-size:13.5px;display:block}
+.chk.on b{text-decoration:line-through;color:var(--ink-soft)}
+.chk small{font-size:11px;color:var(--ink-soft)}
+.tip{background:#fff;border-left:4px solid var(--amber);border-radius:12px;padding:12px 14px;font-size:12px;color:var(--ink-soft);box-shadow:0 8px 20px -12px rgba(15,34,96,.18);margin-bottom:10px}
+.tip b{color:var(--ink)}
+
+/* ==== ボトムナビ ==== */
+.bottom-nav{
+  flex:none;display:none;background:#fff;border-top:1px solid var(--line);
+  padding:8px 0 calc(8px + env(safe-area-inset-bottom));
+}
+.bottom-nav.show{display:flex}
+.bnav{flex:1;text-align:center;font-size:10px;font-weight:700;color:#9aa5c4;padding:4px 0}
+.bnav .b-ico{font-size:20px;display:block;line-height:1.3}
+.bnav.on{color:var(--blue-600)}
+
+.fade-in{animation:fadeIn .4s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="mp-icon" viewBox="0 0 200 200">
+      <g fill="none" stroke-width="42" stroke-dasharray="33 420">
+        <circle cx="100" cy="100" r="72" stroke="#3f3a8c" transform="rotate(-88 100 100)"/>
+        <circle cx="100" cy="100" r="72" stroke="#ff7d1f" transform="rotate(-58 100 100)"/>
+        <circle cx="100" cy="100" r="72" stroke="#74bfec" transform="rotate(-28 100 100)"/>
+        <circle cx="100" cy="100" r="72" stroke="#4faae2" transform="rotate(2 100 100)"/>
+        <circle cx="100" cy="100" r="72" stroke="#2f93d8" transform="rotate(32 100 100)"/>
+        <circle cx="100" cy="100" r="72" stroke="#3a80c8" transform="rotate(62 100 100)"/>
+        <circle cx="100" cy="100" r="72" stroke="#3e70bf" transform="rotate(92 100 100)"/>
+        <circle cx="100" cy="100" r="72" stroke="#4362b3" transform="rotate(122 100 100)"/>
+        <circle cx="100" cy="100" r="72" stroke="#4756a8" transform="rotate(152 100 100)"/>
+        <circle cx="100" cy="100" r="72" stroke="#4a4b9e" transform="rotate(182 100 100)"/>
+        <circle cx="100" cy="100" r="72" stroke="#474295" transform="rotate(212 100 100)"/>
+        <circle cx="100" cy="100" r="72" stroke="#423a8d" transform="rotate(242 100 100)"/>
+      </g>
+      <circle cx="100" cy="100" r="45" fill="#fff" stroke="#141b33" stroke-width="4"/>
+      <clipPath id="mpBallClip"><circle cx="100" cy="100" r="43"/></clipPath>
+      <g clip-path="url(#mpBallClip)">
+        <g stroke="#141b33" stroke-width="3.5" fill="none">
+          <path d="M100 84 100 54"/><path d="M115.2 95.1 143.7 85.8"/><path d="M109.4 112.9 127 137.2"/><path d="M90.6 112.9 73 137.2"/><path d="M84.8 95.1 56.3 85.8"/>
+        </g>
+        <g fill="#141b33">
+          <polygon points="100,84 115.2,95.1 109.4,112.9 90.6,112.9 84.8,95.1"/>
+          <polygon points="100,39 114.3,49.4 108.8,66.1 91.2,66.1 85.7,49.4"/>
+          <polygon points="143.7,70.8 158,81.2 152.5,97.9 134.9,97.9 129.4,81.2"/>
+          <polygon points="127,122.2 141.3,132.6 135.8,149.3 118.2,149.3 112.7,132.6"/>
+          <polygon points="73,122.2 87.3,132.6 81.8,149.3 64.2,149.3 58.7,132.6"/>
+          <polygon points="56.3,70.8 70.6,81.2 65.1,97.9 47.5,97.9 42,81.2"/>
+        </g>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="phone">
+
+  <!-- ヘッダー -->
+  <div class="app-head">
+    <span class="logo"><svg><use href="#mp-icon"/></svg>MeetPitch</span>
+    <span class="demo-chip">DEMO</span>
+  </div>
+
+  <!-- ① ホーム（役割選択） -->
+  <div class="screen active" id="home">
+    <div class="pad" style="width:100%">
+      <svg class="hero-icon"><use href="#mp-icon"/></svg>
+      <h1>MeetPitch</h1>
+      <p class="tag">はじめてのスタジアム、ひとりじゃない。</p>
+      <div class="role-btns">
+        <button class="role-btn beginner" onclick="setRole('beginner')">
+          <span class="r-ico">🔰</span>
+          <span><b>はじめての方</b><small>現地観戦デビューしたい</small></span>
+          <span class="arr">→</span>
+        </button>
+        <button class="role-btn guide" onclick="setRole('guide')">
+          <span class="r-ico">🧭</span>
+          <span><b>案内役の方</b><small>Jリーグの仲間を増やしたい</small></span>
+          <span class="arr">→</span>
+        </button>
+      </div>
+      <p class="foot-note">これは操作デモです。実際の決済・登録は行われません。</p>
+    </div>
+  </div>
+
+  <!-- ② 試合選択 -->
+  <div class="screen" id="select">
+    <a class="back" onclick="go('home')">← もどる</a>
+    <div class="pad">
+      <h2 class="sc-title">どの試合に行く？</h2>
+      <p class="sc-sub">選ぶのはこれだけ。あとはお任せ。</p>
+      <div id="matchList"></div>
+    </div>
+  </div>
+
+  <!-- ③ 確認 -->
+  <div class="screen" id="confirm">
+    <a class="back" onclick="go('select')">← もどる</a>
+    <div class="pad">
+      <h2 class="sc-title">この試合で仲間を探す</h2>
+      <p class="sc-sub" id="confirmSub"></p>
+      <div class="confirm-box" id="confirmMatch"></div>
+      <div class="confirm-box" id="confirmFee"></div>
+      <button class="btn" onclick="startMatching()">仲間を探す ⚽</button>
+      <p class="demo-note">※デモのため、決済はスキップされます</p>
+    </div>
+  </div>
+
+  <!-- ④ マッチング演出 -->
+  <div class="screen" id="matching">
+    <div class="pad" style="width:100%">
+      <div class="pulse-wrap"><svg><use href="#mp-icon"/></svg></div>
+      <p id="matchingText" class="dots">同じ試合に行く仲間を探しています</p>
+    </div>
+  </div>
+
+  <!-- ⑤ グループ -->
+  <div class="screen" id="group">
+    <div class="pad">
+      <h2 class="sc-title">🎉 グループができました！</h2>
+      <p class="sc-sub" id="groupSub"></p>
+      <div class="group-head" id="groupMatch"></div>
+      <div id="pointArea"></div>
+      <p class="sec-h">メンバー</p>
+      <div class="member-card" id="memberList"></div>
+      <p class="sec-h">グループチャット</p>
+      <div class="chat-box">
+        <div class="chat-log" id="chatLog"></div>
+        <div class="chat-input">
+          <input id="chatInput" type="text" placeholder="メッセージを入力…" onkeydown="if(event.key==='Enter')sendMsg()">
+          <button onclick="sendMsg()">↑</button>
+        </div>
+      </div>
+      <div style="height:16px"></div>
+      <button class="btn sub" onclick="go('guide-day')">📋 当日ガイドを見る</button>
+    </div>
+  </div>
+
+  <!-- ⑥ 当日ガイド -->
+  <div class="screen" id="guide-day">
+    <a class="back" onclick="go('group')">← グループにもどる</a>
+    <div class="pad">
+      <h2 class="sc-title">当日までの準備</h2>
+      <p class="sc-sub">ぜんぶで5つ。ひとつずつでOK！</p>
+      <div class="check-card" id="checkList"></div>
+      <p class="sec-h">はじめてでも安心</p>
+      <div class="tip"><b>👕 服装は自由！</b>ユニフォームがなくても大丈夫。持っている人の方が少ない席もあります。</div>
+      <div class="tip"><b>📣 応援は「立たなくていい席」</b>を選んでいます。座ってのんびり観るところから始めましょう。</div>
+      <div class="tip"><b>🍜 スタグルはお楽しみ</b>。キックオフ1時間前に着けば、スタジアムグルメを満喫できます。</div>
+    </div>
+  </div>
+
+  <!-- ボトムナビ -->
+  <div class="bottom-nav" id="bottomNav">
+    <button class="bnav" data-s="select" onclick="go('select')"><span class="b-ico">⚽</span>試合</button>
+    <button class="bnav" data-s="group" onclick="go('group')"><span class="b-ico">👥</span>グループ</button>
+    <button class="bnav" data-s="guide-day" onclick="go('guide-day')"><span class="b-ico">📋</span>ガイド</button>
+    <button class="bnav" onclick="resetDemo()"><span class="b-ico">↺</span>リセット</button>
+  </div>
+</div>
+
+<script>
+// ===== データ =====
+const MATCHES = [
+  {id:0, date:'7/25(土) 19:00', home:'アルビレックス新潟', away:'モンテディオ山形', venue:'デンカビッグスワンスタジアム', waiting:3, avs:['🙂','😀','😊']},
+  {id:1, date:'8/15(土) 19:00', home:'アルビレックス新潟', away:'北海道コンサドーレ札幌', venue:'デンカビッグスワンスタジアム', waiting:2, avs:['😃','🙂']},
+  {id:2, date:'8/22(土) 19:00', home:'アルビレックス新潟', away:'藤枝MYFC', venue:'デンカビッグスワンスタジアム', waiting:4, avs:['😊','😀','🙂','😄']},
+];
+const BEGINNERS = [
+  {ava:'🙂', name:'ハルカさん', desc:'20代・W杯からサッカー好きに'},
+  {ava:'😀', name:'ダイキさん', desc:'30代・代表戦は毎回見る派'},
+  {ava:'😊', name:'ミオさん',   desc:'20代・スタジアムは初めて'},
+];
+const GUIDE = {ava:'🧭', name:'ヤスさん', desc:'観戦歴8年・今季10試合目'};
+const GUIDE_REPLIES = [
+  'いい質問ですね！当日なんでも聞いてください👍',
+  '大丈夫です、僕も最初はそうでした😄',
+  '17:45にNゲート前で待ってますね！オレンジのタオル持ってます🧡',
+  'チケットまだの方は、リンクから「Nスタンド」がおすすめです！',
+];
+
+// ===== 状態 =====
+let role = 'beginner';
+let selMatch = null;
+let matched = false;
+
+// ===== 画面遷移 =====
+function go(id){
+  if((id==='group'||id==='guide-day') && !matched){ id='select'; }
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  const el = document.getElementById(id);
+  el.classList.add('active');
+  el.classList.remove('fade-in'); void el.offsetWidth; el.classList.add('fade-in');
+  // ボトムナビ
+  const nav = document.getElementById('bottomNav');
+  nav.classList.toggle('show', matched && id!=='home' && id!=='matching');
+  document.querySelectorAll('.bnav').forEach(b=>b.classList.toggle('on', b.dataset.s===id));
+  el.scrollTop = 0;
+}
+
+function setRole(r){
+  role = r;
+  renderMatches();
+  go('select');
+}
+
+// ===== 試合リスト =====
+function renderMatches(){
+  const wrap = document.getElementById('matchList');
+  wrap.innerHTML = MATCHES.map(m=>`
+    <button class="match-card" onclick="pickMatch(${m.id})">
+      <span class="m-date">${m.date}</span>
+      <div class="m-fix">${m.home} <span>VS</span> ${m.away}</div>
+      <div class="m-venue">📍 ${m.venue}</div>
+      <div class="m-foot">
+        <span class="avs">${m.avs.map(a=>`<span>${a}</span>`).join('')}</span>
+        <span class="m-wait">${role==='guide' ? `初めての${m.waiting}人が案内役を待っています` : `初めて${m.waiting}人が待っています`}</span>
+        <span class="m-go">→</span>
+      </div>
+    </button>
+  `).join('');
+}
+
+// ===== 確認 =====
+function pickMatch(id){
+  selMatch = MATCHES[id];
+  document.getElementById('confirmSub').textContent =
+    role==='guide' ? 'あなたの案内で、この試合の初観戦が生まれます。' : '同じ「初めて」の仲間と一緒に行きます。';
+  document.getElementById('confirmMatch').innerHTML = `
+    <div class="c-label">選んだ試合</div>
+    <span class="m-date">${selMatch.date}</span>
+    <div class="m-fix" style="font-size:16px;font-weight:900;margin-top:6px">${selMatch.home} <span style="font-size:11px;color:var(--ink-soft)">VS</span> ${selMatch.away}</div>
+    <div class="m-venue" style="font-size:11.5px;color:var(--ink-soft)">📍 ${selMatch.venue}</div>`;
+  document.getElementById('confirmFee').innerHTML = role==='guide' ? `
+    <div class="c-label">参加費（案内役）</div>
+    <div class="fee-row"><span class="fee">¥500</span><span class="fee-unit">/ 1回 ※検討中の想定価格</span></div>
+    <p class="fee-note">“案内の労働対価”ではなく、出会いと体験への参加費です。</p>
+    <ul class="fee-list">
+      <li><span class="ck">✓</span>行きたくて登録した初心者グループに合流</li>
+      <li><span class="ck">✓</span>案内1回ごとに貢献ポイント +10pt</li>
+      <li><span class="ck">✓</span>チケット代は各自購入</li>
+    </ul>` : `
+    <div class="c-label">参加費（はじめての方）</div>
+    <div class="fee-row"><span class="fee">¥1,000</span><span class="fee-unit">/ 1回</span></div>
+    <p class="fee-note">マッチング＆グループ案内料。チケット代は別・各自購入です。</p>
+    <ul class="fee-list">
+      <li><span class="ck">✓</span>同じ初心者仲間とのマッチング</li>
+      <li><span class="ck">✓</span>案内役による当日サポート</li>
+      <li><span class="ck">✓</span>チケットの買い方もガイドします</li>
+    </ul>`;
+  go('confirm');
+}
+
+// ===== マッチング演出 =====
+function startMatching(){
+  go('matching');
+  const t = document.getElementById('matchingText');
+  t.textContent = '同じ試合に行く仲間を探しています';
+  setTimeout(()=>{ t.textContent = role==='guide' ? '初めてのメンバーをご案内します' : '案内役をアサインしています'; }, 1600);
+  setTimeout(()=>{ matched = true; renderGroup(); go('group'); }, 3200);
+}
+
+// ===== グループ =====
+function renderGroup(){
+  document.getElementById('groupSub').textContent =
+    role==='guide' ? 'あなた＋初めての3人のグループです。' : 'みんな「初めて」。安心していこう！';
+  document.getElementById('groupMatch').innerHTML = `
+    <div class="g-date">${selMatch.date} KICK OFF</div>
+    <div class="g-fix">${selMatch.home}<br>vs ${selMatch.away}</div>
+    <div class="g-venue">📍 ${selMatch.venue}</div>
+    <div class="g-meet">🕠 <span><b>集合：17:45 Nゲート前</b><br>ヤスさん（案内役）がオレンジのタオルを持って待っています</span></div>`;
+  document.getElementById('pointArea').innerHTML = role==='guide' ? `
+    <div class="point-card">
+      <div class="p-top"><span class="p-title">🏅 貢献サポーター</span><span class="p-pt">30<small> pt</small></span></div>
+      <div class="p-bar"><i></i></div>
+      <div class="p-note">この案内で +10pt ／ 50pt で「貢献サポーター」認定（構想中）</div>
+    </div>` : '';
+  const members = [];
+  if(role==='guide'){
+    members.push({ava:'🧭', name:'あなた', desc:'案内役・いつもの観戦のままで', tag:'案内役', cls:'guide', you:true});
+    BEGINNERS.forEach(b=>members.push({...b, tag:'初めて', cls:'first'}));
+  } else {
+    members.push({ava:'🔰', name:'あなた', desc:'現地観戦デビュー', tag:'初めて', cls:'first', you:true});
+    BEGINNERS.slice(0,2).forEach(b=>members.push({...b, tag:'初めて', cls:'first'}));
+    members.push({...GUIDE, tag:'案内役', cls:'guide'});
+  }
+  document.getElementById('memberList').innerHTML = members.map(m=>`
+    <div class="mem${m.you?' you':''}">
+      <span class="m-ava">${m.ava}</span>
+      <span><b>${m.name}</b><small>${m.desc}</small></span>
+      <span class="m-tag ${m.cls}">${m.tag}</span>
+    </div>`).join('');
+  // チャット初期化
+  const log = document.getElementById('chatLog');
+  log.innerHTML = '';
+  addMsg(GUIDE, 'グループができましたね！案内役のヤスです。当日はよろしくお願いします🧡 わからないことは何でも聞いてください！');
+  addMsg(BEGINNERS[0], 'はじめまして！初観戦です、よろしくお願いします🙌');
+  renderChecklist();
+}
+
+function addMsg(who, text, me=false){
+  const log = document.getElementById('chatLog');
+  const div = document.createElement('div');
+  div.className = 'msg' + (me?' me':'');
+  div.innerHTML = me
+    ? `<div class="bubble">${text}</div>`
+    : `<span class="c-ava">${who.ava}</span><div><div class="b-name">${who.name}</div><div class="bubble">${text}</div></div>`;
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+}
+
+let replyIdx = 0;
+function sendMsg(){
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text) return;
+  addMsg(null, text, true);
+  input.value = '';
+  setTimeout(()=>{
+    addMsg(GUIDE, GUIDE_REPLIES[replyIdx % GUIDE_REPLIES.length]);
+    replyIdx++;
+  }, 900);
+}
+
+// ===== 当日ガイド =====
+const CHECKS = [
+  {t:'チケットを購入する', s:'各自購入・買い方はチャットでガイドします'},
+  {t:'集合場所を確認', s:'スタジアム正面 Nゲート前 / 17:45'},
+  {t:'持ち物をチェック', s:'飲み物・タオル・（あれば）動きやすい服'},
+  {t:'アクセスを確認', s:'新潟駅からシャトルバス約25分'},
+  {t:'グループに一言あいさつ', s:'「よろしくお願いします」だけでOK！'},
+];
+const checkState = CHECKS.map(()=>false);
+function renderChecklist(){
+  document.getElementById('checkList').innerHTML = CHECKS.map((c,i)=>`
+    <div class="chk${checkState[i]?' on':''}" onclick="toggleCheck(${i})">
+      <span class="box">${checkState[i]?'✓':''}</span>
+      <span><b>${c.t}</b><small>${c.s}</small></span>
+    </div>`).join('');
+}
+function toggleCheck(i){
+  checkState[i] = !checkState[i];
+  renderChecklist();
+}
+
+// ===== リセット =====
+function resetDemo(){
+  role='beginner'; selMatch=null; matched=false; replyIdx=0;
+  checkState.forEach((_,i)=>checkState[i]=false);
+  go('home');
+}
+</script>
+</body>
+</html>
