@@ -355,6 +355,14 @@ section{padding:88px 0}
 details[open] .faq-q .chev{transform:rotate(180deg)}
 .faq-a{padding:0 24px 22px 58px;font-size:14.5px;color:var(--ink-soft)}
 
+/* ============ 案内役バナー ============ */
+.fan-banner{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(120deg,var(--blue-800),var(--blue-600));color:#fff;border-radius:22px;padding:28px 32px;box-shadow:var(--shadow);transition:transform .2s ease}
+.fan-banner:hover{transform:translateY(-3px)}
+.fan-banner .fb-t{font-size:19px;font-weight:900;margin-bottom:5px}
+.fan-banner .fb-d{font-size:13.5px;color:rgba(255,255,255,.86)}
+.fan-banner .fb-a{flex:none;background:var(--amber);color:#3a2400;font-weight:900;padding:13px 24px;border-radius:999px;font-size:14px}
+@media(max-width:680px){.fan-banner{flex-direction:column;text-align:center}}
+
 /* ============ 最終CTA ============ */
 .final{
   text-align:center;
@@ -454,6 +462,7 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
       <a href="#steps">使い方</a>
       <a href="#price">料金</a>
       <a href="#mission">想い</a>
+      <a href="guide.html">案内役の方へ</a>
       <a href="#cta" class="nav-cta">事前登録する</a>
     </nav>
   </div>
@@ -649,7 +658,7 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
       <h2 class="sec-title reveal">シンプルで、<span class="u">わかりやすい料金。</span></h2>
       <p class="sec-lead reveal">ドリンク1杯ぶんで、はじめての現地観戦が安心に変わります。</p>
     </div>
-    <div class="price-grid">
+    <div class="price-grid" style="grid-template-columns:1fr;max-width:460px">
       <div class="price-card main reveal">
         <div class="price-tag">はじめての方（マッチング参加）</div>
         <div class="price-amount"><span class="yen">¥</span>1,000 <span class="unit">/ 1回</span></div>
@@ -660,18 +669,8 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
           <li><span class="ck">✓</span>チケット代は別・各自購入</li>
         </ul>
       </div>
-      <div class="price-card free reveal">
-        <div class="price-tag">案内役（既存ファン）</div>
-        <div class="price-amount">無料 <span class="unit">/ ずっと</span></div>
-        <div class="price-desc">好きなクラブの仲間を増やす、やりがいの場</div>
-        <ul class="price-list">
-          <li><span class="ck">✓</span>参加費0円</li>
-          <li><span class="ck">✓</span>初心者を現地へ案内</li>
-          <li><span class="ck">✓</span>クラブの新しいファンづくりに貢献</li>
-        </ul>
-      </div>
     </div>
-    <p class="price-foot reveal">※ 将来的にはクラブへのB2B課金（新規来場・リピート成果）も視野に入れています。</p>
+    <p class="price-foot reveal">既存Jリーグファンの方は「案内役」として<a href="guide.html" style="color:var(--blue-600);font-weight:700;text-decoration:underline">無料で参加できます →</a></p>
   </div>
 </section>
 
@@ -779,6 +778,19 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
   </div>
 </section>
 
+<!-- 既存ファン向け導線 -->
+<section style="padding:0 0 88px">
+  <div class="wrap">
+    <a href="guide.html" class="fan-banner reveal">
+      <div>
+        <div class="fb-t">⚽ 既存Jリーグファンのあなたへ</div>
+        <div class="fb-d">その熱狂を、次のひとりへ。「案内役」として初心者の現地デビューを支えませんか？ 参加は無料です。</div>
+      </div>
+      <span class="fb-a">案内役ページへ →</span>
+    </a>
+  </div>
+</section>
+
 <!-- 最終CTA -->
 <section class="final" id="cta">
   <div class="wrap inner">
@@ -814,6 +826,7 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
         <a href="#problem">こんな悩み</a>
         <a href="#solution">できること</a>
         <a href="#price">料金</a>
+        <a href="guide.html">案内役の方へ</a>
         <a href="#cta">事前登録</a>
       </div>
     </div>
