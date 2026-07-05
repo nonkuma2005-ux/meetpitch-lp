@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MeetPitch｜案内役募集 — その熱狂を、次のひとりへ。</title>
-<meta name="description" content="Jリーグの現地観戦がはじめての初心者に、そっと寄り添う「案内役」を募集。特別な知識は不要、参加は無料。あなたの“好き”が、クラブの新しい仲間を生みます。">
+<title>MeetPitch｜案内役募集 — 「Jリーグ見に行こうよ！」を、仕組みに。</title>
+<meta name="description" content="Xで「Jリーグ見に行こうよ！」と呼びかけるあなたへ。初観戦は大敗・塩試合に左右される“ガチャ”——MeetPitchは勝敗に左右されない初観戦体験をつくる「案内役」を募集。相手は“行きたくて登録した”初心者だけ。">
 
 <!-- OGP -->
-<meta property="og:title" content="MeetPitch｜案内役募集 — その熱狂を、次のひとりへ。">
-<meta property="og:description" content="初心者の現地観戦デビューをそっと支える「案内役」。参加無料、特別な知識は不要です。">
+<meta property="og:title" content="MeetPitch｜案内役募集 — 「Jリーグ見に行こうよ！」を、仕組みに。">
+<meta property="og:description" content="布教を勝敗ガチャから解放する。初心者の現地デビューを支える「案内役」を募集中。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 
@@ -150,6 +150,29 @@ section{padding:88px 0}
 .m-card p{font-size:14px;color:var(--ink-soft)}
 @media(max-width:860px){.m-grid{grid-template-columns:1fr}}
 
+/* 料金（検討中） */
+.gp-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:52px;max-width:860px;margin-inline:auto}
+.gp-card{border-radius:24px;padding:38px 32px}
+.gp-card.fee{background:linear-gradient(160deg,var(--blue-700),var(--blue-600));color:#fff;box-shadow:var(--shadow)}
+.gp-card.pt{background:#fff;border:2px solid var(--line)}
+.gp-tag{display:inline-block;font-size:13px;font-weight:800;letter-spacing:1px;padding:6px 16px;border-radius:999px;margin-bottom:16px}
+.gp-card.fee .gp-tag{background:rgba(255,179,71,.2);color:var(--amber)}
+.gp-card.pt .gp-tag{background:var(--blue-100);color:var(--blue-600)}
+.gp-amount{font-family:'Montserrat';font-weight:900;font-size:44px;line-height:1}
+.gp-amount .yen{font-size:20px}
+.gp-amount .unit{font-size:14px;font-weight:500;font-family:'Noto Sans JP';opacity:.75}
+.gp-plan{font-size:12.5px;font-weight:700;color:var(--amber);margin-top:8px}
+.gp-desc{font-size:14px;margin-top:12px}
+.gp-card.fee .gp-desc{color:rgba(255,255,255,.9)}
+.gp-card.pt h3{font-size:20px;font-weight:900;margin:4px 0 12px}
+.gp-list{margin-top:16px;display:flex;flex-direction:column;gap:9px}
+.gp-list li{list-style:none;font-size:14px;display:flex;gap:9px;align-items:flex-start}
+.gp-list .ck{flex:none;font-weight:900;color:var(--amber-strong)}
+.gp-card.fee .gp-list .ck{color:var(--amber)}
+.gp-card.pt .gp-list li{color:var(--ink-soft)}
+.gp-note{text-align:center;font-size:13.5px;color:var(--ink-soft);margin-top:26px;line-height:2}
+@media(max-width:720px){.gp-grid{grid-template-columns:1fr}}
+
 /* ステップ */
 .step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:52px}
 .step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:28px 22px;position:relative;box-shadow:var(--shadow-sm)}
@@ -252,6 +275,7 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
     <nav class="nav-links">
       <a href="#role">案内役とは</a>
       <a href="#duo">やること</a>
+      <a href="#price">料金</a>
       <a href="#steps">流れ</a>
       <a href="#faq">FAQ</a>
       <a href="index.html">はじめての方へ</a>
@@ -265,19 +289,20 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
   <div class="wrap hero-grid">
     <div class="hero-left reveal">
       <div class="badge-row">
-        <span class="badge"><span class="dot"></span>既存Jリーグファン向け</span>
-        <span class="badge">参加無料・特別な知識不要</span>
+        <span class="badge"><span class="dot"></span>Jリーグを布教したいあなたへ</span>
+        <span class="badge">盛り上げ役・解説は不要</span>
       </div>
       <h1 class="hero-title">
-        その熱狂を、<br><span class="hl">次のひとりへ。</span>
+        「Jリーグ見に行こうよ！」<br>その声を、<span class="hl">仕組みにする。</span>
       </h1>
       <p class="hero-lead">
-        「日本代表は見るけど、Jリーグの現地は初めて」——そんな初心者の観戦デビューに、そっと寄り添う<b>「案内役」</b>を募集しています。<br>
-        あなたがいつも通り観戦するだけで、クラブに新しい仲間が増えていく。
+        Xで、職場で、友達に——布教を続けるあなたへ。<br>
+        初観戦は大敗・塩試合・悪天候に左右される<b>「ガチャ」</b>。だから誘う側がぜんぶ背負ってしまう。<br>
+        MeetPitchは<b>“行きたくて登録した初心者”</b>とあなたをつなぎ、勝敗に左右されない初観戦体験を一緒につくります。
       </p>
       <div class="hero-cta">
         <a href="https://forms.gle/HKm9dRiBUZdy7H8K9" target="_blank" rel="noopener" class="btn-primary">
-          案内役に登録する（無料）
+          案内役に事前登録する
           <span class="arrow">→</span>
         </a>
         <a href="https://lin.ee/5HZsMr9" target="_blank" rel="noopener" class="btn-line">
@@ -285,7 +310,7 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
           LINEで登録
         </a>
       </div>
-      <span class="hero-note" style="display:block;margin-top:16px">所要 <b>1分</b>／ずっと<b>無料</b>／行ける試合だけでOK</span>
+      <span class="hero-note" style="display:block;margin-top:16px">所要 <b>1分</b>／事前登録は<b>無料</b>／行ける試合だけでOK</span>
     </div>
 
     <div class="hero-right reveal">
@@ -302,7 +327,7 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
             <div class="g-row you">
               <span class="g-ava">🧭</span>
               <div><b>あなた</b><small>案内役・いつもの観戦のままで</small></div>
-              <span class="g-tag">無料</span>
+              <span class="g-tag">案内役</span>
             </div>
             <div class="g-row">
               <span class="g-ava">🙂</span>
@@ -332,28 +357,28 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
 <section class="problem" id="role">
   <div class="wrap">
     <div class="center">
-      <span class="sec-label reveal">Why You</span>
-      <h2 class="sec-title reveal">初心者の足を止める3つの壁。<br><span class="u">あなたの存在</span>が、それを解きます。</h2>
-      <p class="sec-lead reveal">ワールドカップで火がついた新しいファンが、スタジアムに来られない理由。<br>どれも、経験者のあなたにとっては「なんてことないこと」ばかりです。</p>
+      <span class="sec-label reveal">The Struggle</span>
+      <h2 class="sec-title reveal">布教が難しいのは、<br><span class="u">あなたのせいじゃない。</span></h2>
+      <p class="sec-lead reveal">初観戦の満足度は、試合内容・天候・周囲の客層に大きく左右される「ガチャ」。<br>そのリスクを誘った側がひとりで背負う——それが布教の壁でした。</p>
     </div>
     <div class="p-cards">
       <div class="p-card reveal">
-        <div class="p-emoji">🧍</div>
-        <h3>一緒に行く人がいない</h3>
-        <p>MeetPitchが初心者同士をグループにします。あなたはそこに1人加わるだけ。</p>
-        <div class="p-quote">→ グループ分けはこちらにお任せ</div>
+        <div class="p-emoji">🎲</div>
+        <h3>勝敗ガチャ</h3>
+        <p>初観戦の日に限って大敗や塩試合。「つまらなかったらどうしよう」——試合内容は誰にもコントロールできません。</p>
+        <div class="p-quote">→ 勝敗以外の楽しみを“体験”として設計します</div>
       </div>
       <div class="p-card reveal">
-        <div class="p-emoji">🗺️</div>
-        <h3>勝手が分からない</h3>
-        <p>チケットの買い方、席の選び方、スタグルのおすすめ。あなたの「いつもの知識」が頼りです。</p>
-        <div class="p-quote">→ あなたの経験が一番の安心材料</div>
+        <div class="p-emoji">🎒</div>
+        <h3>ぜんぶ自分の責任になる</h3>
+        <p>1対1で誘うと、席も天気も相手の機嫌も、すべて「誘った自分のせい」に。布教がいつしか接待になっていく。</p>
+        <div class="p-quote">→ グループ型だから、ひとりで背負わない</div>
       </div>
       <div class="p-card reveal">
-        <div class="p-emoji">😰</div>
-        <h3>「にわか」と思われる怖さ</h3>
-        <p>だからグループは初心者同士。案内役は“教える先生”ではなく、そっと寄り添う存在です。</p>
-        <div class="p-quote">→ 出しゃばらなくていい「薄い案内役」</div>
+        <div class="p-emoji">🌡️</div>
+        <h3>温度差が怖い</h3>
+        <p>自分の熱量に相手が引いていないか。「もう帰りたい」と思われていないか。気になって試合に集中できない。</p>
+        <div class="p-quote">→ 相手は“自分から行きたくて登録した”初心者だけ</div>
       </div>
     </div>
   </div>
@@ -400,9 +425,9 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
     </div>
     <div class="m-grid">
       <div class="m-card reveal">
-        <div class="m-ico">💸</div>
-        <h3>ずっと無料</h3>
-        <p>案内役の参加費は0円。いつも通りチケットを買って、いつも通り観戦するだけ。</p>
+        <div class="m-ico">🎉</div>
+        <h3>布教が、成功する</h3>
+        <p>相手は“行きたい人”だけ。体験は勝敗に依存しない設計。あなたの「見に行こうよ！」がようやく実を結びます。</p>
       </div>
       <div class="m-card reveal">
         <div class="m-ico">📣</div>
@@ -410,16 +435,49 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
         <p>あなたの案内で現地デビューした初心者が、リピーターに。スタジアムの熱がもっと大きくなる。</p>
       </div>
       <div class="m-card reveal">
-        <div class="m-ico">🤝</div>
-        <h3>新しい観戦仲間</h3>
-        <p>「あの日デビューさせてくれた人」として、一緒に通う仲間ができるかもしれません。</p>
+        <div class="m-ico">🏅</div>
+        <h3>貢献が、ステータスになる</h3>
+        <p>案内のたびにポイントが貯まり、「貢献サポーター」として可視化される仕組みを構想中です。</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- 料金（検討中） -->
+<section id="price">
+  <div class="wrap">
+    <div class="center">
+      <span class="sec-label reveal">Pricing — 検討中</span>
+      <h2 class="sec-title reveal">料金は、<span class="u">あなたと決めたい。</span></h2>
+      <p class="sec-lead reveal">案内役の参加費は現在検討中です。いま考えている形はこちら。</p>
+    </div>
+    <div class="gp-grid">
+      <div class="gp-card fee reveal">
+        <span class="gp-tag">案内役（既存ファン）</span>
+        <div class="gp-amount"><span class="yen">¥</span>500 <span class="unit">/ 1回</span></div>
+        <div class="gp-plan">※予定・検討中</div>
+        <div class="gp-desc">はじめての方（¥1,000）より安価に設定予定。チケット代は各自購入です。</div>
+        <ul class="gp-list">
+          <li><span class="ck">✓</span>“行きたくて登録した”初心者グループとのマッチング</li>
+          <li><span class="ck">✓</span>案内のたびにポイント付与（構想中）</li>
+        </ul>
+      </div>
+      <div class="gp-card pt reveal">
+        <span class="gp-tag">ポイント制度（構想中）</span>
+        <h3>案内が、ステータスになる。</h3>
+        <ul class="gp-list">
+          <li><span class="ck">✓</span>案内1回ごとにポイントが貯まる</li>
+          <li><span class="ck">✓</span>貯めると「貢献サポーター」ステータスを獲得</li>
+          <li><span class="ck">✓</span>クラブと連携した特典も視野に</li>
+        </ul>
+      </div>
+    </div>
+    <p class="gp-note reveal">「無料がいい」「これなら払える」「こんな特典がほしい」——<br>あなたの本音が、この仕組みを決めます。<a href="https://forms.gle/HKm9dRiBUZdy7H8K9" target="_blank" rel="noopener" style="color:var(--blue-600);font-weight:700;text-decoration:underline">フォームで聞かせてください →</a></p>
+  </div>
+</section>
+
 <!-- 流れ -->
-<section id="steps">
+<section id="steps" style="padding-top:0">
   <div class="wrap">
     <div class="center">
       <span class="sec-label reveal">How it works</span>
@@ -463,8 +521,8 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
     </div>
     <div class="faq-list">
       <details class="faq-item reveal">
-        <summary class="faq-q"><span class="qmark">Q</span>本当に無料ですか？<span class="chev">▾</span></summary>
-        <div class="faq-a">はい、案内役の参加費はずっと無料です。ご自身のチケット代・交通費・飲食代は通常どおり各自負担となります。</div>
+        <summary class="faq-q"><span class="qmark">Q</span>料金はかかりますか？<span class="chev">▾</span></summary>
+        <div class="faq-a">1回500円を予定していますが、現在検討中です（はじめての方の¥1,000より安価に設定します）。事前登録は無料。案内のたびにポイントが貯まり「貢献サポーター」になれる仕組みも構想中です。「無料がいい」などのご意見も、ぜひフォームでお聞かせください。</div>
       </details>
       <details class="faq-item reveal">
         <summary class="faq-q"><span class="qmark">Q</span>毎試合参加しないといけませんか？<span class="chev">▾</span></summary>
@@ -486,7 +544,7 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
 <section class="final" id="cta">
   <div class="wrap inner">
     <h2 class="reveal">スタジアムの熱は、<span class="hl">あなたから</span>広がる。</h2>
-    <p class="reveal">サービスの正式リリースに向けて、案内役の事前登録＆ユーザーインタビューにご協力いただける方を募集しています。あなたの観戦経験を、ぜひ聞かせてください。</p>
+    <p class="reveal">サービスの正式リリースに向けて、案内役の事前登録＆ユーザーインタビューにご協力いただける方を募集しています。布教の失敗談も、料金への本音も、ぜひ聞かせてください。</p>
     <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
       <a href="https://forms.gle/HKm9dRiBUZdy7H8K9" target="_blank" rel="noopener" class="btn-primary">
         案内役に登録する（1分）
@@ -498,7 +556,7 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
       </a>
     </div>
     <div class="assure reveal">
-      <span>✅ ずっと無料</span>
+      <span>✅ 事前登録は無料</span>
       <span>✅ 行ける試合だけでOK</span>
       <span>✅ 特別な知識は不要</span>
     </div>
@@ -530,7 +588,7 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
 
 <!-- スマホ追従CTA -->
 <div class="sticky-cta">
-  <a href="https://forms.gle/HKm9dRiBUZdy7H8K9" target="_blank" rel="noopener">案内役に登録する（1分・無料）→</a>
+  <a href="https://forms.gle/HKm9dRiBUZdy7H8K9" target="_blank" rel="noopener">案内役に事前登録する（1分）→</a>
 </div>
 
 <script>
