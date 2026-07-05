@@ -171,6 +171,10 @@ section{padding:88px 0}
 .gp-card.fee .gp-list .ck{color:var(--amber)}
 .gp-card.pt .gp-list li{color:var(--ink-soft)}
 .gp-note{text-align:center;font-size:13.5px;color:var(--ink-soft);margin-top:26px;line-height:2}
+.gp-relief{max-width:860px;margin:26px auto 0;background:var(--blue-050);border:1px dashed #c9d4ee;border-radius:18px;padding:22px 26px;text-align:center}
+.gp-relief-t{font-size:13px;font-weight:800;color:var(--blue-600);margin-bottom:12px}
+.gp-relief-items{display:flex;gap:10px 26px;justify-content:center;flex-wrap:wrap;font-size:14px;font-weight:700}
+.gp-relief-items span{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:rgba(255,157,28,.85);text-decoration-thickness:2.5px}
 @media(max-width:720px){.gp-grid{grid-template-columns:1fr}}
 
 /* ステップ */
@@ -449,17 +453,18 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
     <div class="center">
       <span class="sec-label reveal">Pricing — 検討中</span>
       <h2 class="sec-title reveal">料金は、<span class="u">あなたと決めたい。</span></h2>
-      <p class="sec-lead reveal">案内役の参加費は現在検討中です。いま考えている形はこちら。</p>
+      <p class="sec-lead reveal">先に、大事なことを。この¥500は<b>「案内する労働への対価」ではありません</b>。<br>“行きたくて来た初心者”との出会いと、幹事仕事ゼロの新しい観戦体験——<b>あなたも楽しむ側</b>としての参加費です。</p>
     </div>
     <div class="gp-grid">
       <div class="gp-card fee reveal">
-        <span class="gp-tag">案内役（既存ファン）</span>
+        <span class="gp-tag">参加費（案内役）</span>
         <div class="gp-amount"><span class="yen">¥</span>500 <span class="unit">/ 1回</span></div>
-        <div class="gp-plan">※予定・検討中</div>
-        <div class="gp-desc">はじめての方（¥1,000）より安価に設定予定。チケット代は各自購入です。</div>
+        <div class="gp-plan">※予定・検討中／事前登録は無料</div>
+        <div class="gp-desc">あなたも“参加者”のひとり。はじめての方（¥1,000）の半額に設定予定です。チケット代は各自購入。</div>
         <ul class="gp-list">
-          <li><span class="ck">✓</span>“行きたくて登録した”初心者グループとのマッチング</li>
-          <li><span class="ck">✓</span>案内のたびにポイント付与（構想中）</li>
+          <li><span class="ck">✓</span>“行きたくて登録した”初心者との出会い</li>
+          <li><span class="ck">✓</span>グループ組成・段取りはMeetPitchが担当</li>
+          <li><span class="ck">✓</span>ポイント付与で実質負担はさらに軽く（構想中）</li>
         </ul>
       </div>
       <div class="gp-card pt reveal">
@@ -470,6 +475,14 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
           <li><span class="ck">✓</span>貯めると「貢献サポーター」ステータスを獲得</li>
           <li><span class="ck">✓</span>クラブと連携した特典も視野に</li>
         </ul>
+      </div>
+    </div>
+    <div class="gp-relief reveal">
+      <div class="gp-relief-t">この¥500で、要らなくなるもの</div>
+      <div class="gp-relief-items">
+        <span>誘って断られる気まずさ</span>
+        <span>大敗した日の「ごめん…」</span>
+        <span>席・集合・段取りの幹事仕事</span>
       </div>
     </div>
     <p class="gp-note reveal">「無料がいい」「これなら払える」「こんな特典がほしい」——<br>あなたの本音が、この仕組みを決めます。<a href="https://forms.gle/HKm9dRiBUZdy7H8K9" target="_blank" rel="noopener" style="color:var(--blue-600);font-weight:700;text-decoration:underline">フォームで聞かせてください →</a></p>
@@ -522,7 +535,11 @@ footer{background:var(--blue-900);color:rgba(255,255,255,.7);padding:44px 0 34px
     <div class="faq-list">
       <details class="faq-item reveal">
         <summary class="faq-q"><span class="qmark">Q</span>料金はかかりますか？<span class="chev">▾</span></summary>
-        <div class="faq-a">1回500円を予定していますが、現在検討中です（はじめての方の¥1,000より安価に設定します）。事前登録は無料。案内のたびにポイントが貯まり「貢献サポーター」になれる仕組みも構想中です。「無料がいい」などのご意見も、ぜひフォームでお聞かせください。</div>
+        <div class="faq-a">1回500円を予定していますが、現在検討中です（はじめての方の¥1,000の半額に設定します）。事前登録は無料。案内のたびにポイントが貯まり「貢献サポーター」になれる仕組みも構想中です。「無料がいい」などのご意見も、ぜひフォームでお聞かせください。</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary class="faq-q"><span class="qmark">Q</span>案内する側なのに、お金を払うんですか？<span class="chev">▾</span></summary>
+        <div class="faq-a">もっともな疑問だと思います。この¥500は「案内という労働」への対価としていただくものではなく、<b>“行きたくて登録した初心者”との出会いの場・グループ組成・体験設計への参加費</b>です。ひとりで布教していた頃の「誘う気まずさ」「失敗したときの責任」「幹事仕事」は、MeetPitchが引き受けます。あなたはいつも通り観戦を楽しむだけ。——それでも違和感があれば、それこそ聞きたい本音です。ぜひフォームで教えてください。</div>
       </details>
       <details class="faq-item reveal">
         <summary class="faq-q"><span class="qmark">Q</span>毎試合参加しないといけませんか？<span class="chev">▾</span></summary>
