@@ -79,6 +79,20 @@ button{font-family:inherit;border:none;background:none;cursor:pointer}
 .role-btn .arr{margin-left:auto;color:var(--amber-strong);font-weight:900}
 #home .foot-note{font-size:11px;color:rgba(255,255,255,.6);margin-top:26px}
 
+/* ==== プロフィール ==== */
+.q-block{margin-bottom:18px}
+.q-label{font-size:12.5px;font-weight:800;margin-bottom:8px}
+.q-label small{font-weight:600;color:var(--ink-soft)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 15px;font-size:12.5px;font-weight:700;color:var(--ink-soft);transition:all .12s}
+.chip.on{background:var(--blue-600);border-color:var(--blue-600);color:#fff}
+.chip:active{transform:scale(.95)}
+.name-input{width:100%;border:1.5px solid var(--line);border-radius:14px;padding:12px 15px;font-size:14px;font-family:inherit;outline:none;background:#fff}
+.name-input:focus{border-color:var(--blue-400)}
+.btn:disabled{opacity:.45;box-shadow:none;pointer-events:none}
+.profile-sum{display:flex;flex-wrap:wrap;gap:6px;margin:-8px 0 14px}
+.profile-sum span{font-size:11px;font-weight:700;color:var(--blue-600);background:var(--blue-100);padding:3px 10px;border-radius:999px}
+
 /* ==== 試合選択 ==== */
 .match-card{
   background:#fff;border-radius:18px;padding:16px;border:2px solid transparent;
@@ -262,12 +276,28 @@ button{font-family:inherit;border:none;background:none;cursor:pointer}
     </div>
   </div>
 
+  <!-- ①.5 プロフィール設定 -->
+  <div class="screen" id="profile">
+    <a class="back" onclick="go('home')">← もどる</a>
+    <div class="pad">
+      <h2 class="sc-title" id="profileTitle">あなたのことを教えてください</h2>
+      <p class="sc-sub" id="profileSub">マッチングの条件ではありません。グループのみんなが安心するための、かんたんな自己紹介です。</p>
+      <div class="q-block">
+        <div class="q-label">ニックネーム <small>（任意）</small></div>
+        <input class="name-input" id="nameInput" type="text" placeholder="例：サク" maxlength="10">
+      </div>
+      <div id="profileQs"></div>
+      <button class="btn" id="profileBtn" onclick="profileDone()" disabled>この内容ではじめる →</button>
+    </div>
+  </div>
+
   <!-- ② 試合選択 -->
   <div class="screen" id="select">
-    <a class="back" onclick="go('home')">← もどる</a>
+    <a class="back" onclick="go('profile')">← もどる</a>
     <div class="pad">
       <h2 class="sc-title">どの試合に行く？</h2>
       <p class="sc-sub">選ぶのはこれだけ。あとはお任せ。</p>
+      <div class="profile-sum" id="profileSum"></div>
       <div id="matchList"></div>
     </div>
   </div>
@@ -358,10 +388,33 @@ const GUIDE_REPLIES = [
   'チケットまだの方は、リンクから「Nスタンド」がおすすめです！',
 ];
 
+// ===== プロフィール設問 =====
+const PROFILE_QS = {
+  beginner: [
+    {key:'age',  label:'年代', req:true, opts:['10代','20代','30代','40代','50代','60代以上']},
+    {key:'exp',  label:'サッカーとの距離', req:true, opts:['試合を見たことがない','W杯・代表戦は見る','テレビ・配信でよく見る','けっこう詳しい']},
+    {key:'live', label:'スタジアム観戦の経験', req:true, opts:['初めて','1回だけある','数回ある']},
+    {key:'style',label:'観戦スタイル', req:false, opts:['わいわい楽しみたい','静かにじっくり見たい','おまかせ']},
+  ],
+  guide: [
+    {key:'age',  label:'年代', req:true, opts:['10代','20代','30代','40代','50代','60代以上']},
+    {key:'exp',  label:'観戦歴', req:true, opts:['1〜3年','4〜9年','10年以上']},
+    {key:'live', label:'ホームゲームの頻度', req:true, opts:['ほぼ毎試合','月1回くらい','年に数回']},
+    {key:'style',label:'案内スタイル', req:false, opts:['そっと見守る派','わいわい盛り上げる派','おまかせ']},
+  ],
+};
+const EXP_SHORT = {
+  '試合を見たことがない':'サッカー初体験',
+  'W杯・代表戦は見る':'代表戦は見る派',
+  'テレビ・配信でよく見る':'配信でよく見る',
+  'けっこう詳しい':'けっこう詳しい',
+};
+
 // ===== 状態 =====
 let role = 'beginner';
 let selMatch = null;
 let matched = false;
+let profile = {};
 
 // ===== 画面遷移 =====
 function go(id){
@@ -379,6 +432,46 @@ function go(id){
 
 function setRole(r){
   role = r;
+  renderProfile();
+  go('profile');
+}
+
+// ===== プロフィール =====
+function renderProfile(){
+  profile = {age:null, exp:null, live:null, style:null, name:''};
+  document.getElementById('nameInput').value = '';
+  document.getElementById('profileTitle').textContent =
+    role==='guide' ? 'あなたの観戦スタイルを教えてください' : 'あなたのことを教えてください';
+  document.getElementById('profileSub').textContent =
+    role==='guide'
+      ? '初めてのメンバーが「どんな人が案内してくれるのか」を知って安心するための自己紹介です。'
+      : 'マッチングの条件ではありません。グループのみんなが安心するための、かんたんな自己紹介です。';
+  document.getElementById('profileQs').innerHTML = PROFILE_QS[role].map(q=>`
+    <div class="q-block">
+      <div class="q-label">${q.label}${q.req?'':' <small>（任意）</small>'}</div>
+      <div class="chips">${q.opts.map(o=>`<button class="chip" onclick="selChip(this,'${q.key}','${o}')">${o}</button>`).join('')}</div>
+    </div>`).join('');
+  updateProfileBtn();
+}
+function selChip(el, key, val){
+  profile[key] = val;
+  [...el.parentElement.children].forEach(c=>c.classList.toggle('on', c===el));
+  updateProfileBtn();
+}
+function updateProfileBtn(){
+  const ok = PROFILE_QS[role].filter(q=>q.req).every(q=>profile[q.key]);
+  document.getElementById('profileBtn').disabled = !ok;
+}
+function profileDone(){
+  profile.name = document.getElementById('nameInput').value.trim() || 'あなた';
+  const chips = [
+    (role==='guide' ? '🧭 ' : '🔰 ') + profile.name,
+    profile.age,
+    role==='guide' ? '観戦歴' + profile.exp : EXP_SHORT[profile.exp],
+    role==='guide' ? profile.live : '現地観戦：' + profile.live,
+  ];
+  if(profile.style && profile.style !== 'おまかせ') chips.push(profile.style);
+  document.getElementById('profileSum').innerHTML = chips.map(t=>`<span>${t}</span>`).join('');
   renderMatches();
   go('select');
 }
@@ -454,12 +547,16 @@ function renderGroup(){
       <div class="p-bar"><i></i></div>
       <div class="p-note">この案内で +10pt ／ 50pt で「貢献サポーター」認定（構想中）</div>
     </div>` : '';
+  const youDesc = (role==='guide'
+    ? [profile.age, '観戦歴'+profile.exp, profile.style && profile.style!=='おまかせ' ? profile.style : null]
+    : [profile.age, EXP_SHORT[profile.exp], profile.live==='初めて' ? '現地デビュー' : '現地'+profile.live]
+  ).filter(Boolean).join('・');
   const members = [];
   if(role==='guide'){
-    members.push({ava:'🧭', name:'あなた', desc:'案内役・いつもの観戦のままで', tag:'案内役', cls:'guide', you:true});
+    members.push({ava:'🧭', name:profile.name, desc:youDesc || '案内役', tag:'案内役', cls:'guide', you:true});
     BEGINNERS.forEach(b=>members.push({...b, tag:'初めて', cls:'first'}));
   } else {
-    members.push({ava:'🔰', name:'あなた', desc:'現地観戦デビュー', tag:'初めて', cls:'first', you:true});
+    members.push({ava:'🔰', name:profile.name, desc:youDesc || '現地観戦デビュー', tag:'初めて', cls:'first', you:true});
     BEGINNERS.slice(0,2).forEach(b=>members.push({...b, tag:'初めて', cls:'first'}));
     members.push({...GUIDE, tag:'案内役', cls:'guide'});
   }
@@ -524,8 +621,9 @@ function toggleCheck(i){
 
 // ===== リセット =====
 function resetDemo(){
-  role='beginner'; selMatch=null; matched=false; replyIdx=0;
+  role='beginner'; selMatch=null; matched=false; replyIdx=0; profile={};
   checkState.forEach((_,i)=>checkState[i]=false);
+  document.getElementById('profileSum').innerHTML='';
   go('home');
 }
 </script>
