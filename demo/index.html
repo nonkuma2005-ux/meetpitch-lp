@@ -14,198 +14,188 @@
   --blue-500:#2251d6; --blue-400:#4a7dff; --blue-100:#e8eefc; --blue-050:#f4f7fe;
   --amber:#ffb347; --amber-strong:#ff9d1c; --cta:#ff9d1c;
   --ink:#1a2340; --ink-soft:#4a5678; --line:#e3e8f5;
-  --green:#12894f; --green-bg:#e4f7ec;
+  --green:#12894f; --green-bg:#e4f7ec; --red:#e0455e; --red-bg:#fdeaee;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{
-  font-family:'Noto Sans JP',system-ui,sans-serif;color:var(--ink);line-height:1.7;
-  background:linear-gradient(160deg,#0f2260,#173bb0);min-height:100vh;
-}
-button{font-family:inherit;border:none;background:none;cursor:pointer}
+body{font-family:'Noto Sans JP',system-ui,sans-serif;color:var(--ink);line-height:1.65;background:linear-gradient(160deg,#0f2260,#173bb0);min-height:100vh}
+button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit}
+input,select{font-family:inherit}
 
-/* ==== スマホフレーム ==== */
-.phone{
-  position:relative;max-width:414px;margin:0 auto;background:#fff;min-height:100vh;
-  display:flex;flex-direction:column;overflow:hidden;
-}
+.phone{position:relative;max-width:414px;margin:0 auto;background:#fff;min-height:100vh;display:flex;flex-direction:column;overflow:hidden}
 @media(min-width:500px){
   body{padding:28px 0}
-  .phone{min-height:820px;max-height:860px;border-radius:38px;border:10px solid #10152b;box-shadow:0 40px 90px -30px rgba(0,0,0,.6)}
+  .phone{min-height:840px;max-height:880px;border-radius:38px;border:10px solid #10152b;box-shadow:0 40px 90px -30px rgba(0,0,0,.6)}
 }
-
-/* ==== アプリヘッダー ==== */
-.app-head{
-  flex:none;display:flex;align-items:center;gap:8px;padding:14px 18px 12px;
-  background:#fff;border-bottom:1px solid var(--line);z-index:5;
-}
+.app-head{flex:none;display:flex;align-items:center;gap:8px;padding:13px 18px 11px;background:#fff;border-bottom:1px solid var(--line);z-index:5}
 .app-head .logo{display:flex;align-items:center;gap:7px;font-family:'Montserrat';font-weight:800;font-size:17px;color:var(--blue-700)}
 .app-head svg{width:24px;height:24px}
-.demo-chip{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:1px;color:#fff;background:var(--coral,#ff7a59);background:#ff5a6e;padding:3px 10px;border-radius:999px}
+.role-pill{font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;display:none}
+.role-pill.A{display:inline-block;color:var(--blue-600);background:var(--blue-100)}
+.role-pill.B{display:inline-block;color:#8a5b00;background:#ffe9c7}
+.demo-chip{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:1px;color:#fff;background:#ff5a6e;padding:3px 10px;border-radius:999px}
 
-/* ==== 画面共通 ==== */
 .screen{display:none;flex:1;flex-direction:column;overflow-y:auto;background:var(--blue-050)}
 .screen.active{display:flex}
-.pad{padding:20px 18px}
-.sc-title{font-size:20px;font-weight:900;line-height:1.5;margin-bottom:4px}
-.sc-sub{font-size:13px;color:var(--ink-soft);margin-bottom:18px}
-.btn{
-  display:flex;align-items:center;justify-content:center;gap:8px;width:100%;
-  background:var(--cta);color:#fff;font-weight:800;font-size:15.5px;
-  padding:16px;border-radius:16px;box-shadow:0 10px 24px -10px rgba(240,125,0,.75);
-  transition:transform .15s;
-}
+.pad{padding:18px 16px 26px}
+.sc-title{font-size:19px;font-weight:900;line-height:1.5;margin-bottom:4px}
+.sc-sub{font-size:12.5px;color:var(--ink-soft);margin-bottom:16px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--cta);color:#fff;font-weight:800;font-size:15px;padding:15px;border-radius:15px;box-shadow:0 10px 24px -10px rgba(240,125,0,.75);transition:transform .15s}
 .btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.45;box-shadow:none;pointer-events:none}
 .btn.sub{background:#fff;color:var(--blue-600);border:2px solid var(--blue-100);box-shadow:none}
-.btn.ghost{background:none;color:var(--ink-soft);box-shadow:none;font-weight:600;font-size:13px;padding:10px}
-.back{font-size:13px;font-weight:700;color:var(--ink-soft);padding:14px 18px 0;display:inline-flex;align-items:center;gap:5px}
+.btn.danger{background:#fff;color:var(--red);border:2px solid var(--red-bg);box-shadow:none;font-size:13px;padding:12px}
+.back{font-size:13px;font-weight:700;color:var(--ink-soft);padding:12px 16px 0;display:inline-flex;gap:5px}
+.card{background:#fff;border-radius:16px;padding:15px 16px;box-shadow:0 8px 20px -12px rgba(15,34,96,.22);margin-bottom:12px}
+.note{font-size:11px;color:var(--ink-soft)}
+.sec-h{font-size:11.5px;font-weight:800;color:var(--ink-soft);letter-spacing:1px;margin:4px 0 8px}
 
-/* ==== ホーム ==== */
-#home{background:linear-gradient(170deg,var(--blue-800),var(--blue-600));color:#fff;justify-content:center;text-align:center}
-#home .hero-icon{width:110px;height:110px;margin:0 auto 18px;filter:drop-shadow(0 12px 28px rgba(0,0,0,.35))}
-#home h1{font-family:'Montserrat';font-weight:900;font-size:30px;letter-spacing:.5px}
-#home .tag{font-size:13.5px;color:rgba(255,255,255,.85);margin:8px 0 34px}
-.role-btns{display:flex;flex-direction:column;gap:13px;padding:0 26px}
-.role-btn{
-  display:flex;align-items:center;gap:14px;text-align:left;background:#fff;color:var(--ink);
-  border-radius:18px;padding:17px 18px;box-shadow:0 14px 30px -14px rgba(0,0,0,.4);
-  transition:transform .15s;
-}
-.role-btn:active{transform:scale(.97)}
-.role-btn .r-ico{flex:none;width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:23px}
-.role-btn.beginner .r-ico{background:var(--blue-100)}
-.role-btn.guide .r-ico{background:#ffe9c7}
-.role-btn b{display:block;font-size:15.5px;font-weight:900}
-.role-btn small{font-size:11.5px;color:var(--ink-soft)}
-.role-btn .arr{margin-left:auto;color:var(--amber-strong);font-weight:900}
-#home .foot-note{font-size:11px;color:rgba(255,255,255,.6);margin-top:26px}
-
-/* ==== プロフィール ==== */
-.q-block{margin-bottom:18px}
-.q-label{font-size:12.5px;font-weight:800;margin-bottom:8px}
+/* チップ */
+.q-block{margin-bottom:15px}
+.q-label{font-size:12px;font-weight:800;margin-bottom:7px}
 .q-label small{font-weight:600;color:var(--ink-soft)}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 15px;font-size:12.5px;font-weight:700;color:var(--ink-soft);transition:all .12s}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:700;color:var(--ink-soft);transition:all .12s}
 .chip.on{background:var(--blue-600);border-color:var(--blue-600);color:#fff}
 .chip:active{transform:scale(.95)}
-.name-input{width:100%;border:1.5px solid var(--line);border-radius:14px;padding:12px 15px;font-size:14px;font-family:inherit;outline:none;background:#fff}
-.name-input:focus{border-color:var(--blue-400)}
-.btn:disabled{opacity:.45;box-shadow:none;pointer-events:none}
-.profile-sum{display:flex;flex-wrap:wrap;gap:6px;margin:-8px 0 14px}
-.profile-sum span{font-size:11px;font-weight:700;color:var(--blue-600);background:var(--blue-100);padding:3px 10px;border-radius:999px}
+.verify-row{display:flex;gap:8px}
+.verify-row input{flex:1;border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;font-size:14px;outline:none;background:#fff}
+.verify-btn{flex:none;background:var(--blue-600);color:#fff;font-weight:700;font-size:12px;padding:0 16px;border-radius:12px}
+.verify-btn.done{background:var(--green)}
 
-/* ==== 試合選択 ==== */
-.match-card{
-  background:#fff;border-radius:18px;padding:16px;border:2px solid transparent;
-  box-shadow:0 8px 20px -12px rgba(15,34,96,.25);margin-bottom:12px;width:100%;text-align:left;
-  transition:transform .15s,border-color .15s;
-}
+/* ホーム */
+#home{background:linear-gradient(170deg,var(--blue-800),var(--blue-600));color:#fff;justify-content:center;text-align:center}
+#home .hero-icon{width:100px;height:100px;margin:0 auto 16px;filter:drop-shadow(0 12px 28px rgba(0,0,0,.35))}
+#home h1{font-family:'Montserrat';font-weight:900;font-size:28px}
+#home .tag{font-size:13px;color:rgba(255,255,255,.85);margin:6px 0 30px}
+#home .btn{max-width:280px;margin:0 auto}
+#home .foot-note{font-size:10.5px;color:rgba(255,255,255,.6);margin-top:22px}
+
+/* 判定結果 */
+.judge-card{text-align:center;padding:26px 18px}
+.judge-badge{display:inline-block;font-size:13px;font-weight:900;padding:8px 22px;border-radius:999px;margin-bottom:10px}
+.judge-badge.A{color:#fff;background:var(--blue-600)}
+.judge-badge.B{color:#3a2400;background:var(--amber)}
+.judge-card h3{font-size:20px;font-weight:900;margin-bottom:8px}
+.judge-card p{font-size:12.5px;color:var(--ink-soft)}
+.attr-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:12px}
+.attr-chips span{font-size:10.5px;font-weight:700;color:var(--blue-600);background:var(--blue-100);padding:3px 10px;border-radius:999px}
+
+/* 試合カード */
+.match-card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 8px 20px -12px rgba(15,34,96,.25);margin-bottom:11px;width:100%;text-align:left;transition:transform .15s}
 .match-card:active{transform:scale(.98)}
-.match-card .m-date{font-size:11.5px;font-weight:800;color:var(--blue-600);background:var(--blue-100);display:inline-block;padding:3px 10px;border-radius:999px;margin-bottom:8px}
-.match-card .m-fix{font-size:15px;font-weight:900;line-height:1.45}
-.match-card .m-fix span{font-size:10.5px;color:var(--ink-soft);margin:0 4px}
-.match-card .m-venue{font-size:11px;color:var(--ink-soft);margin:3px 0 10px}
-.match-card .m-foot{display:flex;align-items:center;gap:8px}
-.avs{display:flex}
-.avs span{width:26px;height:26px;border-radius:50%;background:var(--blue-100);border:2px solid #fff;margin-left:-7px;display:flex;align-items:center;justify-content:center;font-size:12px}
-.avs span:first-child{margin-left:0}
-.m-wait{font-size:11.5px;font-weight:700;color:var(--green);background:var(--green-bg);padding:3px 10px;border-radius:999px}
-.m-go{margin-left:auto;font-weight:900;color:var(--amber-strong)}
+.m-date{font-size:11px;font-weight:800;color:var(--blue-600);background:var(--blue-100);display:inline-block;padding:3px 10px;border-radius:999px;margin-bottom:7px}
+.m-fix{font-size:14px;font-weight:900;line-height:1.4}
+.m-fix span{font-size:10px;color:var(--ink-soft);margin:0 4px}
+.m-venue{font-size:10.5px;color:var(--ink-soft);margin:3px 0 8px}
+.m-foot{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--green)}
+.m-foot .go{margin-left:auto;font-weight:900;color:var(--amber-strong);font-size:15px}
 
-/* ==== 確認 ==== */
-.confirm-box{background:#fff;border-radius:20px;padding:20px;box-shadow:0 10px 26px -14px rgba(15,34,96,.3);margin-bottom:14px}
-.confirm-box .c-label{font-size:11px;font-weight:800;color:var(--ink-soft);letter-spacing:1px;margin-bottom:6px}
-.fee-row{display:flex;align-items:baseline;gap:8px;margin:4px 0}
-.fee-row .fee{font-family:'Montserrat';font-weight:900;font-size:34px}
-.fee-row .fee-unit{font-size:12px;color:var(--ink-soft)}
-.fee-note{font-size:11.5px;color:var(--ink-soft)}
-.fee-list{margin-top:12px;display:flex;flex-direction:column;gap:7px}
-.fee-list li{list-style:none;font-size:12.5px;display:flex;gap:7px;color:var(--ink-soft)}
-.fee-list .ck{color:var(--amber-strong);font-weight:900;flex:none}
-.demo-note{font-size:11px;color:var(--ink-soft);text-align:center;margin-top:10px}
+/* グループ一覧 */
+.filters{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap}
+.g-card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 8px 20px -12px rgba(15,34,96,.22);margin-bottom:11px;width:100%;text-align:left;transition:transform .15s}
+.g-card:active{transform:scale(.98)}
+.g-top{display:flex;align-items:center;gap:7px;margin-bottom:6px;flex-wrap:wrap}
+.g-type{font-size:10px;font-weight:900;padding:3px 9px;border-radius:999px}
+.g-type.ab{color:#fff;background:var(--blue-600)}
+.g-type.aa{color:var(--green);background:var(--green-bg)}
+.g-type.bb{color:#8a5b00;background:#ffe9c7}
+.g-status{font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;color:var(--green);background:var(--green-bg)}
+.g-status.soon{color:#b25b00;background:#fff3d9}
+.g-status.full{color:var(--ink-soft);background:var(--blue-050)}
+.g-lock{font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;color:var(--red);background:var(--red-bg)}
+.g-name{font-size:13.5px;font-weight:900;line-height:1.45;margin-bottom:4px}
+.g-meta{font-size:11px;color:var(--ink-soft);margin-bottom:7px}
+.g-tags{display:flex;flex-wrap:wrap;gap:5px}
+.g-tags span{font-size:10px;font-weight:700;color:var(--blue-600);background:var(--blue-050);padding:2px 9px;border-radius:999px}
 
-/* ==== マッチング演出 ==== */
-#matching{background:linear-gradient(170deg,var(--blue-800),var(--blue-600));color:#fff;justify-content:center;text-align:center}
-.pulse-wrap{position:relative;width:130px;height:130px;margin:0 auto 26px}
-.pulse-wrap::before,.pulse-wrap::after{
-  content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(255,179,71,.55);
-  animation:pulse 1.8s ease-out infinite;
-}
-.pulse-wrap::after{animation-delay:.9s}
-@keyframes pulse{0%{transform:scale(.75);opacity:1}100%{transform:scale(1.55);opacity:0}}
-.pulse-wrap svg{position:relative;width:100%;height:100%;z-index:2}
-#matchingText{font-size:15px;font-weight:700;min-height:48px}
-.dots::after{content:"";animation:dots 1.5s steps(4,end) infinite}
-@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+/* 確認 */
+.fee-box{border-radius:16px;padding:17px;margin-bottom:12px;color:#fff;background:linear-gradient(150deg,var(--blue-700),var(--blue-500));box-shadow:0 12px 26px -12px rgba(15,34,96,.5)}
+.fee-box.free{background:linear-gradient(150deg,#1a5c38,#12894f)}
+.fee-box .f-label{font-size:10.5px;font-weight:800;color:var(--amber);letter-spacing:1px;margin-bottom:4px}
+.fee-box.free .f-label{color:#b8f0d0}
+.fee-box .f-amount{font-family:'Montserrat';font-weight:900;font-size:30px}
+.fee-box .f-amount small{font-size:12px;font-family:'Noto Sans JP';font-weight:500}
+.fee-box .f-note{font-size:11px;color:rgba(255,255,255,.85);margin-top:6px}
+.rule-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.rule-list li{font-size:11.5px;color:var(--ink-soft);display:flex;gap:7px}
+.rule-list .ck{color:var(--amber-strong);font-weight:900;flex:none}
 
-/* ==== グループ ==== */
-.group-head{
-  background:linear-gradient(150deg,var(--blue-700),var(--blue-500));color:#fff;
-  padding:18px;border-radius:20px;margin-bottom:14px;box-shadow:0 14px 30px -14px rgba(15,34,96,.5);
-}
-.group-head .g-date{font-size:11.5px;font-weight:700;color:var(--amber);margin-bottom:3px}
-.group-head .g-fix{font-size:16px;font-weight:900;line-height:1.4}
-.group-head .g-venue{font-size:11px;color:rgba(255,255,255,.8);margin-top:4px}
-.group-head .g-meet{margin-top:12px;background:rgba(0,0,0,.18);border-radius:12px;padding:10px 13px;font-size:12px;display:flex;gap:8px;align-items:flex-start}
-.member-card{background:#fff;border-radius:18px;padding:6px 16px;box-shadow:0 8px 20px -12px rgba(15,34,96,.22);margin-bottom:14px}
-.mem{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--blue-050)}
+/* グループ画面 */
+.group-head{background:linear-gradient(150deg,var(--blue-700),var(--blue-500));color:#fff;padding:15px 16px;border-radius:16px;margin-bottom:11px;box-shadow:0 12px 26px -12px rgba(15,34,96,.5)}
+.group-head .g-date{font-size:11px;font-weight:700;color:var(--amber)}
+.group-head .g-fix{font-size:14.5px;font-weight:900;line-height:1.4;margin:2px 0}
+.group-head .g-deadline{margin-top:8px;background:rgba(0,0,0,.18);border-radius:10px;padding:7px 11px;font-size:11px}
+.mem{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--blue-050)}
 .mem:last-child{border-bottom:none}
-.mem .m-ava{flex:none;width:40px;height:40px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:19px}
+.mem .m-ava{flex:none;width:36px;height:36px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:17px}
 .mem.you .m-ava{background:#ffe9c7;box-shadow:0 0 0 2px var(--amber)}
-.mem b{font-size:13.5px;display:block;line-height:1.35}
-.mem small{font-size:11px;color:var(--ink-soft)}
-.mem .m-tag{margin-left:auto;font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:999px;flex:none}
-.mem .m-tag.first{color:var(--blue-600);background:var(--blue-100)}
-.mem .m-tag.guide{color:#8a5b00;background:#ffe9c7}
-.sec-h{font-size:12px;font-weight:800;color:var(--ink-soft);letter-spacing:1px;margin:2px 0 8px}
+.mem b{font-size:12.5px;display:block;line-height:1.3}
+.mem small{font-size:10px;color:var(--ink-soft)}
+.mem .m-tag{margin-left:auto;font-size:9.5px;font-weight:800;padding:3px 8px;border-radius:999px;flex:none}
+.mem .m-tag.a{color:var(--blue-600);background:var(--blue-100)}
+.mem .m-tag.b{color:#8a5b00;background:#ffe9c7}
+.owner-star{font-size:10px;color:var(--amber-strong)}
+.meet-box{background:#fff;border-left:4px solid var(--amber);border-radius:12px;padding:11px 13px;font-size:12px;box-shadow:0 8px 20px -12px rgba(15,34,96,.18);margin-bottom:12px}
+.meet-box b{display:block;font-size:12.5px}
+.meet-box small{color:var(--ink-soft);font-size:10.5px}
 
-/* ポイントカード（案内役） */
-.point-card{background:linear-gradient(140deg,#2b2452,#173bb0);color:#fff;border-radius:18px;padding:16px 18px;margin-bottom:14px;box-shadow:0 12px 26px -12px rgba(15,34,96,.5)}
-.point-card .p-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.point-card .p-title{font-size:11.5px;font-weight:800;color:var(--amber);letter-spacing:1px}
-.point-card .p-pt{font-family:'Montserrat';font-weight:900;font-size:26px}
-.point-card .p-pt small{font-size:11px;font-family:'Noto Sans JP';font-weight:500;opacity:.8}
-.p-bar{height:8px;background:rgba(255,255,255,.18);border-radius:99px;overflow:hidden;margin:6px 0}
-.p-bar i{display:block;height:100%;width:60%;background:linear-gradient(90deg,var(--amber),#ffd07a);border-radius:99px}
-.point-card .p-note{font-size:10.5px;color:rgba(255,255,255,.78)}
-
-/* ==== チャット ==== */
-.chat-box{background:#fff;border-radius:18px;box-shadow:0 8px 20px -12px rgba(15,34,96,.22);display:flex;flex-direction:column;overflow:hidden}
-.chat-log{padding:14px 14px 6px;display:flex;flex-direction:column;gap:10px;max-height:260px;overflow-y:auto}
-.msg{display:flex;gap:8px;align-items:flex-end}
-.msg .c-ava{flex:none;width:28px;height:28px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:13px}
-.msg .bubble{max-width:75%;background:var(--blue-050);border-radius:14px 14px 14px 4px;padding:8px 12px;font-size:12.5px}
-.msg .b-name{font-size:10px;color:var(--ink-soft);margin-bottom:1px}
+/* チャット */
+.chat-box{background:#fff;border-radius:16px;box-shadow:0 8px 20px -12px rgba(15,34,96,.22);display:flex;flex-direction:column;overflow:hidden;margin-bottom:12px}
+.chat-log{padding:12px 12px 6px;display:flex;flex-direction:column;gap:9px;max-height:240px;overflow-y:auto}
+.sysmsg{align-self:center;font-size:10px;font-weight:700;color:var(--ink-soft);background:var(--blue-050);padding:4px 12px;border-radius:999px;text-align:center}
+.msg{display:flex;gap:7px;align-items:flex-end}
+.msg .c-ava{flex:none;width:26px;height:26px;border-radius:50%;background:var(--blue-100);display:flex;align-items:center;justify-content:center;font-size:12px}
+.msg .bubble{max-width:76%;background:var(--blue-050);border-radius:13px 13px 13px 4px;padding:7px 11px;font-size:12px}
+.msg .b-name{font-size:9.5px;color:var(--ink-soft);margin-bottom:1px}
 .msg.me{flex-direction:row-reverse}
-.msg.me .bubble{background:var(--blue-600);color:#fff;border-radius:14px 14px 4px 14px}
-.chat-input{display:flex;gap:8px;padding:10px;border-top:1px solid var(--blue-050)}
-.chat-input input{flex:1;border:1.5px solid var(--line);border-radius:99px;padding:9px 15px;font-size:13px;font-family:inherit;outline:none}
-.chat-input input:focus{border-color:var(--blue-400)}
-.chat-input button{flex:none;width:40px;height:40px;border-radius:50%;background:var(--cta);color:#fff;font-size:16px;font-weight:900}
+.msg.me .bubble{background:var(--blue-600);color:#fff;border-radius:13px 13px 4px 13px}
+.chat-input{display:flex;gap:7px;padding:9px;border-top:1px solid var(--blue-050)}
+.chat-input input{flex:1;border:1.5px solid var(--line);border-radius:99px;padding:8px 14px;font-size:12.5px;outline:none}
+.chat-input button{flex:none;width:37px;height:37px;border-radius:50%;background:var(--cta);color:#fff;font-weight:900}
 
-/* ==== 当日ガイド ==== */
-.check-card{background:#fff;border-radius:18px;padding:6px 16px;box-shadow:0 8px 20px -12px rgba(15,34,96,.22);margin-bottom:14px}
-.chk{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid var(--blue-050);cursor:pointer}
-.chk:last-child{border-bottom:none}
-.chk .box{flex:none;width:22px;height:22px;border-radius:7px;border:2px solid var(--line);margin-top:2px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:900;transition:all .15s}
-.chk.on .box{background:var(--green);border-color:var(--green)}
-.chk b{font-size:13.5px;display:block}
-.chk.on b{text-decoration:line-through;color:var(--ink-soft)}
-.chk small{font-size:11px;color:var(--ink-soft)}
-.tip{background:#fff;border-left:4px solid var(--amber);border-radius:12px;padding:12px 14px;font-size:12px;color:var(--ink-soft);box-shadow:0 8px 20px -12px rgba(15,34,96,.18);margin-bottom:10px}
-.tip b{color:var(--ink)}
+/* キャンセル */
+.cancel-area{display:none;background:#fff;border:2px solid var(--red-bg);border-radius:16px;padding:14px;margin-bottom:12px}
+.cancel-area.show{display:block}
+.cancel-area .q-label{color:var(--red)}
 
-/* ==== ボトムナビ ==== */
-.bottom-nav{
-  flex:none;display:none;background:#fff;border-top:1px solid var(--line);
-  padding:8px 0 calc(8px + env(safe-area-inset-bottom));
-}
+/* 来場確認 */
+#checkin{background:linear-gradient(170deg,var(--blue-800),var(--blue-600));color:#fff;justify-content:center;text-align:center}
+.gps-wrap{position:relative;width:120px;height:120px;margin:0 auto 22px}
+.gps-wrap::before,.gps-wrap::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(255,179,71,.55);animation:pulse 1.6s ease-out infinite}
+.gps-wrap::after{animation-delay:.8s}
+@keyframes pulse{0%{transform:scale(.7);opacity:1}100%{transform:scale(1.55);opacity:0}}
+.gps-wrap .pin{position:relative;z-index:2;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:52px}
+#checkinText{font-size:14px;font-weight:700;min-height:44px;padding:0 24px}
+.settle-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:15px;margin:16px 24px 0;font-size:12.5px;display:none}
+.settle-card.show{display:block}
+
+/* ランク */
+.rank-hero{text-align:center;padding:20px 16px}
+.rank-hero .stars{font-size:30px;letter-spacing:4px;color:var(--amber-strong)}
+.rank-hero h3{font-size:16px;font-weight:900;margin:4px 0 2px}
+.rank-hero p{font-size:11px;color:var(--ink-soft)}
+.rank-row{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--blue-050);font-size:11.5px}
+.rank-row:last-child{border-bottom:none}
+.rank-row .r-star{flex:none;width:56px;font-weight:900;color:var(--amber-strong)}
+.rank-row .r-cond{color:var(--ink-soft)}
+.stat-row{display:flex;gap:10px;margin-bottom:12px}
+.stat{flex:1;background:#fff;border-radius:14px;padding:12px;text-align:center;box-shadow:0 8px 20px -12px rgba(15,34,96,.22)}
+.stat .s-num{font-family:'Montserrat';font-weight:900;font-size:22px;color:var(--blue-600)}
+.stat .s-label{font-size:10px;color:var(--ink-soft);font-weight:700}
+
+/* ボトムナビ */
+.bottom-nav{flex:none;display:none;background:#fff;border-top:1px solid var(--line);padding:7px 0 calc(7px + env(safe-area-inset-bottom))}
 .bottom-nav.show{display:flex}
-.bnav{flex:1;text-align:center;font-size:10px;font-weight:700;color:#9aa5c4;padding:4px 0}
-.bnav .b-ico{font-size:20px;display:block;line-height:1.3}
+.bnav{flex:1;text-align:center;font-size:9.5px;font-weight:700;color:#9aa5c4;padding:3px 0}
+.bnav .b-ico{font-size:19px;display:block;line-height:1.3}
 .bnav.on{color:var(--blue-600)}
 
-.fade-in{animation:fadeIn .4s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* トースト */
+#toast{position:absolute;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:rgba(16,21,43,.92);color:#fff;font-size:12px;font-weight:700;padding:10px 18px;border-radius:999px;opacity:0;transition:all .3s;pointer-events:none;z-index:50;white-space:nowrap;max-width:92%}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.fade-in{animation:fadeIn .35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -248,91 +238,108 @@ button{font-family:inherit;border:none;background:none;cursor:pointer}
 
 <div class="phone">
 
-  <!-- ヘッダー -->
   <div class="app-head">
     <span class="logo"><svg><use href="#mp-icon"/></svg>MeetPitch</span>
+    <span class="role-pill" id="rolePill"></span>
     <span class="demo-chip">DEMO</span>
   </div>
 
-  <!-- ① ホーム（役割選択） -->
+  <!-- ホーム -->
   <div class="screen active" id="home">
     <div class="pad" style="width:100%">
       <svg class="hero-icon"><use href="#mp-icon"/></svg>
       <h1>MeetPitch</h1>
       <p class="tag">はじめてのスタジアム、ひとりじゃない。</p>
-      <div class="role-btns">
-        <button class="role-btn beginner" onclick="setRole('beginner')">
-          <span class="r-ico">🔰</span>
-          <span><b>はじめての方</b><small>現地観戦デビューしたい</small></span>
-          <span class="arr">→</span>
-        </button>
-        <button class="role-btn guide" onclick="setRole('guide')">
-          <span class="r-ico">🧭</span>
-          <span><b>案内役の方</b><small>Jリーグの仲間を増やしたい</small></span>
-          <span class="arr">→</span>
-        </button>
-      </div>
-      <p class="foot-note">これは操作デモです。実際の決済・登録は行われません。</p>
+      <button class="btn" onclick="go('profile')">はじめる →</button>
+      <p class="foot-note">操作デモです。実際の登録・決済・位置情報の取得は行われません。</p>
     </div>
   </div>
 
-  <!-- ①.5 プロフィール設定 -->
+  <!-- プロフィール登録 -->
   <div class="screen" id="profile">
-    <a class="back" onclick="go('home')">← もどる</a>
     <div class="pad">
-      <h2 class="sc-title" id="profileTitle">あなたのことを教えてください</h2>
-      <p class="sc-sub" id="profileSub">マッチングの条件ではありません。グループのみんなが安心するための、かんたんな自己紹介です。</p>
+      <h2 class="sc-title">プロフィール登録</h2>
+      <p class="sc-sub">観戦経験から、あなたの役割（A:新規観戦者/B:既存サポーター）を自動判定します。</p>
+      <div class="q-block"><div class="q-label">年代</div><div class="chips" data-k="age"></div></div>
+      <div class="q-block"><div class="q-label">性別</div><div class="chips" data-k="sex"></div></div>
+      <div class="q-block"><div class="q-label">居住都道府県</div><div class="chips" data-k="pref"></div></div>
+      <div class="q-block"><div class="q-label">応援クラブ <small>（複数可）</small></div><div class="chips" data-k="club" data-multi="1"></div></div>
+      <div class="q-block"><div class="q-label">軸1：観戦経験 <small>（A/B判定に使用）</small></div><div class="chips" data-k="exp"></div></div>
+      <div class="q-block"><div class="q-label">軸2：視聴歴 <small>（任意）</small></div><div class="chips" data-k="watch"></div></div>
+      <div class="q-block"><div class="q-label">軸4：きっかけ <small>（任意・複数可）</small></div><div class="chips" data-k="trigger" data-multi="1"></div></div>
+      <div class="q-block"><div class="q-label">軸5：案内スタイル <small>（任意・複数可）</small></div><div class="chips" data-k="style" data-multi="1"></div></div>
       <div class="q-block">
-        <div class="q-label">ニックネーム <small>（任意）</small></div>
-        <input class="name-input" id="nameInput" type="text" placeholder="例：サク" maxlength="10">
+        <div class="q-label">本人確認（電話番号認証）</div>
+        <div class="verify-row">
+          <input id="phoneInput" type="tel" placeholder="090-XXXX-XXXX" maxlength="13">
+          <button class="verify-btn" id="verifyBtn" onclick="verifyPhone()">認証</button>
+        </div>
+        <p class="note" style="margin-top:5px">※顔が正面から見えるプロフィール画像も必須（デモでは省略）</p>
       </div>
-      <div id="profileQs"></div>
-      <button class="btn" id="profileBtn" onclick="profileDone()" disabled>この内容ではじめる →</button>
+      <button class="btn" id="profileBtn" onclick="judgeRole()" disabled>登録して判定 →</button>
     </div>
   </div>
 
-  <!-- ② 試合選択 -->
-  <div class="screen" id="select">
-    <a class="back" onclick="go('profile')">← もどる</a>
+  <!-- A/B判定結果 -->
+  <div class="screen" id="judge">
+    <div class="pad">
+      <div class="card judge-card" id="judgeCard"></div>
+      <button class="btn" onclick="go('matches')">試合を探す →</button>
+    </div>
+  </div>
+
+  <!-- 試合選択 -->
+  <div class="screen" id="matches">
     <div class="pad">
       <h2 class="sc-title">どの試合に行く？</h2>
-      <p class="sc-sub">選ぶのはこれだけ。あとはお任せ。</p>
-      <div class="profile-sum" id="profileSum"></div>
+      <p class="sc-sub">試合を選んで、参加するグループを探します。</p>
       <div id="matchList"></div>
     </div>
   </div>
 
-  <!-- ③ 確認 -->
-  <div class="screen" id="confirm">
-    <a class="back" onclick="go('select')">← もどる</a>
+  <!-- グループ一覧 -->
+  <div class="screen" id="groups">
+    <a class="back" onclick="go('matches')">← 試合選択にもどる</a>
     <div class="pad">
-      <h2 class="sc-title">この試合で仲間を探す</h2>
+      <h2 class="sc-title" id="groupsTitle">グループを探す</h2>
+      <p class="sc-sub" id="groupsSub"></p>
+      <div class="filters" id="typeFilters"></div>
+      <div id="groupList"></div>
+      <button class="btn sub" onclick="toast('デモでは既存グループへの参加をお試しください')">＋ グループを作成する</button>
+      <p class="note" style="text-align:center;margin-top:8px">作成時はメッセージを記入できます（オーナーになります）</p>
+    </div>
+  </div>
+
+  <!-- 参加確認 -->
+  <div class="screen" id="confirm">
+    <a class="back" onclick="go('groups')">← グループ一覧にもどる</a>
+    <div class="pad">
+      <h2 class="sc-title">このグループに参加する</h2>
       <p class="sc-sub" id="confirmSub"></p>
-      <div class="confirm-box" id="confirmMatch"></div>
-      <div class="confirm-box" id="confirmFee"></div>
-      <button class="btn" onclick="startMatching()">仲間を探す ⚽</button>
-      <p class="demo-note">※デモのため、決済はスキップされます</p>
+      <div class="card" id="confirmGroup"></div>
+      <div id="feeArea"></div>
+      <div class="card">
+        <p class="sec-h">参加ルール</p>
+        <ul class="rule-list">
+          <li><span class="ck">✓</span>募集締切は<b>前日21:00</b>。それまで入退室自由</li>
+          <li><span class="ck">✓</span>2人以上で開催（定員4人で自動締切）</li>
+          <li><span class="ck">✓</span>同一試合日に参加できるのは1グループのみ</li>
+          <li><span class="ck">✓</span>チケットは<b>各自購入</b>（アプリは仲介しません）</li>
+        </ul>
+      </div>
+      <button class="btn" onclick="joinGroup()" id="joinBtn">参加する ⚽</button>
+      <p class="note" style="text-align:center;margin-top:8px">※デモのため実際の決済はありません</p>
     </div>
   </div>
 
-  <!-- ④ マッチング演出 -->
-  <div class="screen" id="matching">
-    <div class="pad" style="width:100%">
-      <div class="pulse-wrap"><svg><use href="#mp-icon"/></svg></div>
-      <p id="matchingText" class="dots">同じ試合に行く仲間を探しています</p>
-    </div>
-  </div>
-
-  <!-- ⑤ グループ -->
+  <!-- グループ画面 -->
   <div class="screen" id="group">
     <div class="pad">
-      <h2 class="sc-title">🎉 グループができました！</h2>
-      <p class="sc-sub" id="groupSub"></p>
-      <div class="group-head" id="groupMatch"></div>
-      <div id="pointArea"></div>
+      <div class="group-head" id="groupHead"></div>
+      <div class="meet-box" id="meetBox"></div>
       <p class="sec-h">メンバー</p>
-      <div class="member-card" id="memberList"></div>
-      <p class="sec-h">グループチャット</p>
+      <div class="card" id="memberList" style="padding:4px 14px"></div>
+      <p class="sec-h">グループチャット（全員参加・個別DMなし）</p>
       <div class="chat-box">
         <div class="chat-log" id="chatLog"></div>
         <div class="chat-input">
@@ -340,292 +347,390 @@ button{font-family:inherit;border:none;background:none;cursor:pointer}
           <button onclick="sendMsg()">↑</button>
         </div>
       </div>
-      <div style="height:16px"></div>
-      <button class="btn sub" onclick="go('guide-day')">📋 当日ガイドを見る</button>
+      <button class="btn" onclick="startCheckin()">📍 （当日デモ）GPSで来場確認</button>
+      <div style="height:9px"></div>
+      <button class="btn danger" onclick="toggleCancel()">当日キャンセルする場合はこちら</button>
+      <div class="cancel-area" id="cancelArea">
+        <div class="q-label">キャンセルの理由は？</div>
+        <div class="chips" data-k="cxl">
+          <button class="chip" onclick="selCxl(this)">体調不良</button>
+          <button class="chip" onclick="selCxl(this)">急用</button>
+          <button class="chip" onclick="selCxl(this)">交通トラブル</button>
+          <button class="chip" onclick="selCxl(this)">その他</button>
+        </div>
+        <div style="height:10px"></div>
+        <button class="btn danger" id="cxlBtn" onclick="submitCancel()" disabled>キャンセルを申告する</button>
+        <p class="note" style="margin-top:7px">理由申告あり＝ランクへの影響は軽度。無断キャンセルは利用制限勧告＋ランク低下。</p>
+      </div>
     </div>
   </div>
 
-  <!-- ⑥ 当日ガイド -->
-  <div class="screen" id="guide-day">
-    <a class="back" onclick="go('group')">← グループにもどる</a>
+  <!-- 来場確認 -->
+  <div class="screen" id="checkin">
+    <div class="pad" style="width:100%">
+      <div class="gps-wrap"><span class="pin">📍</span></div>
+      <p id="checkinText">GPSで位置情報を確認しています…<br><span style="font-size:10.5px;opacity:.7">（位置情報は「使用中のみ許可」・試合当日のみ取得）</span></p>
+      <div class="settle-card" id="settleCard"></div>
+      <div style="height:18px"></div>
+      <button class="btn" id="checkinNext" style="max-width:280px;margin:0 auto;display:none" onclick="go('rank')">ランク・実績を見る →</button>
+    </div>
+  </div>
+
+  <!-- ランク・実績 -->
+  <div class="screen" id="rank">
     <div class="pad">
-      <h2 class="sc-title">当日までの準備</h2>
-      <p class="sc-sub">ぜんぶで5つ。ひとつずつでOK！</p>
-      <div class="check-card" id="checkList"></div>
-      <p class="sec-h">はじめてでも安心</p>
-      <div class="tip"><b>👕 服装は自由！</b>ユニフォームがなくても大丈夫。持っている人の方が少ない席もあります。</div>
-      <div class="tip"><b>📣 応援は「立たなくていい席」</b>を選んでいます。座ってのんびり観るところから始めましょう。</div>
-      <div class="tip"><b>🍜 スタグルはお楽しみ</b>。キックオフ1時間前に着けば、スタジアムグルメを満喫できます。</div>
+      <h2 class="sc-title">ランク・実績</h2>
+      <p class="sc-sub">キャンセルせず参加を重ねると、ランクが上がります。</p>
+      <div class="card rank-hero">
+        <div class="stars" id="myStars">★★★☆☆</div>
+        <h3 id="rankName">スタートランク（★3）</h3>
+        <p>プロフィールの利用歴で、アプリ初心者かベテランかが分かります</p>
+      </div>
+      <div class="stat-row" id="statRow"></div>
+      <div class="card">
+        <p class="sec-h">ランク条件（★5段階）</p>
+        <div class="rank-row"><span class="r-star">★5</span><span class="r-cond">オーナー5試合＋参加者5試合、締切後キャンセル連続なし</span></div>
+        <div class="rank-row"><span class="r-star">★4</span><span class="r-cond">締切後キャンセルなしで連続3試合利用</span></div>
+        <div class="rank-row"><span class="r-star">★3</span><span class="r-cond">通常のスタート位置</span></div>
+        <div class="rank-row"><span class="r-star">★2</span><span class="r-cond">締切（前日21:00）後のキャンセルが1回でもある</span></div>
+        <div class="rank-row"><span class="r-star">★1</span><span class="r-cond">アカウント削除勧告を受けた状態</span></div>
+      </div>
+      <button class="btn sub" onclick="go('matches')">次の試合を探す</button>
+    </div>
+  </div>
+
+  <!-- 1対1（Coming Soon） -->
+  <div class="screen" id="soon">
+    <div class="pad" style="text-align:center;padding-top:60px">
+      <div style="font-size:48px;margin-bottom:10px">🤝</div>
+      <h2 class="sc-title">1対1マッチング</h2>
+      <p class="sc-sub" style="margin-top:6px">2年目リリース予定です。<br>初年度はグループでの新規ファン獲得に集中します。</p>
+      <div class="card" style="text-align:left">
+        <p class="sec-h">予定している料金（回数券・前払い）</p>
+        <ul class="rule-list">
+          <li><span class="ck">・</span>1試合 ¥1,000 ／ 〜5試合 ¥3,000</li>
+          <li><span class="ck">・</span>〜9試合 ¥5,000 ／ 〜18試合 ¥9,500</li>
+          <li><span class="ck">・</span>年間契約 ¥12,000</li>
+        </ul>
+      </div>
     </div>
   </div>
 
   <!-- ボトムナビ -->
   <div class="bottom-nav" id="bottomNav">
-    <button class="bnav" data-s="select" onclick="go('select')"><span class="b-ico">⚽</span>試合</button>
-    <button class="bnav" data-s="group" onclick="go('group')"><span class="b-ico">👥</span>グループ</button>
-    <button class="bnav" data-s="guide-day" onclick="go('guide-day')"><span class="b-ico">📋</span>ガイド</button>
+    <button class="bnav" data-s="matches" onclick="go('matches')"><span class="b-ico">⚽</span>試合</button>
+    <button class="bnav" data-s="group" onclick="goGroup()"><span class="b-ico">👥</span>グループ</button>
+    <button class="bnav" data-s="rank" onclick="go('rank')"><span class="b-ico">⭐</span>ランク</button>
+    <button class="bnav" data-s="soon" onclick="go('soon')"><span class="b-ico">🤝</span>1対1</button>
     <button class="bnav" onclick="resetDemo()"><span class="b-ico">↺</span>リセット</button>
   </div>
+
+  <div id="toast"></div>
 </div>
 
 <script>
 // ===== データ =====
 const MATCHES = [
-  {id:0, date:'7/25(土) 19:00', home:'アルビレックス新潟', away:'モンテディオ山形', venue:'デンカビッグスワンスタジアム', waiting:3, avs:['🙂','😀','😊']},
-  {id:1, date:'8/15(土) 19:00', home:'アルビレックス新潟', away:'北海道コンサドーレ札幌', venue:'デンカビッグスワンスタジアム', waiting:2, avs:['😃','🙂']},
-  {id:2, date:'8/22(土) 19:00', home:'アルビレックス新潟', away:'藤枝MYFC', venue:'デンカビッグスワンスタジアム', waiting:4, avs:['😊','😀','🙂','😄']},
+  {id:0, date:'7/25(土) 19:00', away:'モンテディオ山形', deadline:'7/24(金) 21:00'},
+  {id:1, date:'8/15(土) 19:00', away:'北海道コンサドーレ札幌', deadline:'8/14(金) 21:00'},
+  {id:2, date:'8/22(土) 19:00', away:'藤枝MYFC', deadline:'8/21(金) 21:00'},
 ];
-const BEGINNERS = [
-  {ava:'🙂', name:'ハルカさん', desc:'20代・W杯からサッカー好きに'},
-  {ava:'😀', name:'ダイキさん', desc:'30代・代表戦は毎回見る派'},
-  {ava:'😊', name:'ミオさん',   desc:'20代・スタジアムは初めて'},
+const VENUE = 'デンカビッグスワンスタジアム';
+const GROUPS = [
+  {id:0, type:'A&B', name:'はじめてでも安心！まったり観戦しましょう', owner:{ava:'🧭',name:'ヤスさん',desc:'30代・観戦100回以上',role:'B'},
+   members:[{ava:'🙂',name:'ハルカさん',desc:'20代・W杯からサッカー好き',role:'A'}],
+   cap:4, status:'募集中', tags:['そっと見守る派','初観戦歓迎','得点シーンは盛り上がりたい'],
+   msg:'初観戦の方大歓迎です！チケットの買い方から聞いてください🧡'},
+  {id:1, type:'A同士', name:'初観戦仲間、いっしょにデビューしませんか', owner:{ava:'😀',name:'ダイキさん',desc:'20代・代表戦は毎回見る',role:'A'},
+   members:[{ava:'😊',name:'ミオさん',desc:'20代・スタジアム初めて',role:'A'}],
+   cap:4, status:'募集中', tags:['わいわい盛り上げたい','みんな初めて'], lock:'A同士のみ',
+   msg:'全員初めて同士で気楽に行きましょう！'},
+  {id:2, type:'B&B', name:'Nスタンドで声出し応援！経験者集合', owner:{ava:'🔥',name:'ケンさん',desc:'40代・シーパス組',role:'B'},
+   members:[{ava:'💪',name:'ショウさん',desc:'30代・観戦歴10年',role:'B'},{ava:'🎺',name:'リクさん',desc:'20代・アウェイも行く',role:'B'}],
+   cap:4, status:'締切間近', tags:['戦術について語りたい','ゴール裏'],
+   msg:'いつものメンバー＋新しい仲間募集！'},
 ];
-const GUIDE = {ava:'🧭', name:'ヤスさん', desc:'観戦歴8年・今季10試合目'};
-const GUIDE_REPLIES = [
-  'いい質問ですね！当日なんでも聞いてください👍',
-  '大丈夫です、僕も最初はそうでした😄',
-  '17:45にNゲート前で待ってますね！オレンジのタオル持ってます🧡',
-  'チケットまだの方は、リンクから「Nスタンド」がおすすめです！',
-];
-
-// ===== プロフィール設問 =====
-const PROFILE_QS = {
-  beginner: [
-    {key:'age',  label:'年代', req:true, opts:['10代','20代','30代','40代','50代','60代以上']},
-    {key:'exp',  label:'サッカーとの距離', req:true, opts:['試合を見たことがない','W杯・代表戦は見る','テレビ・配信でよく見る','けっこう詳しい']},
-    {key:'live', label:'スタジアム観戦の経験', req:true, opts:['初めて','1回だけある','数回ある']},
-    {key:'style',label:'観戦スタイル', req:false, opts:['わいわい楽しみたい','静かにじっくり見たい','おまかせ']},
-  ],
-  guide: [
-    {key:'age',  label:'年代', req:true, opts:['10代','20代','30代','40代','50代','60代以上']},
-    {key:'exp',  label:'観戦歴', req:true, opts:['1〜3年','4〜9年','10年以上']},
-    {key:'live', label:'ホームゲームの頻度', req:true, opts:['ほぼ毎試合','月1回くらい','年に数回']},
-    {key:'style',label:'案内スタイル', req:false, opts:['そっと見守る派','わいわい盛り上げる派','おまかせ']},
-  ],
+const PROFILE_OPTS = {
+  age:['10代','20代','30代','40代','50代以上'],
+  sex:['男性','女性','その他'],
+  pref:['新潟県','東京都','愛知県','北海道','その他'],
+  club:['アルビレックス新潟','他クラブ','まだ決めていない'],
+  exp:['観戦経験なし','観戦経験あり(1〜2回)','観戦経験あり(3回以上)'],
+  watch:['視聴歴なし','1〜3年','4〜7年','8年以上'],
+  trigger:['W杯観戦がきっかけ','家族・友人の影響','元々サッカーが好き','クラブに知り合いがいる'],
+  style:['そっと見守る派','わいわい盛り上げる派','得点シーンは盛り上がりたい','選手情報を聞きたい','戦術について語りたい'],
 };
-const EXP_SHORT = {
-  '試合を見たことがない':'サッカー初体験',
-  'W杯・代表戦は見る':'代表戦は見る派',
-  'テレビ・配信でよく見る':'配信でよく見る',
-  'けっこう詳しい':'けっこう詳しい',
-};
+const REQ = ['age','sex','pref','club','exp'];
+const REPLIES = ['よろしくお願いします！当日なんでも聞いてください👍','チケットはE2アッパー指定席がおすすめです、隣同士で取りましょう！','楽しみですね！⚽'];
 
 // ===== 状態 =====
-let role = 'beginner';
-let selMatch = null;
-let matched = false;
-let profile = {};
+let profile = {}, phoneOK = false, role = null;
+let selMatch = null, selGroup = null, joined = false, checkedIn = false;
+let cxlReason = null, replyIdx = 0;
 
-// ===== 画面遷移 =====
+// ===== ユーティリティ =====
 function go(id){
-  if((id==='group'||id==='guide-day') && !matched){ id='select'; }
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   const el = document.getElementById(id);
-  el.classList.add('active');
-  el.classList.remove('fade-in'); void el.offsetWidth; el.classList.add('fade-in');
-  // ボトムナビ
+  el.classList.add('active'); el.classList.remove('fade-in'); void el.offsetWidth; el.classList.add('fade-in');
   const nav = document.getElementById('bottomNav');
-  nav.classList.toggle('show', matched && id!=='home' && id!=='matching');
+  nav.classList.toggle('show', !!role && id!=='home' && id!=='profile' && id!=='judge' && id!=='checkin');
   document.querySelectorAll('.bnav').forEach(b=>b.classList.toggle('on', b.dataset.s===id));
   el.scrollTop = 0;
 }
-
-function setRole(r){
-  role = r;
-  renderProfile();
-  go('profile');
+function goGroup(){ joined ? go('group') : toast('まだグループに参加していません'); }
+function toast(t){
+  const el = document.getElementById('toast');
+  el.textContent = t; el.classList.add('show');
+  clearTimeout(el._t); el._t = setTimeout(()=>el.classList.remove('show'), 2400);
 }
 
 // ===== プロフィール =====
-function renderProfile(){
-  profile = {age:null, exp:null, live:null, style:null, name:''};
-  document.getElementById('nameInput').value = '';
-  document.getElementById('profileTitle').textContent =
-    role==='guide' ? 'あなたの観戦スタイルを教えてください' : 'あなたのことを教えてください';
-  document.getElementById('profileSub').textContent =
-    role==='guide'
-      ? '初めてのメンバーが「どんな人が案内してくれるのか」を知って安心するための自己紹介です。'
-      : 'マッチングの条件ではありません。グループのみんなが安心するための、かんたんな自己紹介です。';
-  document.getElementById('profileQs').innerHTML = PROFILE_QS[role].map(q=>`
-    <div class="q-block">
-      <div class="q-label">${q.label}${q.req?'':' <small>（任意）</small>'}</div>
-      <div class="chips">${q.opts.map(o=>`<button class="chip" onclick="selChip(this,'${q.key}','${o}')">${o}</button>`).join('')}</div>
-    </div>`).join('');
-  updateProfileBtn();
-}
-function selChip(el, key, val){
-  profile[key] = val;
-  [...el.parentElement.children].forEach(c=>c.classList.toggle('on', c===el));
+(function initProfile(){
+  document.querySelectorAll('#profile .chips[data-k]').forEach(box=>{
+    const k = box.dataset.k, multi = box.dataset.multi;
+    (PROFILE_OPTS[k]||[]).forEach(o=>{
+      const b = document.createElement('button');
+      b.className = 'chip'; b.textContent = o;
+      b.onclick = ()=>{
+        if(multi){
+          b.classList.toggle('on');
+          profile[k] = [...box.querySelectorAll('.on')].map(x=>x.textContent);
+        } else {
+          [...box.children].forEach(c=>c.classList.toggle('on', c===b));
+          profile[k] = o;
+        }
+        updateProfileBtn();
+      };
+      box.appendChild(b);
+    });
+  });
+})();
+function verifyPhone(){
+  const v = document.getElementById('phoneInput').value.trim();
+  if(v.length < 10){ toast('電話番号を入力してください（デモ用・保存されません）'); return; }
+  phoneOK = true;
+  const btn = document.getElementById('verifyBtn');
+  btn.textContent = '✓ 認証済み'; btn.classList.add('done');
   updateProfileBtn();
 }
 function updateProfileBtn(){
-  const ok = PROFILE_QS[role].filter(q=>q.req).every(q=>profile[q.key]);
-  document.getElementById('profileBtn').disabled = !ok;
+  document.getElementById('profileBtn').disabled = !(REQ.every(k=>profile[k]) && phoneOK);
 }
-function profileDone(){
-  profile.name = document.getElementById('nameInput').value.trim() || 'あなた';
-  const chips = [
-    (role==='guide' ? '🧭 ' : '🔰 ') + profile.name,
-    profile.age,
-    role==='guide' ? '観戦歴' + profile.exp : EXP_SHORT[profile.exp],
-    role==='guide' ? profile.live : '現地観戦：' + profile.live,
-  ];
-  if(profile.style && profile.style !== 'おまかせ') chips.push(profile.style);
-  document.getElementById('profileSum').innerHTML = chips.map(t=>`<span>${t}</span>`).join('');
+function judgeRole(){
+  role = (profile.exp === '観戦経験あり(3回以上)') ? 'B' : 'A';
+  const pill = document.getElementById('rolePill');
+  pill.textContent = role==='A' ? 'A：新規観戦者' : 'B：既存サポーター';
+  pill.className = 'role-pill ' + role;
+  const attrs = [profile.age, profile.pref, (profile.club||[]).join('・'), profile.exp, profile.watch]
+    .concat(profile.trigger||[], profile.style||[]).filter(Boolean);
+  document.getElementById('judgeCard').innerHTML = `
+    <span class="judge-badge ${role}">${role==='A'?'A：新規観戦者':'B：既存サポーター'}</span>
+    <h3>${role==='A'?'ようこそ、はじめての観戦へ！':'あなたの経験が、誰かの一歩に。'}</h3>
+    <p>軸1「${profile.exp}」から自動判定しました。<br>${role==='A'
+      ? '参加費は1回1,000円・<b>来場確認後の後払い</b>です。'
+      : 'Bの利用は<b>無料</b>。担当は1試合につき1グループまでです。'}</p>
+    <div class="attr-chips">${attrs.map(a=>`<span>${a}</span>`).join('')}</div>`;
   renderMatches();
-  go('select');
+  go('judge');
 }
 
-// ===== 試合リスト =====
+// ===== 試合・グループ =====
 function renderMatches(){
-  const wrap = document.getElementById('matchList');
-  wrap.innerHTML = MATCHES.map(m=>`
-    <button class="match-card" onclick="pickMatch(${m.id})">
+  document.getElementById('matchList').innerHTML = MATCHES.map(m=>`
+    <button class="match-card" onclick="openGroups(${m.id})">
       <span class="m-date">${m.date}</span>
-      <div class="m-fix">${m.home} <span>VS</span> ${m.away}</div>
-      <div class="m-venue">📍 ${m.venue}</div>
-      <div class="m-foot">
-        <span class="avs">${m.avs.map(a=>`<span>${a}</span>`).join('')}</span>
-        <span class="m-wait">${role==='guide' ? `初めての${m.waiting}人が案内役を待っています` : `初めて${m.waiting}人が待っています`}</span>
-        <span class="m-go">→</span>
+      <div class="m-fix">アルビレックス新潟 <span>VS</span> ${m.away}</div>
+      <div class="m-venue">📍 ${VENUE}　⏰ 締切 ${m.deadline}</div>
+      <div class="m-foot">募集中のグループ 3件 <span class="go">→</span></div>
+    </button>`).join('');
+}
+let typeFilter = 'すべて';
+function openGroups(mid){
+  selMatch = MATCHES[mid];
+  document.getElementById('groupsTitle').textContent = `${selMatch.date} のグループ`;
+  document.getElementById('groupsSub').textContent = `アルビレックス新潟 vs ${selMatch.away}｜締切 ${selMatch.deadline}`;
+  typeFilter = 'すべて';
+  renderFilters(); renderGroups();
+  go('groups');
+}
+function renderFilters(){
+  document.getElementById('typeFilters').innerHTML = ['すべて','A&B','A同士','B&B'].map(t=>
+    `<button class="chip${t===typeFilter?' on':''}" onclick="setFilter('${t}')">${t}</button>`).join('');
+}
+function setFilter(t){ typeFilter = t; renderFilters(); renderGroups(); }
+function renderGroups(){
+  const cls = {'A&B':'ab','A同士':'aa','B&B':'bb'};
+  const list = GROUPS.filter(g=>typeFilter==='すべて'||g.type===typeFilter);
+  document.getElementById('groupList').innerHTML = list.map(g=>{
+    const n = 1 + g.members.length;
+    const comp = g.type==='A&B' ? `B1＋A${g.members.length}` : (g.type==='A同士' ? `A${n}` : `B${n}`);
+    return `<button class="g-card" onclick="openConfirm(${g.id})">
+      <div class="g-top">
+        <span class="g-type ${cls[g.type]}">${g.type}</span>
+        <span class="g-status${g.status==='締切間近'?' soon':''}">${g.status}</span>
+        ${g.lock?`<span class="g-lock">🔒 ${g.lock}</span>`:''}
       </div>
-    </button>
-  `).join('');
+      <div class="g-name">${g.name}</div>
+      <div class="g-meta">${comp}／定員${g.cap}人　オーナー：${g.owner.name}（${g.owner.desc.split('・')[0]}）</div>
+      <div class="g-tags">${g.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+    </button>`;
+  }).join('') || '<p class="note" style="text-align:center;padding:20px 0">該当するグループがありません</p>';
 }
 
-// ===== 確認 =====
-function pickMatch(id){
-  selMatch = MATCHES[id];
+// ===== 参加確認 =====
+function openConfirm(gid){
+  selGroup = GROUPS[gid];
+  // 制約チェック（デモ簡略）：BはA同士(限定)に入れない
+  if(role==='B' && selGroup.lock==='A同士のみ'){ toast('🔒 このグループは「A同士のみ」限定です'); return; }
   document.getElementById('confirmSub').textContent =
-    role==='guide' ? 'あなたの案内で、この試合の初観戦が生まれます。' : '同じ「初めて」の仲間と一緒に行きます。';
-  document.getElementById('confirmMatch').innerHTML = `
-    <div class="c-label">選んだ試合</div>
-    <span class="m-date">${selMatch.date}</span>
-    <div class="m-fix" style="font-size:16px;font-weight:900;margin-top:6px">${selMatch.home} <span style="font-size:11px;color:var(--ink-soft)">VS</span> ${selMatch.away}</div>
-    <div class="m-venue" style="font-size:11.5px;color:var(--ink-soft)">📍 ${selMatch.venue}</div>`;
-  document.getElementById('confirmFee').innerHTML = role==='guide' ? `
-    <div class="c-label">参加費（案内役）</div>
-    <div class="fee-row"><span class="fee">¥500</span><span class="fee-unit">/ 1回 ※検討中の想定価格</span></div>
-    <p class="fee-note">“案内の労働対価”ではなく、出会いと体験への参加費です。</p>
-    <ul class="fee-list">
-      <li><span class="ck">✓</span>行きたくて登録した初心者グループに合流</li>
-      <li><span class="ck">✓</span>案内1回ごとに貢献ポイント +10pt</li>
-      <li><span class="ck">✓</span>チケット代は各自購入</li>
-    </ul>` : `
-    <div class="c-label">参加費（はじめての方）</div>
-    <div class="fee-row"><span class="fee">¥1,000</span><span class="fee-unit">/ 1回</span></div>
-    <p class="fee-note">マッチング＆グループ案内料。チケット代は別・各自購入です。</p>
-    <ul class="fee-list">
-      <li><span class="ck">✓</span>同じ初心者仲間とのマッチング</li>
-      <li><span class="ck">✓</span>案内役による当日サポート</li>
-      <li><span class="ck">✓</span>チケットの買い方もガイドします</li>
-    </ul>`;
+    role==='B' && selGroup.type==='A同士' ? 'Bとして途中参加すると、このグループはA&B（成果対象）になります。' : `${selMatch.date}｜vs ${selMatch.away}`;
+  document.getElementById('confirmGroup').innerHTML = `
+    <div class="g-top"><span class="g-type ${{'A&B':'ab','A同士':'aa','B&B':'bb'}[selGroup.type]}">${selGroup.type}</span></div>
+    <div class="g-name">${selGroup.name}</div>
+    <div class="g-meta" style="margin-bottom:6px">オーナー：${selGroup.owner.name}</div>
+    <p style="font-size:12px;color:var(--ink-soft)">💬 ${selGroup.msg}</p>`;
+  document.getElementById('feeArea').innerHTML = role==='A' ? `
+    <div class="fee-box">
+      <div class="f-label">参加費（A：新規観戦者）</div>
+      <div class="f-amount">¥1,000 <small>/ 回・後払い</small></div>
+      <div class="f-note">課金は<b>GPS来場確認のあと</b>。行けなかったら請求されません。チケット代は別（各自購入）。</div>
+      <div style="height:10px"></div>
+      <div class="chips">
+        <button class="chip" style="border-color:rgba(255,255,255,.4);color:#fff" onclick="selPay(this)">クレジットカード</button>
+        <button class="chip" style="border-color:rgba(255,255,255,.4);color:#fff" onclick="selPay(this)">コンビニ後払い</button>
+      </div>
+    </div>` : `
+    <div class="fee-box free">
+      <div class="f-label">参加費（B：既存サポーター）</div>
+      <div class="f-amount">無料</div>
+      <div class="f-note">あなたの案内が、クラブの新しいファンを生みます。実績はランク・バッジで可視化されます。</div>
+    </div>`;
+  document.getElementById('joinBtn').disabled = (role==='A'); // Aは決済方法の選択が必要
   go('confirm');
 }
-
-// ===== マッチング演出 =====
-function startMatching(){
-  go('matching');
-  const t = document.getElementById('matchingText');
-  t.textContent = '同じ試合に行く仲間を探しています';
-  setTimeout(()=>{ t.textContent = role==='guide' ? '初めてのメンバーをご案内します' : '案内役をアサインしています'; }, 1600);
-  setTimeout(()=>{ matched = true; renderGroup(); go('group'); }, 3200);
+let payMethod = null;
+function selPay(el){
+  payMethod = el.textContent;
+  [...el.parentElement.children].forEach(c=>{
+    const on = c===el;
+    c.style.background = on ? '#fff' : 'transparent';
+    c.style.color = on ? 'var(--blue-700)' : '#fff';
+  });
+  document.getElementById('joinBtn').disabled = false;
+}
+function joinGroup(){
+  joined = true;
+  if(role==='B' && selGroup.type==='A同士') selGroup.type = 'A&B';
+  renderGroup();
+  go('group');
+  toast('グループに参加しました🎉 通知：新規参加者があります');
 }
 
-// ===== グループ =====
+// ===== グループ画面 =====
 function renderGroup(){
-  document.getElementById('groupSub').textContent =
-    role==='guide' ? 'あなた＋初めての3人のグループです。' : 'みんな「初めて」。安心していこう！';
-  document.getElementById('groupMatch').innerHTML = `
+  document.getElementById('groupHead').innerHTML = `
     <div class="g-date">${selMatch.date} KICK OFF</div>
-    <div class="g-fix">${selMatch.home}<br>vs ${selMatch.away}</div>
-    <div class="g-venue">📍 ${selMatch.venue}</div>
-    <div class="g-meet">🕠 <span><b>集合：17:45 Nゲート前</b><br>ヤスさん（案内役）がオレンジのタオルを持って待っています</span></div>`;
-  document.getElementById('pointArea').innerHTML = role==='guide' ? `
-    <div class="point-card">
-      <div class="p-top"><span class="p-title">🏅 貢献サポーター</span><span class="p-pt">30<small> pt</small></span></div>
-      <div class="p-bar"><i></i></div>
-      <div class="p-note">この案内で +10pt ／ 50pt で「貢献サポーター」認定（構想中）</div>
-    </div>` : '';
-  const youDesc = (role==='guide'
-    ? [profile.age, '観戦歴'+profile.exp, profile.style && profile.style!=='おまかせ' ? profile.style : null]
-    : [profile.age, EXP_SHORT[profile.exp], profile.live==='初めて' ? '現地デビュー' : '現地'+profile.live]
-  ).filter(Boolean).join('・');
-  const members = [];
-  if(role==='guide'){
-    members.push({ava:'🧭', name:profile.name, desc:youDesc || '案内役', tag:'案内役', cls:'guide', you:true});
-    BEGINNERS.forEach(b=>members.push({...b, tag:'初めて', cls:'first'}));
-  } else {
-    members.push({ava:'🔰', name:profile.name, desc:youDesc || '現地観戦デビュー', tag:'初めて', cls:'first', you:true});
-    BEGINNERS.slice(0,2).forEach(b=>members.push({...b, tag:'初めて', cls:'first'}));
-    members.push({...GUIDE, tag:'案内役', cls:'guide'});
-  }
-  document.getElementById('memberList').innerHTML = members.map(m=>`
+    <div class="g-fix">アルビレックス新潟 vs ${selMatch.away}</div>
+    <div style="font-size:10.5px;opacity:.85">📍 ${VENUE}</div>
+    <div class="g-deadline">⏰ 募集締切：${selMatch.deadline}（それまで入退室自由）｜🎫 前日12:00にチケットリマインド</div>`;
+  document.getElementById('meetBox').innerHTML = `
+    <b>📌 集合場所（オーナーが前日18:00までにアナウンス）</b>
+    ${selGroup.owner.name}：「ビッグスワン Nゲート前に <b>17:30</b> 集合にしましょう！」
+    <small>運営推奨：駅周辺 または キックオフ2時間前〜1時間30分前の集合（電波混雑対策）／座席は隣同士が前提・チケットは各自購入</small>`;
+  const me = {ava: role==='A'?'🔰':'🧭', name:'あなた', desc:`${profile.age||''}・${profile.exp||''}`, role, you:true};
+  const mems = [ {...selGroup.owner, owner:true}, ...selGroup.members, me ];
+  document.getElementById('memberList').innerHTML = mems.map(m=>`
     <div class="mem${m.you?' you':''}">
       <span class="m-ava">${m.ava}</span>
-      <span><b>${m.name}</b><small>${m.desc}</small></span>
-      <span class="m-tag ${m.cls}">${m.tag}</span>
+      <span><b>${m.name} ${m.owner?'<span class="owner-star">👑オーナー</span>':''}</b><small>${m.desc}</small></span>
+      <span class="m-tag ${m.role==='B'?'b':'a'}">${m.role}</span>
     </div>`).join('');
-  // チャット初期化
   const log = document.getElementById('chatLog');
   log.innerHTML = '';
-  addMsg(GUIDE, 'グループができましたね！案内役のヤスです。当日はよろしくお願いします🧡 わからないことは何でも聞いてください！');
-  addMsg(BEGINNERS[0], 'はじめまして！初観戦です、よろしくお願いします🙌');
-  renderChecklist();
+  addSys(`⏰ 募集締切は ${selMatch.deadline} です`);
+  addMsg(selGroup.owner, selGroup.msg);
+  addSys('🔔 通知：新規参加者がグループに加わりました');
+  addMsg(selGroup.members[0] || selGroup.owner, 'よろしくお願いします！');
+  addSys('🎫 前日12:00：チケットは取得済みですか？（各自購入）');
 }
-
+function addSys(t){
+  const log = document.getElementById('chatLog');
+  const d = document.createElement('div'); d.className='sysmsg'; d.textContent=t;
+  log.appendChild(d); log.scrollTop = log.scrollHeight;
+}
 function addMsg(who, text, me=false){
   const log = document.getElementById('chatLog');
-  const div = document.createElement('div');
-  div.className = 'msg' + (me?' me':'');
-  div.innerHTML = me
-    ? `<div class="bubble">${text}</div>`
+  const d = document.createElement('div'); d.className='msg'+(me?' me':'');
+  d.innerHTML = me ? `<div class="bubble">${text}</div>`
     : `<span class="c-ava">${who.ava}</span><div><div class="b-name">${who.name}</div><div class="bubble">${text}</div></div>`;
-  log.appendChild(div);
-  log.scrollTop = log.scrollHeight;
+  log.appendChild(d); log.scrollTop = log.scrollHeight;
 }
-
-let replyIdx = 0;
 function sendMsg(){
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if(!text) return;
-  addMsg(null, text, true);
-  input.value = '';
-  setTimeout(()=>{
-    addMsg(GUIDE, GUIDE_REPLIES[replyIdx % GUIDE_REPLIES.length]);
-    replyIdx++;
-  }, 900);
+  const i = document.getElementById('chatInput');
+  const t = i.value.trim(); if(!t) return;
+  addMsg(null, t, true); i.value='';
+  setTimeout(()=>addMsg(selGroup.owner, REPLIES[replyIdx++ % REPLIES.length]), 900);
 }
 
-// ===== 当日ガイド =====
-const CHECKS = [
-  {t:'チケットを購入する', s:'各自購入・買い方はチャットでガイドします'},
-  {t:'集合場所を確認', s:'スタジアム正面 Nゲート前 / 17:45'},
-  {t:'持ち物をチェック', s:'飲み物・タオル・（あれば）動きやすい服'},
-  {t:'アクセスを確認', s:'新潟駅からシャトルバス約25分'},
-  {t:'グループに一言あいさつ', s:'「よろしくお願いします」だけでOK！'},
-];
-const checkState = CHECKS.map(()=>false);
-function renderChecklist(){
-  document.getElementById('checkList').innerHTML = CHECKS.map((c,i)=>`
-    <div class="chk${checkState[i]?' on':''}" onclick="toggleCheck(${i})">
-      <span class="box">${checkState[i]?'✓':''}</span>
-      <span><b>${c.t}</b><small>${c.s}</small></span>
-    </div>`).join('');
+// ===== キャンセル =====
+function toggleCancel(){ document.getElementById('cancelArea').classList.toggle('show'); }
+function selCxl(el){
+  cxlReason = el.textContent;
+  [...el.parentElement.children].forEach(c=>c.classList.toggle('on', c===el));
+  document.getElementById('cxlBtn').disabled = false;
 }
-function toggleCheck(i){
-  checkState[i] = !checkState[i];
-  renderChecklist();
+function submitCancel(){
+  document.getElementById('cancelArea').classList.remove('show');
+  addSys(`🔔 通知：あなたが当日キャンセルを申告しました（理由：${cxlReason}）`);
+  toast('申告を受け付けました。ランクへの影響は軽度です');
+}
+
+// ===== 来場確認（GPS） =====
+function startCheckin(){
+  go('checkin');
+  const t = document.getElementById('checkinText');
+  t.innerHTML = 'GPSで位置情報を確認しています…<br><span style="font-size:10.5px;opacity:.7">（位置情報は「使用中のみ許可」・試合当日のみ取得）</span>';
+  document.getElementById('settleCard').classList.remove('show');
+  document.getElementById('checkinNext').style.display = 'none';
+  setTimeout(()=>{ t.innerHTML = '🏟️ スタジアム滞在を確認中…'; }, 1400);
+  setTimeout(()=>{
+    checkedIn = true;
+    t.innerHTML = '✅ <b>来場確認が完了しました！</b>';
+    const sc = document.getElementById('settleCard');
+    sc.innerHTML = role==='A'
+      ? `💳 参加費 <b>¥1,000</b> を${payMethod||'選択した方法'}で決済しました（後払い）<br><span style="font-size:10.5px;opacity:.8">一人では行けなかった観戦を実現できたことへの対価です</span>`
+      : `🏅 案内実績 <b>+1</b>！<br><span style="font-size:10.5px;opacity:.8">あなたの案内はクラブへの月次レポートに（匿名で）カウントされます</span>`;
+    sc.classList.add('show');
+    document.getElementById('checkinNext').style.display = 'flex';
+    renderRank();
+  }, 3000);
+}
+
+// ===== ランク =====
+function renderRank(){
+  const s = document.getElementById('statRow');
+  s.innerHTML = role==='B' ? `
+    <div class="stat"><div class="s-num">1</div><div class="s-label">今季の案内実績</div></div>
+    <div class="stat"><div class="s-num">1</div><div class="s-label">生まれた新規ファン</div></div>
+    <div class="stat"><div class="s-num">0</div><div class="s-label">締切後キャンセル</div></div>` : `
+    <div class="stat"><div class="s-num">1</div><div class="s-label">観戦した試合</div></div>
+    <div class="stat"><div class="s-num">0</div><div class="s-label">締切後キャンセル</div></div>
+    <div class="stat"><div class="s-num">★4</div><div class="s-label">あと2試合で昇格</div></div>`;
 }
 
 // ===== リセット =====
 function resetDemo(){
-  role='beginner'; selMatch=null; matched=false; replyIdx=0; profile={};
-  checkState.forEach((_,i)=>checkState[i]=false);
-  document.getElementById('profileSum').innerHTML='';
+  profile={}; phoneOK=false; role=null; selMatch=null; selGroup=null; joined=false; checkedIn=false; cxlReason=null; replyIdx=0; payMethod=null;
+  GROUPS[1].type='A同士';
+  document.getElementById('rolePill').className='role-pill';
+  document.querySelectorAll('#profile .chip').forEach(c=>c.classList.remove('on'));
+  const vb=document.getElementById('verifyBtn'); vb.textContent='認証'; vb.classList.remove('done');
+  document.getElementById('phoneInput').value='';
+  document.getElementById('profileBtn').disabled=true;
   go('home');
 }
+renderRank();
 </script>
 </body>
 </html>
