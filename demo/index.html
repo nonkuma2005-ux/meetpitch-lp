@@ -119,24 +119,6 @@ input,select{font-family:inherit}
 .m-foot{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;color:var(--green)}
 .m-foot .go{margin-left:auto;font-weight:900;color:var(--amber-strong);font-size:15px}
 
-/* グループ一覧 */
-.filters{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap}
-.g-card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 8px 20px -12px rgba(15,34,96,.22);margin-bottom:11px;width:100%;text-align:left;transition:transform .15s}
-.g-card:active{transform:scale(.98)}
-.g-top{display:flex;align-items:center;gap:7px;margin-bottom:6px;flex-wrap:wrap}
-.g-type{font-size:10px;font-weight:900;padding:3px 9px;border-radius:999px}
-.g-type.ab{color:#fff;background:var(--blue-600)}
-.g-type.aa{color:var(--green);background:var(--green-bg)}
-.g-type.bb{color:#8a5b00;background:#ffe9c7}
-.g-status{font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;color:var(--green);background:var(--green-bg)}
-.g-status.soon{color:#b25b00;background:#fff3d9}
-.g-status.full{color:var(--ink-soft);background:var(--blue-050)}
-.g-lock{font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;color:var(--red);background:var(--red-bg)}
-.g-name{font-size:13.5px;font-weight:900;line-height:1.45;margin-bottom:4px}
-.g-meta{font-size:11px;color:var(--ink-soft);margin-bottom:7px}
-.g-tags{display:flex;flex-wrap:wrap;gap:5px}
-.g-tags span{font-size:10px;font-weight:700;color:var(--blue-600);background:var(--blue-050);padding:2px 9px;border-radius:999px}
-
 /* 確認 */
 .fee-box{border-radius:16px;padding:17px;margin-bottom:12px;color:#fff;background:linear-gradient(150deg,var(--blue-700),var(--blue-500));box-shadow:0 12px 26px -12px rgba(15,34,96,.5)}
 .fee-box.free{background:linear-gradient(150deg,#1a5c38,#12894f)}
@@ -186,6 +168,9 @@ input,select{font-family:inherit}
 .cancel-area{display:none;background:#fff;border:2px solid var(--red-bg);border-radius:16px;padding:14px;margin-bottom:12px}
 .cancel-area.show{display:block}
 .cancel-area .q-label{color:var(--red)}
+
+/* マッチング中 */
+#matching{background:linear-gradient(170deg,var(--blue-800),var(--blue-600));color:#fff;justify-content:center;text-align:center}
 
 /* 来場確認 */
 #checkin{background:linear-gradient(170deg,var(--blue-800),var(--blue-600));color:#fff;justify-content:center;text-align:center}
@@ -299,7 +284,7 @@ input,select{font-family:inherit}
   <div class="screen" id="profile">
     <div class="pad">
       <h2 class="sc-title">プロフィール登録</h2>
-      <p class="sc-sub">グループのみんなが安心できるよう、かんたんな自己紹介です。マッチングの必須条件ではありません。</p>
+      <p class="sc-sub">ここで答える内容（特に案内スタイル）をもとに、相性の近い方とグループを自動で組みます。</p>
       <div class="q-block"><div class="q-label">ニックネーム <small>（任意）</small></div><input class="text-input" id="nameInput" type="text" placeholder="例：サク" maxlength="10"></div>
       <div class="q-block"><div class="q-label">年代</div><div class="chips" data-k="age"></div></div>
       <div class="q-block"><div class="q-label">性別</div><div class="chips" data-k="sex"></div></div>
@@ -308,7 +293,7 @@ input,select{font-family:inherit}
       <div class="q-block"><div class="q-label">軸1：観戦経験</div><div class="chips" data-k="exp"></div></div>
       <div class="q-block"><div class="q-label">軸2：視聴歴 <small>（任意）</small></div><div class="chips" data-k="watch"></div></div>
       <div class="q-block"><div class="q-label">軸4：きっかけ <small>（任意・複数可）</small></div><div class="chips" data-k="trigger" data-multi="1"></div></div>
-      <div class="q-block"><div class="q-label">軸5：案内スタイル <small>（任意・複数可）</small></div><div class="chips" data-k="style" data-multi="1"></div></div>
+      <div class="q-block"><div class="q-label">軸5：案内スタイル <small>（任意・複数可・マッチングに使用）</small></div><div class="chips" data-k="style" data-multi="1"></div></div>
       <div class="q-block"><div class="q-label">推し選手 <small>（任意）</small></div><input class="text-input" id="oshiInput" type="text" placeholder="例：秋山裕紀"></div>
       <div class="q-block">
         <div class="q-label">本人確認（電話番号認証）</div>
@@ -334,43 +319,38 @@ input,select{font-family:inherit}
   <div class="screen" id="matches">
     <div class="pad">
       <h2 class="sc-title">どの試合に行く？</h2>
-      <p class="sc-sub">試合を選んで、参加するグループを探します。</p>
+      <p class="sc-sub">試合日を選ぶだけ。相性の近い方とのグループは自動で組まれます。</p>
       <div id="matchList"></div>
-    </div>
-  </div>
-
-  <!-- グループ一覧 -->
-  <div class="screen" id="groups">
-    <a class="back" onclick="go('matches')">← 試合選択にもどる</a>
-    <div class="pad">
-      <h2 class="sc-title" id="groupsTitle">グループを探す</h2>
-      <p class="sc-sub" id="groupsSub"></p>
-      <div class="filters" id="typeFilters"></div>
-      <div id="groupList"></div>
-      <button class="btn sub" onclick="toast('デモでは既存グループへの参加をお試しください')">＋ グループを作成する</button>
-      <p class="note" style="text-align:center;margin-top:8px">作成時はメッセージを記入できます（オーナーになります）</p>
     </div>
   </div>
 
   <!-- 参加確認 -->
   <div class="screen" id="confirm">
-    <a class="back" onclick="go('groups')">← グループ一覧にもどる</a>
+    <a class="back" onclick="go('matches')">← 試合選択にもどる</a>
     <div class="pad">
-      <h2 class="sc-title">このグループに参加する</h2>
-      <p class="sc-sub" id="confirmSub"></p>
-      <div class="card" id="confirmGroup"></div>
+      <h2 class="sc-title">この試合で仲間を探す</h2>
+      <p class="sc-sub" id="confirmSub">相性の近い仲間と自動でグループを組みます。参加費と当日のルールをご確認ください。</p>
+      <div class="card" id="confirmMatch"></div>
       <div id="feeArea"></div>
       <div class="card">
         <p class="sec-h">参加ルール</p>
         <ul class="rule-list">
-          <li><span class="ck">✓</span>募集締切は<b>前日21:00</b>。それまで入退室自由</li>
-          <li><span class="ck">✓</span>2人以上で開催（定員4人で自動締切）</li>
+          <li><span class="ck">✓</span>試合日ごとに、<b>相性の近い方と自動</b>でグループを組みます</li>
+          <li><span class="ck">✓</span>グループは2〜4人（案内役1人＋はじめての方 最大3人）</li>
           <li><span class="ck">✓</span>同一試合日に参加できるのは1グループのみ</li>
           <li><span class="ck">✓</span>チケットは<b>各自購入</b>（アプリは仲介しません）</li>
         </ul>
       </div>
-      <button class="btn" onclick="joinGroup()" id="joinBtn">参加する ⚽</button>
+      <button class="btn" onclick="startMatching()" id="joinBtn">仲間を探す ⚽</button>
       <p class="note" style="text-align:center;margin-top:8px">※デモのため実際の決済はありません</p>
+    </div>
+  </div>
+
+  <!-- マッチング中 -->
+  <div class="screen" id="matching">
+    <div class="pad" style="width:100%">
+      <div class="gps-wrap"><span class="pin">🤝</span></div>
+      <p id="matchingText" style="font-size:14px;font-weight:700;padding:0 24px">仲間を探しています…</p>
     </div>
   </div>
 
@@ -493,20 +473,25 @@ const MATCHES = [
   {id:2, date:'8/22(土) 19:00', away:'藤枝MYFC', deadline:'8/21(金) 21:00'},
 ];
 const VENUE = 'デンカビッグスワンスタジアム';
-const GROUPS = [
-  {id:0, type:'A&B', name:'はじめてでも安心！まったり観戦しましょう', owner:{ava:'🧭',name:'ヤスさん',desc:'30代・観戦100回以上',role:'B'},
-   members:[{ava:'🙂',name:'ハルカさん',desc:'20代・W杯からサッカー好き',role:'A'}],
-   cap:4, status:'募集中', tags:['そっと見守る派','初観戦歓迎','得点シーンは盛り上がりたい'],
-   msg:'初観戦の方大歓迎です！チケットの買い方から聞いてください🧡'},
-  {id:1, type:'A同士', name:'初観戦仲間、いっしょにデビューしませんか', owner:{ava:'😀',name:'ダイキさん',desc:'20代・代表戦は毎回見る',role:'A'},
-   members:[{ava:'😊',name:'ミオさん',desc:'20代・スタジアム初めて',role:'A'}],
-   cap:4, status:'募集中', tags:['わいわい盛り上げたい','みんな初めて'], lock:'A同士のみ',
-   msg:'全員初めて同士で気楽に行きましょう！'},
-  {id:2, type:'B&B', name:'Nスタンドで声出し応援！経験者集合', owner:{ava:'🔥',name:'ケンさん',desc:'40代・シーパス組',role:'B'},
-   members:[{ava:'💪',name:'ショウさん',desc:'30代・観戦歴10年',role:'B'},{ava:'🎺',name:'リクさん',desc:'20代・アウェイも行く',role:'B'}],
-   cap:4, status:'締切間近', tags:['戦術について語りたい','ゴール裏'],
-   msg:'いつものメンバー＋新しい仲間募集！'},
+// 相性マッチングの候補プール（案内スタイルが近い人を優先して選ばれる）
+const POOL_A = [
+  {ava:'🙂', name:'ハルカさん', desc:'20代・W杯からサッカー好き', role:'A', style:'そっと見守る派', greet:'はじめまして！初観戦です、よろしくお願いします🙌'},
+  {ava:'😀', name:'ダイキさん', desc:'20代・代表戦は毎回見る', role:'A', style:'わいわい盛り上げる派', greet:'楽しみです！当日盛り上がりましょう🔥'},
+  {ava:'😊', name:'ミオさん', desc:'20代・スタジアム初めて', role:'A', style:'そっと見守る派', greet:'緊張していますが、よろしくお願いします😳'},
+  {ava:'😃', name:'ユウトさん', desc:'30代・元々サッカーが好き', role:'A', style:'得点シーンは盛り上がりたい', greet:'ゴールシーンが楽しみです！よろしくお願いします⚽'},
 ];
+const POOL_B = [
+  {ava:'🧭', name:'ヤスさん', desc:'30代・観戦100回以上', role:'B', style:'そっと見守る派', greet:'グループができましたね！案内役のヤスです。当日はよろしくお願いします🧡 わからないことは何でも聞いてください！'},
+  {ava:'🔥', name:'ケンさん', desc:'40代・シーズンパス組', role:'B', style:'戦術について語りたい', greet:'よろしくお願いします！せっかくなので戦術の見どころも少しお話しますね😊'},
+  {ava:'💪', name:'ショウさん', desc:'30代・観戦歴10年', role:'B', style:'選手情報を聞きたい', greet:'こんにちは！選手のこと気になったら何でも聞いてください👍'},
+];
+// 案内スタイルが一致する人を優先し、足りない分は他の候補で補う
+function pickByStyle(pool, styles, count){
+  styles = styles || [];
+  const matched = pool.filter(p => styles.includes(p.style));
+  const rest = pool.filter(p => !matched.includes(p)).sort(() => Math.random() - 0.5);
+  return matched.concat(rest).slice(0, count);
+}
 const PROFILE_OPTS = {
   age:['10代','20代','30代','40代','50代以上'],
   sex:['男性','女性','その他'],
@@ -542,7 +527,7 @@ function go(id){
   const el = document.getElementById(id);
   el.classList.add('active'); el.classList.remove('fade-in'); void el.offsetWidth; el.classList.add('fade-in');
   const nav = document.getElementById('bottomNav');
-  nav.classList.toggle('show', !!role && id!=='home' && id!=='profile' && id!=='judge' && id!=='checkin');
+  nav.classList.toggle('show', !!role && id!=='home' && id!=='profile' && id!=='judge' && id!=='checkin' && id!=='matching');
   document.querySelectorAll('.bnav').forEach(b=>b.classList.toggle('on', b.dataset.s===id));
   el.scrollTop = 0;
 }
@@ -611,61 +596,22 @@ function judgeRole(){
   go('judge');
 }
 
-// ===== 試合・グループ =====
+// ===== 試合・確認 =====
 function renderMatches(){
   document.getElementById('matchList').innerHTML = MATCHES.map(m=>`
-    <button class="match-card" onclick="openGroups(${m.id})">
+    <button class="match-card" onclick="openConfirm(${m.id})">
       <span class="m-date">${m.date}</span>
       <div class="m-fix">アルビレックス新潟 <span>VS</span> ${m.away}</div>
-      <div class="m-venue">📍 ${VENUE}　⏰ 締切 ${m.deadline}</div>
-      <div class="m-foot">募集中のグループ 3件 <span class="go">→</span></div>
+      <div class="m-venue">📍 ${VENUE}</div>
+      <div class="m-foot">この試合の仲間を探す <span class="go">→</span></div>
     </button>`).join('');
 }
-let typeFilter = 'すべて';
-function openGroups(mid){
+function openConfirm(mid){
   selMatch = MATCHES[mid];
-  document.getElementById('groupsTitle').textContent = `${selMatch.date} のグループ`;
-  document.getElementById('groupsSub').textContent = `アルビレックス新潟 vs ${selMatch.away}｜締切 ${selMatch.deadline}`;
-  typeFilter = 'すべて';
-  renderFilters(); renderGroups();
-  go('groups');
-}
-function renderFilters(){
-  document.getElementById('typeFilters').innerHTML = ['すべて','A&B','A同士','B&B'].map(t=>
-    `<button class="chip${t===typeFilter?' on':''}" onclick="setFilter('${t}')">${t}</button>`).join('');
-}
-function setFilter(t){ typeFilter = t; renderFilters(); renderGroups(); }
-function renderGroups(){
-  const cls = {'A&B':'ab','A同士':'aa','B&B':'bb'};
-  const list = GROUPS.filter(g=>typeFilter==='すべて'||g.type===typeFilter);
-  document.getElementById('groupList').innerHTML = list.map(g=>{
-    const n = 1 + g.members.length;
-    const comp = g.type==='A&B' ? `B1＋A${g.members.length}` : (g.type==='A同士' ? `A${n}` : `B${n}`);
-    return `<button class="g-card" onclick="openConfirm(${g.id})">
-      <div class="g-top">
-        <span class="g-type ${cls[g.type]}">${g.type}</span>
-        <span class="g-status${g.status==='締切間近'?' soon':''}">${g.status}</span>
-        ${g.lock?`<span class="g-lock">🔒 ${g.lock}</span>`:''}
-      </div>
-      <div class="g-name">${g.name}</div>
-      <div class="g-meta">${comp}／定員${g.cap}人　オーナー：${g.owner.name}（${g.owner.desc.split('・')[0]}）</div>
-      <div class="g-tags">${g.tags.map(t=>`<span>${t}</span>`).join('')}</div>
-    </button>`;
-  }).join('') || '<p class="note" style="text-align:center;padding:20px 0">該当するグループがありません</p>';
-}
-
-// ===== 参加確認 =====
-function openConfirm(gid){
-  selGroup = GROUPS[gid];
-  // 制約チェック（デモ簡略）：BはA同士(限定)に入れない
-  if(role==='B' && selGroup.lock==='A同士のみ'){ toast('🔒 このグループは「A同士のみ」限定です'); return; }
-  document.getElementById('confirmSub').textContent =
-    role==='B' && selGroup.type==='A同士' ? 'Bとして途中参加すると、このグループはA&B（成果対象）になります。' : `${selMatch.date}｜vs ${selMatch.away}`;
-  document.getElementById('confirmGroup').innerHTML = `
-    <div class="g-top"><span class="g-type ${{'A&B':'ab','A同士':'aa','B&B':'bb'}[selGroup.type]}">${selGroup.type}</span></div>
-    <div class="g-name">${selGroup.name}</div>
-    <div class="g-meta" style="margin-bottom:6px">オーナー：${selGroup.owner.name}</div>
-    <p style="font-size:12px;color:var(--ink-soft)">💬 ${selGroup.msg}</p>`;
+  document.getElementById('confirmMatch').innerHTML = `
+    <span class="m-date">${selMatch.date}</span>
+    <div class="m-fix" style="font-size:15px;font-weight:900;margin-top:6px">アルビレックス新潟 <span style="font-size:11px;color:var(--ink-soft)">VS</span> ${selMatch.away}</div>
+    <div class="m-venue" style="font-size:11px;color:var(--ink-soft)">📍 ${VENUE}</div>`;
   document.getElementById('feeArea').innerHTML = role==='A' ? `
     <div class="fee-box">
       <div class="f-label">参加費（A：新規観戦者）</div>
@@ -695,13 +641,28 @@ function selPay(el){
   });
   document.getElementById('joinBtn').disabled = false;
 }
-function joinGroup(){
+// ===== マッチング（相性で自動編成） =====
+function startMatching(){
+  go('matching');
+  const t = document.getElementById('matchingText');
+  const style = (profile.style && profile.style[0]) || null;
+  t.textContent = style ? `「${style}」に近い、相性の良い仲間を探しています…` : '相性の良い仲間を探しています…';
+  setTimeout(()=>{ t.textContent = role==='A' ? '案内役をアサインしています…' : 'はじめての方をアサインしています…'; }, 1400);
+  setTimeout(finalizeMatch, 2800);
+}
+function finalizeMatch(){
   joined = true;
-  if(role==='B' && selGroup.type==='A同士') selGroup.type = 'A&B';
+  if(role==='B'){
+    selGroup = { owner:null, members: pickByStyle(POOL_A, profile.style, 3) };
+  } else {
+    const owner = pickByStyle(POOL_B, profile.style, 1)[0];
+    const peers = pickByStyle(POOL_A, profile.style, 2);
+    selGroup = { owner, members: peers };
+  }
   history.push({date:selMatch.date, opponent:selMatch.away, venue:VENUE, status:'upcoming'});
   renderGroup();
   go('group');
-  toast('グループに参加しました🎉 通知：新規参加者があります');
+  toast('マッチングが完了しました🎉 グループができました');
 }
 
 // ===== グループ画面 =====
@@ -710,25 +671,40 @@ function renderGroup(){
     <div class="g-date">${selMatch.date} KICK OFF</div>
     <div class="g-fix">アルビレックス新潟 vs ${selMatch.away}</div>
     <div style="font-size:10.5px;opacity:.85">📍 ${VENUE}</div>
-    <div class="g-deadline">⏰ 募集締切：${selMatch.deadline}（それまで入退室自由）｜🎫 前日12:00にチケットリマインド</div>`;
-  document.getElementById('meetBox').innerHTML = `
-    <b>📌 集合場所（オーナーが前日18:00までにアナウンス）</b>
-    ${selGroup.owner.name}：「ビッグスワン Nゲート前に <b>17:30</b> 集合にしましょう！」
-    <small>運営推奨：駅周辺 または キックオフ2時間前〜1時間30分前の集合（電波混雑対策）／座席は隣同士が前提・チケットは各自購入</small>`;
-  const me = {ava: role==='A'?'🔰':'🧭', name:'あなた', desc:`${profile.age||''}・${profile.exp||''}`, role, you:true};
-  const mems = [ {...selGroup.owner, owner:true}, ...selGroup.members, me ];
+    <div class="g-deadline">🎫 前日12:00にチケット取得のリマインドが届きます</div>`;
+
+  const me = {ava: role==='A'?'🔰':'🧭', name: profile.name || 'あなた', desc:`${profile.age||''}・${profile.exp||''}`, role, you:true};
+  let mems;
+  if(role==='B'){
+    me.owner = true;
+    mems = [ me, ...selGroup.members ];
+    document.getElementById('meetBox').innerHTML = `
+      <b>📌 集合場所をアナウンスしましょう</b>
+      オーナーとして、グループチャットで集合場所・時間を伝えてあげてください（例：「ビッグスワン Nゲート前 17:30」）
+      <small>運営推奨：駅周辺 または キックオフ2時間前〜1時間30分前の集合（電波混雑対策）／座席は隣同士が前提・チケットは各自購入</small>`;
+  } else {
+    mems = [ {...selGroup.owner, owner:true}, ...selGroup.members, me ];
+    document.getElementById('meetBox').innerHTML = `
+      <b>📌 集合場所（オーナーが前日18:00までにアナウンス）</b>
+      ${selGroup.owner.name}：「ビッグスワン Nゲート前に <b>17:30</b> 集合にしましょう！」
+      <small>運営推奨：駅周辺 または キックオフ2時間前〜1時間30分前の集合（電波混雑対策）／座席は隣同士が前提・チケットは各自購入</small>`;
+  }
   document.getElementById('memberList').innerHTML = mems.map(m=>`
     <div class="mem${m.you?' you':''}">
       <span class="m-ava">${m.ava}</span>
       <span><b>${m.name} ${m.owner?'<span class="owner-star">👑オーナー</span>':''}</b><small>${m.desc}</small></span>
       <span class="m-tag ${m.role==='B'?'b':'a'}">${m.role}</span>
     </div>`).join('');
+
   const log = document.getElementById('chatLog');
   log.innerHTML = '';
-  addSys(`⏰ 募集締切は ${selMatch.deadline} です`);
-  addMsg(selGroup.owner, selGroup.msg);
-  addSys('🔔 通知：新規参加者がグループに加わりました');
-  addMsg(selGroup.members[0] || selGroup.owner, 'よろしくお願いします！');
+  addSys('🔔 相性の近い方とグループが組まれました');
+  if(role==='B'){
+    addMsg(selGroup.members[0], selGroup.members[0].greet);
+  } else {
+    addMsg(selGroup.owner, selGroup.owner.greet);
+    if(selGroup.members[0]) addMsg(selGroup.members[0], selGroup.members[0].greet);
+  }
   addSys('🎫 前日12:00：チケットは取得済みですか？（各自購入）');
 }
 function addSys(t){
@@ -747,7 +723,8 @@ function sendMsg(){
   const i = document.getElementById('chatInput');
   const t = i.value.trim(); if(!t) return;
   addMsg(null, t, true); i.value='';
-  setTimeout(()=>addMsg(selGroup.owner, REPLIES[replyIdx++ % REPLIES.length]), 900);
+  const replier = role==='B' ? selGroup.members[0] : selGroup.owner;
+  setTimeout(()=>addMsg(replier, REPLIES[replyIdx++ % REPLIES.length]), 900);
 }
 
 // ===== キャンセル =====
@@ -851,7 +828,6 @@ function renderMypage(){
 function resetDemo(){
   profile={}; phoneOK=false; role=null; selMatch=null; selGroup=null; joined=false; checkedIn=false; cxlReason=null; replyIdx=0; payMethod=null;
   points=0; history=[];
-  GROUPS[1].type='A同士';
   document.getElementById('rolePill').className='role-pill';
   document.querySelectorAll('#profile .chip').forEach(c=>c.classList.remove('on'));
   const vb=document.getElementById('verifyBtn'); vb.textContent='認証'; vb.classList.remove('done');
