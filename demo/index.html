@@ -619,8 +619,8 @@ function openConfirm(mid){
       <div class="f-note">課金は<b>GPS来場確認のあと</b>。行けなかったら請求されません。チケット代は別（各自購入）。</div>
       <div style="height:10px"></div>
       <div class="chips">
-        <button class="chip" style="border-color:rgba(255,255,255,.4);color:#fff" onclick="selPay(this)">クレジットカード</button>
-        <button class="chip" style="border-color:rgba(255,255,255,.4);color:#fff" onclick="selPay(this)">コンビニ後払い</button>
+        <button class="chip" style="transition:none;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.45);color:#fff" onclick="selPay(this)">クレジットカード</button>
+        <button class="chip" style="transition:none;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.45);color:#fff" onclick="selPay(this)">コンビニ後払い</button>
       </div>
     </div>` : `
     <div class="fee-box free">
@@ -636,8 +636,9 @@ function selPay(el){
   payMethod = el.textContent;
   [...el.parentElement.children].forEach(c=>{
     const on = c===el;
-    c.style.background = on ? '#fff' : 'transparent';
+    c.style.background = on ? '#fff' : 'rgba(255,255,255,.15)';
     c.style.color = on ? 'var(--blue-700)' : '#fff';
+    c.style.fontWeight = on ? '900' : '700';
   });
   document.getElementById('joinBtn').disabled = false;
 }
