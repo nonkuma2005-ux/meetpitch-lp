@@ -276,7 +276,7 @@ input,select{font-family:inherit}
           <span class="arr">→</span>
         </button>
       </div>
-      <p class="foot-note">操作デモです。実際の登録・決済・位置情報の取得は行われません。</p>
+      <p class="foot-note">操作デモです。実際の登録・決済は行われません。</p>
     </div>
   </div>
 
@@ -284,16 +284,17 @@ input,select{font-family:inherit}
   <div class="screen" id="profile">
     <div class="pad">
       <h2 class="sc-title">プロフィール登録</h2>
-      <p class="sc-sub">ここで答える内容（特に案内スタイル）をもとに、相性の近い方とグループを自動で組みます。</p>
+      <p class="sc-sub">ここで答える内容は、グループのメンバーに共有されるプロフィールになります。グループは同じ試合を選んだ人同士で自動編成されます。</p>
       <div class="q-block"><div class="q-label">ニックネーム <small>（任意）</small></div><input class="text-input" id="nameInput" type="text" placeholder="例：サク" maxlength="10"></div>
       <div class="q-block"><div class="q-label">年代</div><div class="chips" data-k="age"></div></div>
       <div class="q-block"><div class="q-label">性別</div><div class="chips" data-k="sex"></div></div>
       <div class="q-block"><div class="q-label">居住都道府県</div><div class="chips" data-k="pref"></div></div>
       <div class="q-block"><div class="q-label">応援クラブ <small>（複数可）</small></div><div class="chips" data-k="club" data-multi="1"></div></div>
+      <div class="q-block"><div class="q-label">参加スタイル <small>（任意）</small></div><div class="chips" data-k="companion"></div></div>
       <div class="q-block"><div class="q-label">軸1：観戦経験</div><div class="chips" data-k="exp"></div></div>
       <div class="q-block"><div class="q-label">軸2：視聴歴 <small>（任意）</small></div><div class="chips" data-k="watch"></div></div>
       <div class="q-block"><div class="q-label">軸4：きっかけ <small>（任意・複数可）</small></div><div class="chips" data-k="trigger" data-multi="1"></div></div>
-      <div class="q-block"><div class="q-label">軸5：案内スタイル <small>（任意・複数可・マッチングに使用）</small></div><div class="chips" data-k="style" data-multi="1"></div></div>
+      <div class="q-block"><div class="q-label">軸5：案内スタイル <small>（任意・複数可）</small></div><div class="chips" data-k="style" data-multi="1"></div></div>
       <div class="q-block"><div class="q-label">推し選手 <small>（任意）</small></div><input class="text-input" id="oshiInput" type="text" placeholder="例：秋山裕紀"></div>
       <div class="q-block">
         <div class="q-label">本人確認（電話番号認証）</div>
@@ -319,7 +320,7 @@ input,select{font-family:inherit}
   <div class="screen" id="matches">
     <div class="pad">
       <h2 class="sc-title">どの試合に行く？</h2>
-      <p class="sc-sub">試合日を選ぶだけ。相性の近い方とのグループは自動で組まれます。</p>
+      <p class="sc-sub">試合日を選ぶだけ。同じ試合に行く人同士でグループが自動的に組まれます。</p>
       <div id="matchList"></div>
     </div>
   </div>
@@ -329,13 +330,13 @@ input,select{font-family:inherit}
     <a class="back" onclick="go('matches')">← 試合選択にもどる</a>
     <div class="pad">
       <h2 class="sc-title">この試合で仲間を探す</h2>
-      <p class="sc-sub" id="confirmSub">相性の近い仲間と自動でグループを組みます。参加費と当日のルールをご確認ください。</p>
+      <p class="sc-sub" id="confirmSub">同じ試合に行く方同士でグループを組みます。参加費と当日のルールをご確認ください。</p>
       <div class="card" id="confirmMatch"></div>
       <div id="feeArea"></div>
       <div class="card">
         <p class="sec-h">参加ルール</p>
         <ul class="rule-list">
-          <li><span class="ck">✓</span>試合日ごとに、<b>相性の近い方と自動</b>でグループを組みます</li>
+          <li><span class="ck">✓</span>試合日ごとに、<b>その試合に行く方と自動</b>でグループを組みます</li>
           <li><span class="ck">✓</span>グループは2〜4人（案内役1人＋はじめての方 最大3人）</li>
           <li><span class="ck">✓</span>同一試合日に参加できるのは1グループのみ</li>
           <li><span class="ck">✓</span>チケットは<b>各自購入</b>（アプリは仲介しません）</li>
@@ -369,7 +370,7 @@ input,select{font-family:inherit}
           <button onclick="sendMsg()">↑</button>
         </div>
       </div>
-      <button class="btn" onclick="startCheckin()">📍 （当日デモ）GPSで来場確認</button>
+      <button class="btn" onclick="startCheckin()">📸 （当日デモ）来場チェックイン</button>
       <div style="height:9px"></div>
       <button class="btn danger" onclick="toggleCancel()">当日キャンセルする場合はこちら</button>
       <div class="cancel-area" id="cancelArea">
@@ -390,8 +391,9 @@ input,select{font-family:inherit}
   <!-- 来場確認 -->
   <div class="screen" id="checkin">
     <div class="pad" style="width:100%">
-      <div class="gps-wrap"><span class="pin">📍</span></div>
-      <p id="checkinText">GPSで位置情報を確認しています…<br><span style="font-size:10.5px;opacity:.7">（位置情報は「使用中のみ許可」・試合当日のみ取得）</span></p>
+      <div class="gps-wrap"><span class="pin">📸</span></div>
+      <p id="checkinText">スタジアムでの1枚を投稿して、来場チェックイン！</p>
+      <button class="btn" id="photoBtn" style="max-width:280px;margin:14px auto 0" onclick="uploadPhoto()">📷 写真を選ぶ（デモ）</button>
       <div class="settle-card" id="settleCard"></div>
       <div style="height:18px"></div>
       <button class="btn" id="checkinNext" style="max-width:280px;margin:0 auto;display:none" onclick="go('rank')">ランク・実績を見る →</button>
@@ -442,11 +444,9 @@ input,select{font-family:inherit}
       <h2 class="sc-title">1対1マッチング</h2>
       <p class="sc-sub" style="margin-top:6px">2年目リリース予定です。<br>初年度はグループでの新規ファン獲得に集中します。</p>
       <div class="card" style="text-align:left">
-        <p class="sec-h">予定している料金（回数券・前払い）</p>
+        <p class="sec-h">利用について</p>
         <ul class="rule-list">
-          <li><span class="ck">・</span>1試合 ¥1,000 ／ 〜5試合 ¥3,000</li>
-          <li><span class="ck">・</span>〜9試合 ¥5,000 ／ 〜18試合 ¥9,500</li>
-          <li><span class="ck">・</span>年間契約 ¥12,000</li>
+          <li><span class="ck">✓</span>ユーザーの利用は<b>完全無料</b>の予定です</li>
         </ul>
       </div>
     </div>
@@ -473,7 +473,7 @@ const MATCHES = [
   {id:2, date:'8/22(土) 19:00', away:'藤枝MYFC', deadline:'8/21(金) 21:00'},
 ];
 const VENUE = 'デンカビッグスワンスタジアム';
-// 相性マッチングの候補プール（案内スタイルが近い人を優先して選ばれる）
+// マッチング候補プール（同じ試合を選んだ人の中からランダムに選ばれる）
 const POOL_A = [
   {ava:'🙂', name:'ハルカさん', desc:'20代・W杯からサッカー好き', role:'A', style:'そっと見守る派', greet:'はじめまして！初観戦です、よろしくお願いします🙌'},
   {ava:'😀', name:'ダイキさん', desc:'20代・代表戦は毎回見る', role:'A', style:'わいわい盛り上げる派', greet:'楽しみです！当日盛り上がりましょう🔥'},
@@ -485,18 +485,16 @@ const POOL_B = [
   {ava:'🔥', name:'ケンさん', desc:'40代・シーズンパス組', role:'B', style:'戦術について語りたい', greet:'よろしくお願いします！せっかくなので戦術の見どころも少しお話しますね😊'},
   {ava:'💪', name:'ショウさん', desc:'30代・観戦歴10年', role:'B', style:'選手情報を聞きたい', greet:'こんにちは！選手のこと気になったら何でも聞いてください👍'},
 ];
-// 案内スタイルが一致する人を優先し、足りない分は他の候補で補う
-function pickByStyle(pool, styles, count){
-  styles = styles || [];
-  const matched = pool.filter(p => styles.includes(p.style));
-  const rest = pool.filter(p => !matched.includes(p)).sort(() => Math.random() - 0.5);
-  return matched.concat(rest).slice(0, count);
+// 同じ試合を選んだ人の中からランダムに必要人数を選ぶ
+function pickRandom(pool, count){
+  return pool.slice().sort(() => Math.random() - 0.5).slice(0, count);
 }
 const PROFILE_OPTS = {
   age:['10代','20代','30代','40代','50代以上'],
   sex:['男性','女性','その他'],
   pref:['新潟県','東京都','愛知県','北海道','その他'],
   club:['アルビレックス新潟','他クラブ','まだ決めていない'],
+  companion:['一人で参加','友達と参加','家族連れです','カップルで参加'],
   exp:['観戦経験なし','観戦経験あり(1〜2回)','観戦経験あり(3回以上)'],
   watch:['視聴歴なし','1〜3年','4〜7年','8年以上'],
   trigger:['W杯観戦がきっかけ','家族・友人の影響','元々サッカーが好き','クラブに知り合いがいる'],
@@ -582,14 +580,14 @@ function updateProfileBtn(){
 function judgeRole(){
   profile.name = document.getElementById('nameInput').value.trim();
   profile.oshi = document.getElementById('oshiInput').value.trim();
-  const attrs = [profile.age, profile.pref, (profile.club||[]).join('・'), profile.exp, profile.watch]
+  const attrs = [profile.age, profile.pref, (profile.club||[]).join('・'), profile.companion, profile.exp, profile.watch]
     .concat(profile.trigger||[], profile.style||[]).filter(Boolean);
   if(profile.oshi) attrs.push('推し：' + profile.oshi);
   document.getElementById('judgeCard').innerHTML = `
     <span class="judge-badge ${role}">${role==='A'?'案内してほしい':'案内したい'}</span>
     <h3>${role==='A'?'ようこそ、はじめての観戦へ！':'あなたの経験が、誰かの一歩に。'}</h3>
     <p>${role==='A'
-      ? 'あなたを案内してくれる経験者とマッチングします。参加費は1回1,000円・<b>来場確認後の後払い</b>です。'
+      ? 'あなたを案内してくれる経験者とマッチングします。利用は<b>完全無料</b>です。'
       : 'あなたの案内で、初観戦の仲間を増やせます。利用は<b>無料</b>。担当は1試合につき1グループまでです。'}</p>
     <div class="attr-chips">${attrs.map(a=>`<span>${a}</span>`).join('')}</div>`;
   renderMatches();
@@ -613,51 +611,34 @@ function openConfirm(mid){
     <div class="m-fix" style="font-size:15px;font-weight:900;margin-top:6px">アルビレックス新潟 <span style="font-size:11px;color:var(--ink-soft)">VS</span> ${selMatch.away}</div>
     <div class="m-venue" style="font-size:11px;color:var(--ink-soft)">📍 ${VENUE}</div>`;
   document.getElementById('feeArea').innerHTML = role==='A' ? `
-    <div class="fee-box">
+    <div class="fee-box free">
       <div class="f-label">参加費（A：新規観戦者）</div>
-      <div class="f-amount">¥1,000 <small>/ 回・後払い</small></div>
-      <div class="f-note">課金は<b>GPS来場確認のあと</b>。行けなかったら請求されません。チケット代は別（各自購入）。</div>
-      <div style="height:10px"></div>
-      <div class="chips">
-        <button class="chip" style="transition:none;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.45);color:#fff" onclick="selPay(this)">クレジットカード</button>
-        <button class="chip" style="transition:none;background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.45);color:#fff" onclick="selPay(this)">コンビニ後払い</button>
-      </div>
+      <div class="f-amount">無料</div>
+      <div class="f-note">利用は<b>完全無料</b>です。チケット代のみ各自ご購入ください。</div>
     </div>` : `
     <div class="fee-box free">
       <div class="f-label">参加費（B：既存サポーター）</div>
       <div class="f-amount">無料</div>
       <div class="f-note">あなたの案内が、クラブの新しいファンを生みます。実績はランク・バッジで可視化されます。</div>
     </div>`;
-  document.getElementById('joinBtn').disabled = (role==='A'); // Aは決済方法の選択が必要
+  document.getElementById('joinBtn').disabled = false;
   go('confirm');
 }
-let payMethod = null;
-function selPay(el){
-  payMethod = el.textContent;
-  [...el.parentElement.children].forEach(c=>{
-    const on = c===el;
-    c.style.background = on ? '#fff' : 'rgba(255,255,255,.15)';
-    c.style.color = on ? 'var(--blue-700)' : '#fff';
-    c.style.fontWeight = on ? '900' : '700';
-  });
-  document.getElementById('joinBtn').disabled = false;
-}
-// ===== マッチング（相性で自動編成） =====
+// ===== マッチング（同じ試合日の人同士で自動編成） =====
 function startMatching(){
   go('matching');
   const t = document.getElementById('matchingText');
-  const style = (profile.style && profile.style[0]) || null;
-  t.textContent = style ? `「${style}」に近い、相性の良い仲間を探しています…` : '相性の良い仲間を探しています…';
+  t.textContent = '同じ試合に行く仲間を探しています…';
   setTimeout(()=>{ t.textContent = role==='A' ? '案内役をアサインしています…' : 'はじめての方をアサインしています…'; }, 1400);
   setTimeout(finalizeMatch, 2800);
 }
 function finalizeMatch(){
   joined = true;
   if(role==='B'){
-    selGroup = { owner:null, members: pickByStyle(POOL_A, profile.style, 3) };
+    selGroup = { owner:null, members: pickRandom(POOL_A, 3) };
   } else {
-    const owner = pickByStyle(POOL_B, profile.style, 1)[0];
-    const peers = pickByStyle(POOL_A, profile.style, 2);
+    const owner = pickRandom(POOL_B, 1)[0];
+    const peers = pickRandom(POOL_A, 2);
     selGroup = { owner, members: peers };
   }
   history.push({date:selMatch.date, opponent:selMatch.away, venue:VENUE, status:'upcoming'});
@@ -699,7 +680,7 @@ function renderGroup(){
 
   const log = document.getElementById('chatLog');
   log.innerHTML = '';
-  addSys('🔔 相性の近い方とグループが組まれました');
+  addSys('🔔 同じ試合に行く仲間とグループが組まれました');
   if(role==='B'){
     addMsg(selGroup.members[0], selGroup.members[0].greet);
   } else {
@@ -741,29 +722,34 @@ function submitCancel(){
   toast('申告を受け付けました。ランクへの影響は軽度です');
 }
 
-// ===== 来場確認（GPS） =====
+// ===== 来場確認（観戦写真の共有） =====
 function startCheckin(){
   go('checkin');
   const t = document.getElementById('checkinText');
-  t.innerHTML = 'GPSで位置情報を確認しています…<br><span style="font-size:10.5px;opacity:.7">（位置情報は「使用中のみ許可」・試合当日のみ取得）</span>';
+  t.innerHTML = 'スタジアムでの1枚を投稿して、来場チェックイン！<br><span style="font-size:10.5px;opacity:.7">（写真の共有が来場確認と「どうでしたか？」のヒアリングを兼ねます）</span>';
+  document.getElementById('photoBtn').style.display = 'flex';
   document.getElementById('settleCard').classList.remove('show');
   document.getElementById('checkinNext').style.display = 'none';
-  setTimeout(()=>{ t.innerHTML = '🏟️ スタジアム滞在を確認中…'; }, 1400);
+}
+function uploadPhoto(){
+  const t = document.getElementById('checkinText');
+  document.getElementById('photoBtn').style.display = 'none';
+  t.innerHTML = '📤 写真をアップロードしています…';
   setTimeout(()=>{
     checkedIn = true;
     const h = history[history.length - 1];
     if(h) h.status = 'done';
     if(role==='B') points += 10;
-    t.innerHTML = '✅ <b>来場確認が完了しました！</b>';
+    t.innerHTML = '✅ <b>来場確認が完了しました！</b><br><span style="font-size:10.5px;opacity:.8">すてきな観戦の記録が残りました📸</span>';
     const sc = document.getElementById('settleCard');
     sc.innerHTML = role==='A'
-      ? `💳 参加費 <b>¥1,000</b> を${payMethod||'選択した方法'}で決済しました（後払い）<br><span style="font-size:10.5px;opacity:.8">一人では行けなかった観戦を実現できたことへの対価です</span>`
+      ? `🎉 <b>参加が確定しました！</b>（利用は無料）<br><span style="font-size:10.5px;opacity:.8">一人では行けなかった観戦が実現しました</span>`
       : `🏅 案内実績 <b>+1</b>（+10pt）！<br><span style="font-size:10.5px;opacity:.8">あなたの案内はクラブへの月次レポートに（匿名で）カウントされます</span>`;
     sc.classList.add('show');
     document.getElementById('checkinNext').style.display = 'flex';
     renderRank();
     renderMypage();
-  }, 3000);
+  }, 1500);
 }
 
 // ===== ランク =====
@@ -781,7 +767,7 @@ function renderRank(){
 // ===== マイページ =====
 function renderMypage(){
   const prof = document.getElementById('mypageProfile');
-  const attrs = [profile.age, profile.pref, profile.exp].filter(Boolean);
+  const attrs = [profile.age, profile.pref, profile.companion, profile.exp].filter(Boolean);
   prof.innerHTML = `
     <div class="avatar-row">
       <span class="avatar-circ" style="background:${role==='B'?'#ffe9c7':'var(--blue-100)'}">${role==='B'?'🧭':'🔰'}</span>
@@ -827,7 +813,7 @@ function renderMypage(){
 
 // ===== リセット =====
 function resetDemo(){
-  profile={}; phoneOK=false; role=null; selMatch=null; selGroup=null; joined=false; checkedIn=false; cxlReason=null; replyIdx=0; payMethod=null;
+  profile={}; phoneOK=false; role=null; selMatch=null; selGroup=null; joined=false; checkedIn=false; cxlReason=null; replyIdx=0;
   points=0; history=[];
   document.getElementById('rolePill').className='role-pill';
   document.querySelectorAll('#profile .chip').forEach(c=>c.classList.remove('on'));
