@@ -592,6 +592,12 @@ const GUIDES = [
   {ava:'👨‍👩‍👧', name:'トモさん', desc:'40代・子連れ観戦の達人・ボランティア歴2年', types:['家族でゆったり楽しみたい','そっと静かに見たい'], stars:'★4.7', jobs:10,
    greet:'こんにちは、トモです！うちも子連れ観戦の常連です。お子様が楽しめるポイントもご案内しますね👨‍👩‍👧'},
 ];
+// ほかの初観戦メンバー（自分のパーティに空きがあるとき同じグループに入る）
+const FELLOWS = [
+  {ava:'🙂', name:'ハルカさん', desc:'20代・W杯からサッカー好き・初観戦', types:['そっと静かに見たい','家族でゆったり楽しみたい'], greet:'はじめまして！初観戦です、よろしくお願いします🙌'},
+  {ava:'😀', name:'ダイキさん', desc:'20代・代表戦は毎回見る・初観戦', types:['わいわい盛り上がりたい','推し選手を応援したい'], greet:'楽しみです！当日盛り上がりましょう🔥'},
+  {ava:'😊', name:'ミオさん', desc:'20代・スタジアム初めて', types:['そっと静かに見たい','戦術・プレーをじっくり見たい'], greet:'緊張していますが、よろしくお願いします😳'},
+];
 // 初観戦パーティプール（B側に届く依頼）
 const PARTIES = [
   {ava:'👨‍👩‍👧', name:'ハルカさん', desc:'30代・はじめての観戦', size:'大人2名＋お子様1名', types:['家族でゆったり楽しみたい'],
@@ -847,7 +853,11 @@ function startMatching(){
 function finalizeMatch(){
   joined = true;
   if(role==='A'){
-    selGroup = { owner: selCand };
+    // 自分のパーティで埋まらない枠には、観戦タイプの近いほかの初観戦者が入る（最大3人まで）
+    const partySize = 1 + companions.length + kidCount;
+    const slots = Math.max(0, 3 - partySize);
+    const fellows = FELLOWS.slice().sort((a,b)=>overlap(b.types,selWtypes)-overlap(a.types,selWtypes)).slice(0, slots);
+    selGroup = { owner: selCand, fellows };
   } else {
     const party = PARTIES.slice().sort((a,b)=>overlap(b.types,profile.wtype||[])-overlap(a.types,profile.wtype||[]))[0];
     selGroup = { party };
@@ -872,10 +882,12 @@ function renderGroup(){
 
   const rows = [];
   if(role==='A'){
+    const hasParty = companions.length > 0 || kidCount > 0;
     rows.push({ava:selCand.ava, name:selCand.name, desc:selCand.desc, tag:'案内役', tagCls:'b', owner:true});
-    rows.push({ava:'🔰', name:profile.name || 'あなた', desc:`代表者・ID: ${myId}`, tag:'観戦', tagCls:'a', you:true});
+    rows.push({ava:'🔰', name:profile.name || 'あなた', desc:`${hasParty?'代表者・':''}ID: ${myId}`, tag:'観戦', tagCls:'a', you:true});
     companions.forEach((c,i)=>rows.push({ava:'👥', name:`同行者${i+1}`, desc:`ID: ${c}`, tag:'観戦', tagCls:'a'}));
     if(kidCount>0) rows.push({ava:'👶', name:`お子様 ×${kidCount}`, desc:'登録なし・人数のみ', tag:'同行', tagCls:'a'});
+    (selGroup.fellows||[]).forEach(f=>rows.push({ava:f.ava, name:f.name, desc:f.desc, tag:'観戦', tagCls:'a'}));
     document.getElementById('meetBox').innerHTML = `
       <b>📌 集合場所（案内役が前日18:00までにアナウンス）</b>
       ${selCand.name}：「ビッグスワン Nゲート前に <b>17:30</b> 集合にしましょう！」
@@ -901,6 +913,7 @@ function renderGroup(){
   if(role==='A'){
     addMsg(selGroup.owner, selGroup.owner.greet);
     if(companions.length || kidCount) addSys(`👥 あなたのパーティ：${partySizeText()}`);
+    if(selGroup.fellows && selGroup.fellows[0]) addMsg(selGroup.fellows[0], selGroup.fellows[0].greet);
   } else {
     addMsg(selGroup.party, selGroup.party.greet);
   }
