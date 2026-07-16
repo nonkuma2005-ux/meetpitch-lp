@@ -81,6 +81,40 @@ input,select{font-family:inherit}
 .role-pick small{font-size:10.5px;color:var(--ink-soft)}
 .role-pick .arr{margin-left:auto;color:var(--amber-strong);font-weight:900;flex:none}
 
+/* 登録者ID */
+.id-card{text-align:center;background:linear-gradient(150deg,var(--blue-700),var(--blue-500));color:#fff;border-radius:16px;padding:16px;margin:14px 0 4px;box-shadow:0 12px 26px -12px rgba(15,34,96,.5)}
+.id-card .id-label{font-size:10.5px;font-weight:800;color:var(--amber);letter-spacing:1px}
+.id-card .id-num{font-family:'Montserrat';font-weight:900;font-size:27px;letter-spacing:2px}
+.id-card .id-note{font-size:10.5px;color:rgba(255,255,255,.85);margin-top:3px}
+.vol-badge{display:inline-block;font-size:9.5px;font-weight:800;color:#8a5b00;background:#ffe9c7;padding:2px 8px;border-radius:999px}
+
+/* 同行者設定 */
+.party-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.party-row .p-idx{flex:none;font-size:11px;font-weight:800;color:var(--ink-soft);width:52px}
+.party-row input{flex:1}
+.stepper{display:flex;align-items:center;gap:16px;margin-top:4px}
+.stepper button{width:40px;height:40px;border-radius:50%;background:#fff;border:1.5px solid var(--line);font-size:19px;font-weight:900;color:var(--blue-600)}
+.stepper button:active{transform:scale(.92)}
+.stepper .st-num{font-family:'Montserrat';font-weight:900;font-size:24px;min-width:34px;text-align:center}
+.stepper .st-label{font-size:11px;color:var(--ink-soft);font-weight:700}
+#companionArea{display:none}
+#companionArea.show{display:block}
+
+/* 案内役候補カード */
+.cand-card{width:100%;text-align:left;background:#fff;border:2px solid var(--line);border-radius:16px;padding:13px 14px;margin-bottom:10px;transition:border-color .15s,box-shadow .15s;box-shadow:0 8px 20px -12px rgba(15,34,96,.2)}
+.cand-card.sel{border-color:var(--amber-strong);box-shadow:0 10px 24px -10px rgba(240,125,0,.45)}
+.cand-top{display:flex;align-items:center;gap:10px}
+.cand-top .c-ava2{flex:none;width:44px;height:44px;border-radius:50%;background:#ffe9c7;display:flex;align-items:center;justify-content:center;font-size:22px}
+.cand-top b{font-size:13.5px;display:block;line-height:1.3}
+.cand-top small{display:block;font-size:10px;color:var(--ink-soft)}
+.cand-stats{margin-left:auto;text-align:right;font-size:10.5px;color:var(--amber-strong);font-weight:800;flex:none;line-height:1.5}
+.cand-stats small{display:block;color:var(--ink-soft);font-weight:700;font-size:9.5px}
+.cand-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+.cand-tags span{font-size:10px;font-weight:700;color:var(--blue-600);background:var(--blue-100);padding:2px 9px;border-radius:999px}
+.cand-tags span.hit{color:#8a5b00;background:#ffe9c7}
+.cand-check{flex:none;width:22px;height:22px;border-radius:50%;border:2px solid var(--line);margin-left:8px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.cand-card.sel .cand-check{background:var(--amber-strong);border-color:var(--amber-strong)}
+
 /* マイページ */
 .avatar-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
 .avatar-circ{flex:none;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px}
@@ -99,8 +133,8 @@ input,select{font-family:inherit}
 .hist-fix{font-size:13px;font-weight:900;margin-top:2px}
 .hist-venue{font-size:10.5px;color:var(--ink-soft)}
 
-/* 判定結果 */
-.judge-card{text-align:center;padding:26px 18px}
+/* 登録完了 */
+.judge-card{text-align:center;padding:24px 18px}
 .judge-badge{display:inline-block;font-size:13px;font-weight:900;padding:8px 22px;border-radius:999px;margin-bottom:10px}
 .judge-badge.A{color:#fff;background:var(--blue-600)}
 .judge-badge.B{color:#3a2400;background:var(--amber)}
@@ -120,10 +154,8 @@ input,select{font-family:inherit}
 .m-foot .go{margin-left:auto;font-weight:900;color:var(--amber-strong);font-size:15px}
 
 /* 確認 */
-.fee-box{border-radius:16px;padding:17px;margin-bottom:12px;color:#fff;background:linear-gradient(150deg,var(--blue-700),var(--blue-500));box-shadow:0 12px 26px -12px rgba(15,34,96,.5)}
-.fee-box.free{background:linear-gradient(150deg,#1a5c38,#12894f)}
-.fee-box .f-label{font-size:10.5px;font-weight:800;color:var(--amber);letter-spacing:1px;margin-bottom:4px}
-.fee-box.free .f-label{color:#b8f0d0}
+.fee-box{border-radius:16px;padding:17px;margin-bottom:12px;color:#fff;background:linear-gradient(150deg,#1a5c38,#12894f);box-shadow:0 12px 26px -12px rgba(15,34,96,.5)}
+.fee-box .f-label{font-size:10.5px;font-weight:800;color:#b8f0d0;letter-spacing:1px;margin-bottom:4px}
 .fee-box .f-amount{font-family:'Montserrat';font-weight:900;font-size:30px}
 .fee-box .f-amount small{font-size:12px;font-family:'Noto Sans JP';font-weight:500}
 .fee-box .f-note{font-size:11px;color:rgba(255,255,255,.85);margin-top:6px}
@@ -267,48 +299,52 @@ input,select{font-family:inherit}
       <div class="role-picks">
         <button class="role-pick a" onclick="setRole('A')">
           <span class="r-ico">🔰</span>
-          <span><b>案内してほしい</b><small>はじめての現地観戦、一緒に行く人がほしい</small></span>
+          <span><b>観戦したい</b><small>はじめての現地観戦。友人・家族との参加もOK</small></span>
           <span class="arr">→</span>
         </button>
         <button class="role-pick b" onclick="setRole('B')">
           <span class="r-ico">🧭</span>
-          <span><b>案内したい</b><small>Jリーグの仲間を増やしたい</small></span>
+          <span><b>案内したい</b><small>クラブのボランティア登録・観戦経験をいかして案内</small></span>
           <span class="arr">→</span>
         </button>
       </div>
-      <p class="foot-note">操作デモです。実際の登録・決済は行われません。</p>
+      <p class="foot-note">操作デモです。実際の登録・マッチングは行われません。<br>クラブボランティア連携は構想段階の機能イメージです。</p>
     </div>
   </div>
 
-  <!-- プロフィール登録 -->
+  <!-- アカウント登録 -->
   <div class="screen" id="profile">
     <div class="pad">
-      <h2 class="sc-title">プロフィール登録</h2>
-      <p class="sc-sub">ここで答える内容は、グループのメンバーに共有されるプロフィールになります。グループは同じ試合を選んだ人同士で自動編成されます。</p>
-      <div class="q-block"><div class="q-label">ニックネーム <small>（任意）</small></div><input class="text-input" id="nameInput" type="text" placeholder="例：サク" maxlength="10"></div>
-      <div class="q-block"><div class="q-label">年代</div><div class="chips" data-k="age"></div></div>
-      <div class="q-block"><div class="q-label">性別</div><div class="chips" data-k="sex"></div></div>
-      <div class="q-block"><div class="q-label">居住都道府県</div><div class="chips" data-k="pref"></div></div>
-      <div class="q-block"><div class="q-label">応援クラブ <small>（複数可）</small></div><div class="chips" data-k="club" data-multi="1"></div></div>
-      <div class="q-block"><div class="q-label">参加スタイル <small>（任意）</small></div><div class="chips" data-k="companion"></div></div>
-      <div class="q-block"><div class="q-label">軸1：観戦経験</div><div class="chips" data-k="exp"></div></div>
-      <div class="q-block"><div class="q-label">軸2：視聴歴 <small>（任意）</small></div><div class="chips" data-k="watch"></div></div>
-      <div class="q-block"><div class="q-label">軸4：きっかけ <small>（任意・複数可）</small></div><div class="chips" data-k="trigger" data-multi="1"></div></div>
-      <div class="q-block"><div class="q-label">軸5：案内スタイル <small>（任意・複数可）</small></div><div class="chips" data-k="style" data-multi="1"></div></div>
+      <h2 class="sc-title">アカウント登録</h2>
+      <p class="sc-sub">マッチングの精度を上げるため、登録をお願いしています。内容はグループのメンバーに共有されます。</p>
+      <div class="q-block"><div class="q-label">ニックネーム <small>（必須）</small></div><input class="text-input" id="nameInput" type="text" placeholder="例：サク" maxlength="10" oninput="updateProfileBtn()"></div>
+      <div class="q-block"><div class="q-label">年代 <small>（必須）</small></div><div class="chips" data-k="age"></div></div>
+      <div class="q-block"><div class="q-label">性別 <small>（必須）</small></div><div class="chips" data-k="sex"></div></div>
+      <div class="q-block"><div class="q-label">居住都道府県 <small>（必須）</small></div><div class="chips" data-k="pref"></div></div>
+      <div class="q-block"><div class="q-label">応援クラブ <small>（必須・複数可）</small></div><div class="chips" data-k="club" data-multi="1"></div></div>
+      <div class="q-block"><div class="q-label">観戦経験 <small>（必須）</small></div><div class="chips" data-k="exp"></div></div>
+      <div class="q-block"><div class="q-label">観戦目的（観戦タイプ）<small>（必須・複数可・マッチングに使用）</small></div><div class="chips" data-k="wtype" data-multi="1"></div></div>
+      <div class="q-block"><div class="q-label">視聴歴 <small>（任意）</small></div><div class="chips" data-k="watch"></div></div>
+      <div class="q-block"><div class="q-label">きっかけ <small>（任意・複数可）</small></div><div class="chips" data-k="trigger" data-multi="1"></div></div>
       <div class="q-block"><div class="q-label">推し選手 <small>（任意）</small></div><input class="text-input" id="oshiInput" type="text" placeholder="例：秋山裕紀"></div>
+      <div class="q-block" id="volunteerBlock" style="display:none">
+        <div class="q-label">クラブボランティア連携 <small>（案内役は必須・構想段階のデモ）</small></div>
+        <button class="btn sub" id="volBtn" onclick="linkVolunteer()" style="font-size:13px;padding:12px">⚽ クラブのボランティア登録と連携する</button>
+        <p class="note" style="margin-top:5px">クラブに登録済みのボランティア情報と連携し、案内役として認定されます。</p>
+      </div>
       <div class="q-block">
-        <div class="q-label">本人確認（電話番号認証）</div>
+        <div class="q-label">本人確認（電話番号認証）<small>（必須）</small></div>
         <div class="verify-row">
           <input id="phoneInput" type="tel" placeholder="090-XXXX-XXXX" maxlength="13">
           <button class="verify-btn" id="verifyBtn" onclick="verifyPhone()">認証</button>
         </div>
         <p class="note" style="margin-top:5px">※顔が正面から見えるプロフィール画像も必須（デモでは省略）</p>
       </div>
-      <button class="btn" id="profileBtn" onclick="judgeRole()" disabled>登録する →</button>
+      <button class="btn" id="profileBtn" onclick="registerDone()" disabled>登録する →</button>
     </div>
   </div>
 
-  <!-- A/B判定結果 -->
+  <!-- 登録完了（登録者ID発行） -->
   <div class="screen" id="judge">
     <div class="pad">
       <div class="card judge-card" id="judgeCard"></div>
@@ -319,31 +355,102 @@ input,select{font-family:inherit}
   <!-- 試合選択 -->
   <div class="screen" id="matches">
     <div class="pad">
-      <h2 class="sc-title">どの試合に行く？</h2>
-      <p class="sc-sub">試合日を選ぶだけ。同じ試合に行く人同士でグループが自動的に組まれます。</p>
+      <h2 class="sc-title" id="matchesTitle">どの試合に行く？</h2>
+      <p class="sc-sub" id="matchesSub">行きたい試合日を選んでください。</p>
       <div id="matchList"></div>
     </div>
   </div>
 
-  <!-- 参加確認 -->
-  <div class="screen" id="confirm">
+  <!-- 同行者設定（Aのみ） -->
+  <div class="screen" id="party">
     <a class="back" onclick="go('matches')">← 試合選択にもどる</a>
     <div class="pad">
-      <h2 class="sc-title">この試合で仲間を探す</h2>
-      <p class="sc-sub" id="confirmSub">同じ試合に行く方同士でグループを組みます。参加費と当日のルールをご確認ください。</p>
-      <div class="card" id="confirmMatch"></div>
-      <div id="feeArea"></div>
+      <h2 class="sc-title">同行者はいますか？</h2>
+      <p class="sc-sub">友人や家族と一緒に参加できます。1人での参加ももちろんOKです。</p>
+      <div class="card" id="partyMatch"></div>
+      <div class="q-block">
+        <div class="chips">
+          <button class="chip" id="soloChip" onclick="setParty(false)">1人で参加する</button>
+          <button class="chip" id="withChip" onclick="setParty(true)">同行者と参加する</button>
+        </div>
+      </div>
+      <div id="companionArea">
+        <div class="card">
+          <p class="sec-h">同行者の登録者ID</p>
+          <p class="note" style="margin-bottom:10px">同行者の方もMeetPitchへの登録が必要です。各自の登録時に発行される<b>登録者ID</b>を、代表者（あなた）が入力してください。</p>
+          <div class="party-row"><span class="p-idx">同行者1</span><input class="text-input" id="compId1" type="text" placeholder="例：MP-2201" maxlength="8"></div>
+          <div class="party-row"><span class="p-idx">同行者2</span><input class="text-input" id="compId2" type="text" placeholder="（いれば入力）" maxlength="8"></div>
+          <div class="party-row"><span class="p-idx">同行者3</span><input class="text-input" id="compId3" type="text" placeholder="（いれば入力）" maxlength="8"></div>
+        </div>
+        <div class="card">
+          <p class="sec-h">登録なしの同行人数</p>
+          <p class="note" style="margin-bottom:6px">スマホをお持ちでないお子様などは、人数の入力だけでOKです。</p>
+          <div class="stepper">
+            <button onclick="stepKids(-1)">−</button>
+            <span class="st-num" id="kidNum">0</span>
+            <button onclick="stepKids(1)">＋</button>
+            <span class="st-label">人（お子様など）</span>
+          </div>
+        </div>
+      </div>
+      <button class="btn" id="partyBtn" onclick="confirmParty()" disabled>次へ →</button>
+    </div>
+  </div>
+
+  <!-- 観戦タイプ確認（Aのみ） -->
+  <div class="screen" id="wtype">
+    <a class="back" onclick="go('party')">← 同行者設定にもどる</a>
+    <div class="pad">
+      <h2 class="sc-title">今回の観戦目的を確認</h2>
+      <p class="sc-sub">アカウント登録時に選んだ内容が選択されています。今回の観戦に合わせて変更できます。</p>
+      <div class="card">
+        <div class="q-label">観戦タイプ <small>（複数可・案内役の提案に使用）</small></div>
+        <div class="chips" id="wtypeChips"></div>
+      </div>
+      <button class="btn" id="wtypeBtn" onclick="confirmWtype()">この内容で案内役を探す →</button>
+    </div>
+  </div>
+
+  <!-- 案内役の提案（Aのみ） -->
+  <div class="screen" id="propose">
+    <a class="back" onclick="go('wtype')">← 観戦タイプにもどる</a>
+    <div class="pad">
+      <h2 class="sc-title">あなたに合う案内役</h2>
+      <p class="sc-sub">観戦タイプが近い案内役（クラブ連携ボランティア）を提案します。一緒に行きたい方を選んでください。</p>
+      <div id="candList"></div>
       <div class="card">
         <p class="sec-h">参加ルール</p>
         <ul class="rule-list">
-          <li><span class="ck">✓</span>試合日ごとに、<b>その試合に行く方と自動</b>でグループを組みます</li>
-          <li><span class="ck">✓</span>グループは2〜4人（案内役1人＋はじめての方 最大3人）</li>
-          <li><span class="ck">✓</span>同一試合日に参加できるのは1グループのみ</li>
+          <li><span class="ck">✓</span>1グループ＝案内役1人＋初観戦のみなさん（同行者含む）</li>
+          <li><span class="ck">✓</span>チケットは<b>各自購入</b>（アプリは仲介しません）</li>
+          <li><span class="ck">✓</span>やり取りはアプリ内のグループチャットのみ（個別DMなし）</li>
+        </ul>
+      </div>
+      <button class="btn" id="candBtn" onclick="startMatching()" disabled>この方と一緒に行く ⚽</button>
+    </div>
+  </div>
+
+  <!-- 受付確認（Bのみ） -->
+  <div class="screen" id="confirm">
+    <a class="back" onclick="go('matches')">← 試合選択にもどる</a>
+    <div class="pad">
+      <h2 class="sc-title">この試合の案内を受け付ける</h2>
+      <p class="sc-sub">観戦タイプの近い初観戦グループとマッチングされます。</p>
+      <div class="card" id="confirmMatch"></div>
+      <div class="fee-box">
+        <div class="f-label">案内役として参加</div>
+        <div class="f-amount" style="font-size:20px;font-family:'Noto Sans JP'">あなたの案内が、新しいファンを生む</div>
+        <div class="f-note">案内実績はポイント・サポーターランクとして記録され、クラブへの月次レポートにもカウントされます。</div>
+      </div>
+      <div class="card">
+        <p class="sec-h">参加ルール</p>
+        <ul class="rule-list">
+          <li><span class="ck">✓</span>担当は1試合につき1グループまで</li>
+          <li><span class="ck">✓</span>グループには友人・家族連れのパーティが含まれることがあります</li>
           <li><span class="ck">✓</span>チケットは<b>各自購入</b>（アプリは仲介しません）</li>
         </ul>
       </div>
-      <button class="btn" onclick="startMatching()" id="joinBtn">仲間を探す ⚽</button>
-      <p class="note" style="text-align:center;margin-top:8px">※デモのため実際の決済はありません</p>
+      <button class="btn" onclick="startMatching()" id="joinBtn">案内リクエストを受け付ける 🧭</button>
     </div>
   </div>
 
@@ -446,7 +553,7 @@ input,select{font-family:inherit}
       <div class="card" style="text-align:left">
         <p class="sec-h">利用について</p>
         <ul class="rule-list">
-          <li><span class="ck">✓</span>ユーザーの利用は<b>完全無料</b>の予定です</li>
+          <li><span class="ck">✓</span>案内役と1対1でマッチングできる機能を予定しています</li>
         </ul>
       </div>
     </div>
@@ -473,39 +580,45 @@ const MATCHES = [
   {id:2, date:'8/22(土) 19:00', away:'藤枝MYFC', deadline:'8/21(金) 21:00'},
 ];
 const VENUE = 'デンカビッグスワンスタジアム';
-// マッチング候補プール（同じ試合を選んだ人の中からランダムに選ばれる）
-const POOL_A = [
-  {ava:'🙂', name:'ハルカさん', desc:'20代・W杯からサッカー好き', role:'A', style:'そっと見守る派', greet:'はじめまして！初観戦です、よろしくお願いします🙌'},
-  {ava:'😀', name:'ダイキさん', desc:'20代・代表戦は毎回見る', role:'A', style:'わいわい盛り上げる派', greet:'楽しみです！当日盛り上がりましょう🔥'},
-  {ava:'😊', name:'ミオさん', desc:'20代・スタジアム初めて', role:'A', style:'そっと見守る派', greet:'緊張していますが、よろしくお願いします😳'},
-  {ava:'😃', name:'ユウトさん', desc:'30代・元々サッカーが好き', role:'A', style:'得点シーンは盛り上がりたい', greet:'ゴールシーンが楽しみです！よろしくお願いします⚽'},
+const WTYPES = ['わいわい盛り上がりたい','そっと静かに見たい','家族でゆったり楽しみたい','戦術・プレーをじっくり見たい','推し選手を応援したい'];
+// 案内役プール（クラブ連携ボランティア・構想段階のデモ）
+const GUIDES = [
+  {ava:'🧭', name:'ヤスさん', desc:'30代・観戦100回以上・ボランティア歴3年', types:['そっと静かに見たい','家族でゆったり楽しみたい'], stars:'★4.9', jobs:12,
+   greet:'グループができましたね！案内役のヤスです。当日はよろしくお願いします🧡 わからないことは何でも聞いてください！'},
+  {ava:'🎉', name:'ミカさん', desc:'20代・ゴール裏常連・ボランティア歴1年', types:['わいわい盛り上がりたい','推し選手を応援したい'], stars:'★4.8', jobs:8,
+   greet:'はじめまして、ミカです🎉 一緒に思いっきり盛り上がりましょう！応援の仕方も当日教えますね！'},
+  {ava:'📋', name:'ケンさん', desc:'40代・シーズンパス歴10年・ボランティア歴5年', types:['戦術・プレーをじっくり見たい'], stars:'★5.0', jobs:15,
+   greet:'案内役のケンです。よろしくお願いします！せっかくなので戦術の見どころも少しお話しますね😊'},
+  {ava:'👨‍👩‍👧', name:'トモさん', desc:'40代・子連れ観戦の達人・ボランティア歴2年', types:['家族でゆったり楽しみたい','そっと静かに見たい'], stars:'★4.7', jobs:10,
+   greet:'こんにちは、トモです！うちも子連れ観戦の常連です。お子様が楽しめるポイントもご案内しますね👨‍👩‍👧'},
 ];
-const POOL_B = [
-  {ava:'🧭', name:'ヤスさん', desc:'30代・観戦100回以上', role:'B', style:'そっと見守る派', greet:'グループができましたね！案内役のヤスです。当日はよろしくお願いします🧡 わからないことは何でも聞いてください！'},
-  {ava:'🔥', name:'ケンさん', desc:'40代・シーズンパス組', role:'B', style:'戦術について語りたい', greet:'よろしくお願いします！せっかくなので戦術の見どころも少しお話しますね😊'},
-  {ava:'💪', name:'ショウさん', desc:'30代・観戦歴10年', role:'B', style:'選手情報を聞きたい', greet:'こんにちは！選手のこと気になったら何でも聞いてください👍'},
+// 初観戦パーティプール（B側に届く依頼）
+const PARTIES = [
+  {ava:'👨‍👩‍👧', name:'ハルカさん', desc:'30代・はじめての観戦', size:'大人2名＋お子様1名', types:['家族でゆったり楽しみたい'],
+   greet:'家族3人ではじめて観戦します！子どもも一緒なので、よろしくお願いします🙌'},
+  {ava:'🔥', name:'ダイキさん', desc:'20代・友人2人と参加', size:'大人3名', types:['わいわい盛り上がりたい'],
+   greet:'友達と3人で参加します！当日は思いっきり盛り上がりたいです🔥'},
+  {ava:'🙂', name:'ミオさん', desc:'20代・スタジアム初めて', size:'1名', types:['そっと静かに見たい','推し選手を応援したい'],
+   greet:'1人で参加します。緊張していますが、よろしくお願いします😳'},
 ];
-// 同じ試合を選んだ人の中からランダムに必要人数を選ぶ
-function pickRandom(pool, count){
-  return pool.slice().sort(() => Math.random() - 0.5).slice(0, count);
-}
 const PROFILE_OPTS = {
   age:['10代','20代','30代','40代','50代以上'],
   sex:['男性','女性','その他'],
   pref:['新潟県','東京都','愛知県','北海道','その他'],
   club:['アルビレックス新潟','他クラブ','まだ決めていない'],
-  companion:['一人で参加','友達と参加','家族連れです','カップルで参加'],
   exp:['観戦経験なし','観戦経験あり(1〜2回)','観戦経験あり(3回以上)'],
+  wtype: WTYPES,
   watch:['視聴歴なし','1〜3年','4〜7年','8年以上'],
   trigger:['W杯観戦がきっかけ','家族・友人の影響','元々サッカーが好き','クラブに知り合いがいる'],
-  style:['そっと見守る派','わいわい盛り上げる派','得点シーンは盛り上がりたい','選手情報を聞きたい','戦術について語りたい'],
 };
-const REQ = ['age','sex','pref','club','exp'];
+const REQ = ['age','sex','pref','club','exp','wtype'];
 const REPLIES = ['よろしくお願いします！当日なんでも聞いてください👍','チケットはE2アッパー指定席がおすすめです、隣同士で取りましょう！','楽しみですね！⚽'];
 
 // ===== 状態 =====
-let profile = {}, phoneOK = false, role = null;
+let profile = {}, phoneOK = false, volOK = false, role = null, myId = null;
 let selMatch = null, selGroup = null, joined = false, checkedIn = false;
+let hasCompanions = null, companions = [], kidCount = 0;
+let selWtypes = [], selCand = null;
 let cxlReason = null, replyIdx = 0;
 let points = 0;
 let history = []; // {date, opponent, venue, status:'upcoming'|'done'}
@@ -525,7 +638,7 @@ function go(id){
   const el = document.getElementById(id);
   el.classList.add('active'); el.classList.remove('fade-in'); void el.offsetWidth; el.classList.add('fade-in');
   const nav = document.getElementById('bottomNav');
-  nav.classList.toggle('show', !!role && id!=='home' && id!=='profile' && id!=='judge' && id!=='checkin' && id!=='matching');
+  nav.classList.toggle('show', !!role && !['home','profile','judge','checkin','matching'].includes(id));
   document.querySelectorAll('.bnav').forEach(b=>b.classList.toggle('on', b.dataset.s===id));
   el.scrollTop = 0;
 }
@@ -540,12 +653,13 @@ function toast(t){
 function setRole(r){
   role = r;
   const pill = document.getElementById('rolePill');
-  pill.textContent = role === 'A' ? '案内してほしい' : '案内したい';
+  pill.textContent = role === 'A' ? '観戦したい' : '案内したい';
   pill.className = 'role-pill ' + role;
+  document.getElementById('volunteerBlock').style.display = role==='B' ? 'block' : 'none';
   go('profile');
 }
 
-// ===== プロフィール =====
+// ===== アカウント登録 =====
 (function initProfile(){
   document.querySelectorAll('#profile .chips[data-k]').forEach(box=>{
     const k = box.dataset.k, multi = box.dataset.multi;
@@ -556,6 +670,7 @@ function setRole(r){
         if(multi){
           b.classList.toggle('on');
           profile[k] = [...box.querySelectorAll('.on')].map(x=>x.textContent);
+          if(!profile[k].length) delete profile[k];
         } else {
           [...box.children].forEach(c=>c.classList.toggle('on', c===b));
           profile[k] = o;
@@ -574,72 +689,168 @@ function verifyPhone(){
   btn.textContent = '✓ 認証済み'; btn.classList.add('done');
   updateProfileBtn();
 }
-function updateProfileBtn(){
-  document.getElementById('profileBtn').disabled = !(REQ.every(k=>profile[k]) && phoneOK);
+function linkVolunteer(){
+  volOK = true;
+  const btn = document.getElementById('volBtn');
+  btn.textContent = '✓ ボランティア連携済み（デモ）';
+  btn.style.color = 'var(--green)'; btn.style.borderColor = 'var(--green-bg)';
+  toast('クラブのボランティア登録と連携しました（デモ）');
+  updateProfileBtn();
 }
-function judgeRole(){
+function updateProfileBtn(){
+  const nameOK = document.getElementById('nameInput').value.trim().length > 0;
+  const volNeed = role==='B' ? volOK : true;
+  document.getElementById('profileBtn').disabled = !(nameOK && REQ.every(k=>profile[k]) && phoneOK && volNeed);
+}
+function registerDone(){
   profile.name = document.getElementById('nameInput').value.trim();
   profile.oshi = document.getElementById('oshiInput').value.trim();
-  const attrs = [profile.age, profile.pref, (profile.club||[]).join('・'), profile.companion, profile.exp, profile.watch]
-    .concat(profile.trigger||[], profile.style||[]).filter(Boolean);
+  myId = 'MP-' + (1000 + Math.floor(Math.random()*9000));
+  const attrs = [profile.age, profile.pref, (profile.club||[]).join('・'), profile.exp, profile.watch]
+    .concat(profile.wtype||[], profile.trigger||[]).filter(Boolean);
   if(profile.oshi) attrs.push('推し：' + profile.oshi);
   document.getElementById('judgeCard').innerHTML = `
-    <span class="judge-badge ${role}">${role==='A'?'案内してほしい':'案内したい'}</span>
-    <h3>${role==='A'?'ようこそ、はじめての観戦へ！':'あなたの経験が、誰かの一歩に。'}</h3>
+    <span class="judge-badge ${role}">${role==='A'?'観戦したい':'案内したい'}</span>
+    <h3>登録が完了しました！</h3>
     <p>${role==='A'
-      ? 'あなたを案内してくれる経験者とマッチングします。利用は<b>完全無料</b>です。'
-      : 'あなたの案内で、初観戦の仲間を増やせます。利用は<b>無料</b>。担当は1試合につき1グループまでです。'}</p>
+      ? '観戦タイプの近い案内役とマッチングできます。さっそく行きたい試合を選んでみましょう。'
+      : 'クラブ連携ボランティアの案内役として認定されました。担当は1試合につき1グループまでです。'}</p>
+    <div class="id-card">
+      <div class="id-label">あなたの登録者ID</div>
+      <div class="id-num">${myId}</div>
+      <div class="id-note">${role==='A'
+        ? '友人・家族と参加するときは、代表者にこのIDを伝えてください'
+        : '案内役の実績はこのIDに記録されます'}</div>
+    </div>
     <div class="attr-chips">${attrs.map(a=>`<span>${a}</span>`).join('')}</div>`;
+  document.getElementById('matchesTitle').textContent = role==='A' ? 'どの試合に行く？' : 'どの試合を案内する？';
+  document.getElementById('matchesSub').textContent = role==='A' ? '行きたい試合日を選んでください。' : '案内できる試合日を選んでください。';
   renderMatches();
   go('judge');
 }
 
-// ===== 試合・確認 =====
+// ===== 試合選択 =====
 function renderMatches(){
   document.getElementById('matchList').innerHTML = MATCHES.map(m=>`
-    <button class="match-card" onclick="openConfirm(${m.id})">
+    <button class="match-card" onclick="openMatch(${m.id})">
       <span class="m-date">${m.date}</span>
       <div class="m-fix">アルビレックス新潟 <span>VS</span> ${m.away}</div>
       <div class="m-venue">📍 ${VENUE}</div>
-      <div class="m-foot">この試合の仲間を探す <span class="go">→</span></div>
+      <div class="m-foot">${role==='A'?'この試合に行く':'この試合を案内する'} <span class="go">→</span></div>
     </button>`).join('');
 }
-function openConfirm(mid){
-  selMatch = MATCHES[mid];
-  document.getElementById('confirmMatch').innerHTML = `
-    <span class="m-date">${selMatch.date}</span>
-    <div class="m-fix" style="font-size:15px;font-weight:900;margin-top:6px">アルビレックス新潟 <span style="font-size:11px;color:var(--ink-soft)">VS</span> ${selMatch.away}</div>
+function matchCardHtml(m){
+  return `
+    <span class="m-date">${m.date}</span>
+    <div class="m-fix" style="font-size:15px;font-weight:900;margin-top:6px">アルビレックス新潟 <span style="font-size:11px;color:var(--ink-soft)">VS</span> ${m.away}</div>
     <div class="m-venue" style="font-size:11px;color:var(--ink-soft)">📍 ${VENUE}</div>`;
-  document.getElementById('feeArea').innerHTML = role==='A' ? `
-    <div class="fee-box free">
-      <div class="f-label">参加費（A：新規観戦者）</div>
-      <div class="f-amount">無料</div>
-      <div class="f-note">利用は<b>完全無料</b>です。チケット代のみ各自ご購入ください。</div>
-    </div>` : `
-    <div class="fee-box free">
-      <div class="f-label">参加費（B：既存サポーター）</div>
-      <div class="f-amount">無料</div>
-      <div class="f-note">あなたの案内が、クラブの新しいファンを生みます。実績はランク・バッジで可視化されます。</div>
-    </div>`;
-  document.getElementById('joinBtn').disabled = false;
-  go('confirm');
 }
-// ===== マッチング（同じ試合日の人同士で自動編成） =====
+function openMatch(mid){
+  selMatch = MATCHES[mid];
+  if(role==='A'){
+    document.getElementById('partyMatch').innerHTML = matchCardHtml(selMatch);
+    go('party');
+  } else {
+    document.getElementById('confirmMatch').innerHTML = matchCardHtml(selMatch);
+    go('confirm');
+  }
+}
+
+// ===== 同行者設定（A） =====
+function setParty(withComp){
+  hasCompanions = withComp;
+  document.getElementById('soloChip').classList.toggle('on', !withComp);
+  document.getElementById('withChip').classList.toggle('on', withComp);
+  document.getElementById('companionArea').classList.toggle('show', withComp);
+  document.getElementById('partyBtn').disabled = false;
+}
+function stepKids(d){
+  kidCount = Math.max(0, Math.min(3, kidCount + d));
+  document.getElementById('kidNum').textContent = kidCount;
+}
+function confirmParty(){
+  companions = [];
+  if(hasCompanions){
+    ['compId1','compId2','compId3'].forEach(id=>{
+      const v = document.getElementById(id).value.trim().toUpperCase();
+      if(v) companions.push(v);
+    });
+    if(companions.length===0 && kidCount===0){
+      toast('同行者の登録者ID、または人数を入力してください'); return;
+    }
+  } else {
+    kidCount = 0;
+  }
+  renderWtype();
+  go('wtype');
+}
+
+// ===== 観戦タイプ確認（A） =====
+function renderWtype(){
+  selWtypes = (profile.wtype||[]).slice(); // 登録時の選択を自動選択
+  const box = document.getElementById('wtypeChips');
+  box.innerHTML = '';
+  WTYPES.forEach(o=>{
+    const b = document.createElement('button');
+    b.className = 'chip' + (selWtypes.includes(o) ? ' on' : '');
+    b.textContent = o;
+    b.onclick = ()=>{
+      b.classList.toggle('on');
+      selWtypes = [...box.querySelectorAll('.on')].map(x=>x.textContent);
+      document.getElementById('wtypeBtn').disabled = selWtypes.length===0;
+    };
+    box.appendChild(b);
+  });
+  document.getElementById('wtypeBtn').disabled = selWtypes.length===0;
+}
+function confirmWtype(){
+  renderPropose();
+  go('propose');
+}
+
+// ===== 案内役の提案（A） =====
+function overlap(types, sel){ return types.filter(t=>sel.includes(t)).length; }
+function renderPropose(){
+  selCand = null;
+  document.getElementById('candBtn').disabled = true;
+  const ranked = GUIDES.slice().sort((a,b)=>overlap(b.types,selWtypes)-overlap(a.types,selWtypes)).slice(0,3);
+  document.getElementById('candList').innerHTML = ranked.map((g,i)=>`
+    <button class="cand-card" id="cand${i}" onclick='selectCand(${i}, ${JSON.stringify(JSON.stringify(g))})'>
+      <div class="cand-top">
+        <span class="c-ava2">${g.ava}</span>
+        <span><b>${g.name} <span class="vol-badge">クラブ連携ボランティア</span></b><small>${g.desc}</small></span>
+        <span class="cand-stats">${g.stars}<small>案内 ${g.jobs}回</small></span>
+        <span class="cand-check">✓</span>
+      </div>
+      <div class="cand-tags">${g.types.map(t=>`<span class="${selWtypes.includes(t)?'hit':''}">${selWtypes.includes(t)?'◎ ':''}${t}</span>`).join('')}</div>
+    </button>`).join('');
+}
+function selectCand(i, gJson){
+  selCand = JSON.parse(gJson);
+  document.querySelectorAll('.cand-card').forEach((c,ci)=>c.classList.toggle('sel', ci===i));
+  document.getElementById('candBtn').disabled = false;
+}
+
+// ===== マッチング =====
 function startMatching(){
   go('matching');
   const t = document.getElementById('matchingText');
-  t.textContent = '同じ試合に行く仲間を探しています…';
-  setTimeout(()=>{ t.textContent = role==='A' ? '案内役をアサインしています…' : 'はじめての方をアサインしています…'; }, 1400);
+  if(role==='A'){
+    t.textContent = `${selCand.name}にリクエストを送っています…`;
+    setTimeout(()=>{ t.textContent = 'グループを作成しています…'; }, 1400);
+  } else {
+    t.textContent = '案内を待っている初観戦グループを探しています…';
+    setTimeout(()=>{ t.textContent = '観戦タイプの近いグループが見つかりました…'; }, 1400);
+  }
   setTimeout(finalizeMatch, 2800);
 }
 function finalizeMatch(){
   joined = true;
-  if(role==='B'){
-    selGroup = { owner:null, members: pickRandom(POOL_A, 3) };
+  if(role==='A'){
+    selGroup = { owner: selCand };
   } else {
-    const owner = pickRandom(POOL_B, 1)[0];
-    const peers = pickRandom(POOL_A, 2);
-    selGroup = { owner, members: peers };
+    const party = PARTIES.slice().sort((a,b)=>overlap(b.types,profile.wtype||[])-overlap(a.types,profile.wtype||[]))[0];
+    selGroup = { party };
   }
   history.push({date:selMatch.date, opponent:selMatch.away, venue:VENUE, status:'upcoming'});
   renderGroup();
@@ -648,6 +859,10 @@ function finalizeMatch(){
 }
 
 // ===== グループ画面 =====
+function partySizeText(){
+  const n = 1 + companions.length + kidCount;
+  return n>1 ? `${n}名（代表：あなた）` : 'あなた1名';
+}
 function renderGroup(){
   document.getElementById('groupHead').innerHTML = `
     <div class="g-date">${selMatch.date} KICK OFF</div>
@@ -655,37 +870,39 @@ function renderGroup(){
     <div style="font-size:10.5px;opacity:.85">📍 ${VENUE}</div>
     <div class="g-deadline">🎫 前日12:00にチケット取得のリマインドが届きます</div>`;
 
-  const me = {ava: role==='A'?'🔰':'🧭', name: profile.name || 'あなた', desc:`${profile.age||''}・${profile.exp||''}`, role, you:true};
-  let mems;
-  if(role==='B'){
-    me.owner = true;
-    mems = [ me, ...selGroup.members ];
+  const rows = [];
+  if(role==='A'){
+    rows.push({ava:selCand.ava, name:selCand.name, desc:selCand.desc, tag:'案内役', tagCls:'b', owner:true});
+    rows.push({ava:'🔰', name:profile.name || 'あなた', desc:`代表者・ID: ${myId}`, tag:'観戦', tagCls:'a', you:true});
+    companions.forEach((c,i)=>rows.push({ava:'👥', name:`同行者${i+1}`, desc:`ID: ${c}`, tag:'観戦', tagCls:'a'}));
+    if(kidCount>0) rows.push({ava:'👶', name:`お子様 ×${kidCount}`, desc:'登録なし・人数のみ', tag:'同行', tagCls:'a'});
     document.getElementById('meetBox').innerHTML = `
-      <b>📌 集合場所をアナウンスしましょう</b>
-      オーナーとして、グループチャットで集合場所・時間を伝えてあげてください（例：「ビッグスワン Nゲート前 17:30」）
+      <b>📌 集合場所（案内役が前日18:00までにアナウンス）</b>
+      ${selCand.name}：「ビッグスワン Nゲート前に <b>17:30</b> 集合にしましょう！」
       <small>運営推奨：駅周辺 または キックオフ2時間前〜1時間30分前の集合（電波混雑対策）／座席は隣同士が前提・チケットは各自購入</small>`;
   } else {
-    mems = [ {...selGroup.owner, owner:true}, ...selGroup.members, me ];
+    rows.push({ava:'🧭', name:profile.name || 'あなた', desc:`案内役・ID: ${myId}`, tag:'案内役', tagCls:'b', you:true, owner:true});
+    rows.push({ava:selGroup.party.ava, name:selGroup.party.name, desc:`${selGroup.party.desc}・${selGroup.party.size}`, tag:'観戦', tagCls:'a'});
     document.getElementById('meetBox').innerHTML = `
-      <b>📌 集合場所（オーナーが前日18:00までにアナウンス）</b>
-      ${selGroup.owner.name}：「ビッグスワン Nゲート前に <b>17:30</b> 集合にしましょう！」
+      <b>📌 集合場所をアナウンスしましょう</b>
+      案内役として、グループチャットで集合場所・時間を伝えてあげてください（例：「ビッグスワン Nゲート前 17:30」）
       <small>運営推奨：駅周辺 または キックオフ2時間前〜1時間30分前の集合（電波混雑対策）／座席は隣同士が前提・チケットは各自購入</small>`;
   }
-  document.getElementById('memberList').innerHTML = mems.map(m=>`
+  document.getElementById('memberList').innerHTML = rows.map(m=>`
     <div class="mem${m.you?' you':''}">
       <span class="m-ava">${m.ava}</span>
-      <span><b>${m.name} ${m.owner?'<span class="owner-star">👑オーナー</span>':''}</b><small>${m.desc}</small></span>
-      <span class="m-tag ${m.role==='B'?'b':'a'}">${m.role}</span>
+      <span><b>${m.name} ${m.owner?'<span class="owner-star">👑</span>':''}</b><small>${m.desc}</small></span>
+      <span class="m-tag ${m.tagCls}">${m.tag}</span>
     </div>`).join('');
 
   const log = document.getElementById('chatLog');
   log.innerHTML = '';
-  addSys('🔔 同じ試合に行く仲間とグループが組まれました');
-  if(role==='B'){
-    addMsg(selGroup.members[0], selGroup.members[0].greet);
-  } else {
+  addSys('🔔 観戦タイプの近いメンバーでグループが組まれました');
+  if(role==='A'){
     addMsg(selGroup.owner, selGroup.owner.greet);
-    if(selGroup.members[0]) addMsg(selGroup.members[0], selGroup.members[0].greet);
+    if(companions.length || kidCount) addSys(`👥 あなたのパーティ：${partySizeText()}`);
+  } else {
+    addMsg(selGroup.party, selGroup.party.greet);
   }
   addSys('🎫 前日12:00：チケットは取得済みですか？（各自購入）');
 }
@@ -705,7 +922,7 @@ function sendMsg(){
   const i = document.getElementById('chatInput');
   const t = i.value.trim(); if(!t) return;
   addMsg(null, t, true); i.value='';
-  const replier = role==='B' ? selGroup.members[0] : selGroup.owner;
+  const replier = role==='B' ? selGroup.party : selGroup.owner;
   setTimeout(()=>addMsg(replier, REPLIES[replyIdx++ % REPLIES.length]), 900);
 }
 
@@ -743,7 +960,7 @@ function uploadPhoto(){
     t.innerHTML = '✅ <b>来場確認が完了しました！</b><br><span style="font-size:10.5px;opacity:.8">すてきな観戦の記録が残りました📸</span>';
     const sc = document.getElementById('settleCard');
     sc.innerHTML = role==='A'
-      ? `🎉 <b>参加が確定しました！</b>（利用は無料）<br><span style="font-size:10.5px;opacity:.8">一人では行けなかった観戦が実現しました</span>`
+      ? `🎉 <b>参加が確定しました！</b><br><span style="font-size:10.5px;opacity:.8">一人では行けなかった観戦が実現しました</span>`
       : `🏅 案内実績 <b>+1</b>（+10pt）！<br><span style="font-size:10.5px;opacity:.8">あなたの案内はクラブへの月次レポートに（匿名で）カウントされます</span>`;
     sc.classList.add('show');
     document.getElementById('checkinNext').style.display = 'flex';
@@ -767,13 +984,13 @@ function renderRank(){
 // ===== マイページ =====
 function renderMypage(){
   const prof = document.getElementById('mypageProfile');
-  const attrs = [profile.age, profile.pref, profile.companion, profile.exp].filter(Boolean);
+  const attrs = [profile.age, profile.pref, profile.exp].concat(profile.wtype||[]).filter(Boolean);
   prof.innerHTML = `
     <div class="avatar-row">
       <span class="avatar-circ" style="background:${role==='B'?'#ffe9c7':'var(--blue-100)'}">${role==='B'?'🧭':'🔰'}</span>
       <div>
         <b style="font-size:15px">${profile.name || 'あなた'}</b>
-        <div style="font-size:11px;color:var(--ink-soft)">${role==='A'?'案内してほしい':'案内したい'}${profile.oshi?'　⚽推し：'+profile.oshi:''}</div>
+        <div style="font-size:11px;color:var(--ink-soft)">${role==='A'?'観戦したい':'案内したい'}${myId?'　🪪 '+myId:''}${profile.oshi?'　⚽推し：'+profile.oshi:''}</div>
       </div>
     </div>
     <div class="attr-chips" style="justify-content:flex-start">${attrs.map(a=>`<span>${a}</span>`).join('')}</div>`;
@@ -813,14 +1030,23 @@ function renderMypage(){
 
 // ===== リセット =====
 function resetDemo(){
-  profile={}; phoneOK=false; role=null; selMatch=null; selGroup=null; joined=false; checkedIn=false; cxlReason=null; replyIdx=0;
-  points=0; history=[];
+  profile={}; phoneOK=false; volOK=false; role=null; myId=null;
+  selMatch=null; selGroup=null; joined=false; checkedIn=false;
+  hasCompanions=null; companions=[]; kidCount=0; selWtypes=[]; selCand=null;
+  cxlReason=null; replyIdx=0; points=0; history=[];
   document.getElementById('rolePill').className='role-pill';
   document.querySelectorAll('#profile .chip').forEach(c=>c.classList.remove('on'));
   const vb=document.getElementById('verifyBtn'); vb.textContent='認証'; vb.classList.remove('done');
+  const volb=document.getElementById('volBtn'); volb.textContent='⚽ クラブのボランティア登録と連携する'; volb.style.color=''; volb.style.borderColor='';
   document.getElementById('phoneInput').value='';
   document.getElementById('nameInput').value='';
   document.getElementById('oshiInput').value='';
+  ['compId1','compId2','compId3'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('kidNum').textContent='0';
+  document.getElementById('soloChip').classList.remove('on');
+  document.getElementById('withChip').classList.remove('on');
+  document.getElementById('companionArea').classList.remove('show');
+  document.getElementById('partyBtn').disabled=true;
   document.getElementById('profileBtn').disabled=true;
   go('home');
 }
